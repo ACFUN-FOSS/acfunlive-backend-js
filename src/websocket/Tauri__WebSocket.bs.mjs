@@ -2,8 +2,8 @@
 
 import * as Js_exn from "@rescript/std/lib/es6/js_exn.js";
 import * as Caml_option from "@rescript/std/lib/es6/caml_option.js";
-import * as Core__Option from "@rescript/core/src/Core__Option.mjs";
-import * as Core__Promise from "@rescript/core/src/Core__Promise.mjs";
+import * as Core__Option from "@rescript/core/src/Core__Option.bs.mjs";
+import * as Core__Promise from "@rescript/core/src/Core__Promise.bs.mjs";
 import * as TauriPluginWebsocketApi from "tauri-plugin-websocket-api";
 
 function convertCloseFrame(ws, frame) {

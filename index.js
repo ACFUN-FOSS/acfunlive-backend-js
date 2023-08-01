@@ -1,4 +1,4 @@
-import { makeWebAPISession, makeNodeSession, makeTauriSession } from './src/AcFunLiveBackend.mjs';
+import { makeWebAPISession, makeNodeSession, makeTauriSession } from './src/AcFunLiveBackend.bs.mjs';
 
 export const WebAPISession = makeWebAPISession;
 
