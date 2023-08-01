@@ -2,7 +2,7 @@
 
 import * as Core__Option from "@rescript/core/src/Core__Option.bs.mjs";
 import * as AcFunLiveBackend from "../src/AcFunLiveBackend.bs.mjs";
-import * as Caml_js_exceptions from "@rescript/std/lib/es6/caml_js_exceptions.js";
+import * as Caml_js_exceptions from "rescript/lib/es6/caml_js_exceptions.js";
 
 var session = AcFunLiveBackend.makeNodeSession(undefined);
 

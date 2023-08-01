@@ -24,7 +24,6 @@
     "generatedFileExtension": ".gen.ts"
   },
   "suffix": ".bs.mjs",
-  "external-stdlib": "@rescript/std",
   "bsc-flags": [
     "-open RescriptCore"
   ],

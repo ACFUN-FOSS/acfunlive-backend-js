@@ -11,21 +11,29 @@
   "license": "AGPL-3.0-only",
   "author": "orzogc",
   "scripts": {
-    "build": "rescript",
+    "build": "rescript && rollup -c",
     "clean": "rescript clean",
-    "dev": "rescript build -w"
+    "dev": "concurrently \"rescript build -w\" \"rollup -c -w\"",
+    "bundle": "rollup -c"
   },
   "type": "module",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "exports": {
+    "./webapi.js": "./webapi.js",
+    "./node.js": "./node.js",
+    "./tauri.js": "./tauri.js"
+  },
   "files": [
     "src",
     "bsconfig.json",
-    "index.d.ts"
+    "node.d.ts",
+    "node.js",
+    "tauri.d.ts",
+    "tauri.js",
+    "webapi.d.ts",
+    "webapi.js"
   ],
   "dependencies": {
     "@rescript/core": "^0.5.0",
-    "@rescript/std": "^11.0.0-beta.4",
     "rescript-struct": "^4.1.1",
     "uuid": "^9.0.0"
   },
@@ -42,7 +50,10 @@
     }
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "concurrently": "^8.2.0",
     "rescript": "^11.0.0-beta.4",
+    "rollup": "^3.27.0",
     "tauri-plugin-websocket-api": "https://github.com/orzogc/tauri-plugin-websocket#ac-live-fix",
     "ws": "^8.13.0"
   }

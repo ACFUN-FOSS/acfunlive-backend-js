@@ -2,8 +2,8 @@ module Message = AcLive__Message
 
 module Session = AcLive__Session
 
-let makeWebAPISession = (~config=?) => Session.make(module(WebAPI__WebSocket), ~config?)
+let makeWebAPISession = AcLive__WebAPI.makeSession
 
-let makeNodeSession = (~config=?) => Session.make(module(Node__WebSocket), ~config?)
+let makeNodeSession = AcLive__Node.makeSession
 
-let makeTauriSession = (~config=?) => Session.make(module(Tauri__WebSocket), ~config?)
+let makeTauriSession = AcLive__Tauri.makeSession

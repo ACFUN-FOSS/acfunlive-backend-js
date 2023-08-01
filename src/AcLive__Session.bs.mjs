@@ -2,12 +2,12 @@
 
 import * as Uuid from "uuid";
 import * as Core__Dict from "@rescript/core/src/Core__Dict.bs.mjs";
-import * as Caml_option from "@rescript/std/lib/es6/caml_option.js";
+import * as Caml_option from "rescript/lib/es6/caml_option.js";
 import * as Core__Option from "@rescript/core/src/Core__Option.bs.mjs";
 import * as AcLive__Struct from "./data/AcLive__Struct.bs.mjs";
 import * as AcLive__Message from "./data/AcLive__Message.bs.mjs";
 import * as AcLive__Subject from "./AcLive__Subject.bs.mjs";
-import * as Caml_exceptions from "@rescript/std/lib/es6/caml_exceptions.js";
+import * as Caml_exceptions from "rescript/lib/es6/caml_exceptions.js";
 
 var NotConnectBackend = /* @__PURE__ */Caml_exceptions.create("AcLive__Session.NotConnectBackend");
 
