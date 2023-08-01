@@ -1,7 +1,7 @@
 {
   "name": "acfunlive-backend-js",
   "version": "0.1.0",
-  "description": "javascript/rescript bindings for acfunlive-backend",
+  "description": "javascript/rescript interface for acfunlive-backend",
   "keywords": [
     "rescript",
     "acfun",
