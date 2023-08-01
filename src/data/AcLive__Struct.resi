@@ -1,6 +1,6 @@
 open RescriptStruct
 
-open Message
+open AcLive__Message
 
 let serializeRequest: requestData => Result.t<string, S.Error.t>
 

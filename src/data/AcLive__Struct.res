@@ -1,6 +1,6 @@
 open RescriptStruct
 
-open Message
+open AcLive__Message
 
 let makeEmptyRequestStruct = type_ =>
   S.object(o => {

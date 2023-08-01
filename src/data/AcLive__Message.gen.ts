@@ -1,4 +1,4 @@
-/* TypeScript file generated from Message.res by genType. */
+/* TypeScript file generated from AcLive__Message.res by genType. */
 /* eslint-disable import/first */
 
 

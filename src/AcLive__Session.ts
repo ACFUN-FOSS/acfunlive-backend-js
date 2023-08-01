@@ -1,5 +1,5 @@
-import type { websocketError, jsonError } from './Session.gen'
-import type { error, loginRequest, loginResponse, message } from './data/Message.gen'
+import type { websocketError, jsonError } from './AcLive__Session.gen'
+import type { error, loginRequest, loginResponse, message } from './data/AcLive__Message.gen'
 
 export type event = {
     "websocketOpen": [undefined, undefined];

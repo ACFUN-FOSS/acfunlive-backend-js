@@ -1,5 +1,5 @@
-open Message
-open Struct
+open AcLive__Message
+open AcLive__Struct
 
 exception NotConnectBackend
 exception OneshotTimeout
@@ -138,6 +138,8 @@ type rec request<'a, 'b> =
   | @as("getLiveCutStatus") GetLiveCutStatus: request<unit, message<getLiveCutStatusResponse>>
   | @as("setLiveCutStatus") SetLiveCutStatus: request<setLiveCutStatusRequest, emptyMessage>
 
+type unsubscribe = AcLive__Subject.unsubscribe
+
 type t = {
   connect: unit => unit,
   disConnect: unit => unit,
@@ -147,7 +149,7 @@ type t = {
     ~key: 'b=?,
     ~onData: 'a => unit,
     ~onError: error => unit=?,
-  ) => Subject.unsubscribe,
+  ) => unsubscribe,
   request: 'a 'b. (request<'a, 'b>, 'a, ~requestID: string=?) => unit,
   oneshot: 'a 'b. (request<'a, 'b>, 'a, ~requestIDPrefix: string=?, ~timeout: int=?) => promise<'b>,
 }
@@ -164,21 +166,25 @@ let defaultConfig = {
   oneshotTimeout: 10000,
 }
 
-let setResponse = (type a, subject: Subject.t<response<a>>, v) =>
+type subject<'a> = AcLive__Subject.t<'a>
+
+let makeSubject = AcLive__Subject.make
+
+let setResponse = (type a, subject: subject<response<a>>, v) =>
   v->subject.set(~key=v->getResponseRequestId)
 
-let setEmptyResponse = (subject: Subject.t<emptyResponse>, v) =>
+let setEmptyResponse = (subject: subject<emptyResponse>, v) =>
   v->subject.set(~key=v->getEmptyResponseRequestId)
 
-let setDanmaku = (type a, subject: Subject.t<danmaku<a>>, v) =>
+let setDanmaku = (type a, subject: subject<danmaku<a>>, v) =>
   v->subject.set(~key=v.liverUID->Int.toString)
 
-let fixKeyCallback = (type a, subject: Subject.t<a>, key, ~onData: a => unit) =>
+let fixKeyCallback = (type a, subject: subject<a>, key, ~onData: a => unit) =>
   subject.subcribe((v, ~key as _) => onData(v), ~key)
 
 let responseCallback = (
   type a,
-  subject: Subject.t<result<a, error>>,
+  subject: subject<result<a, error>>,
   ~key=?,
   ~onData: a => unit,
   ~onError=?,
@@ -193,80 +199,80 @@ let responseCallback = (
     }
   , ~key?)
 
-let danmakuCallback = (type a, subject: Subject.t<a>, ~key=?, ~onData: a => unit) =>
+let danmakuCallback = (type a, subject: subject<a>, ~key=?, ~onData: a => unit) =>
   subject.subcribe((v, ~key as _) => onData(v), ~key=?key->Option.map(Int.toString))
 
 let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfig) => {
   let ws = ref(None)
 
-  let unitSubject = Subject.make()
-  let websocketErrorSubject = Subject.make()
-  let jsonErrorSubject = Subject.make()
-  let loginSubject = Subject.make()
-  let setClientIDSubject = Subject.make()
-  let requestForwardSubject = Subject.make()
-  let receiveForwardSubject = Subject.make()
-  let setTokenSubject = Subject.make()
-  let getDanmakuSubject = Subject.make()
-  let stopDanmakuSubject = Subject.make()
-  let getWatchingListSubject = Subject.make()
-  let getBillboardSubject = Subject.make()
-  let getSummarySubject = Subject.make()
-  let getLuckListSubject = Subject.make()
-  let getPlaybackSubject = Subject.make()
-  let getAllGiftListSubject = Subject.make()
-  let getWalletBalanceSubject = Subject.make()
-  let getUserLiveInfoSubject = Subject.make()
-  let getAllLiveListSubject = Subject.make()
-  let getLiveDataSubject = Subject.make()
-  let getGiftListSubject = Subject.make()
-  let getUserInfoSubject = Subject.make()
-  let getLiveCutInfoSubject = Subject.make()
-  let getManagerListSubject = Subject.make()
-  let addManagerSubject = Subject.make()
-  let deleteManagerSubject = Subject.make()
-  let getAllKickHistorySubject = Subject.make()
-  let managerKickSubject = Subject.make()
-  let authorKickSubject = Subject.make()
-  let getMedalDetailSubject = Subject.make()
-  let getMedalListSubject = Subject.make()
-  let getMedalRankListSubject = Subject.make()
-  let getUserMedalSubject = Subject.make()
-  let wearMedalSubject = Subject.make()
-  let cancelWearMedalSubject = Subject.make()
-  let checkLiveAuthSubject = Subject.make()
-  let getLiveTypeListSubject = Subject.make()
-  let getPushConfigSubject = Subject.make()
-  let getLiveStatusSubject = Subject.make()
-  let getTranscodeInfoSubject = Subject.make()
-  let startLiveSubject = Subject.make()
-  let stopLiveSubject = Subject.make()
-  let changeTitleAndCoverSubject = Subject.make()
-  let getLiveCutStatusSubject = Subject.make()
-  let setLiveCutStatusSubject = Subject.make()
-  let commentSubject = Subject.make()
-  let likeSubject = Subject.make()
-  let enterRoomSubject = Subject.make()
-  let followAuthorSubject = Subject.make()
-  let throwBananaSubject = Subject.make()
-  let giftSubject = Subject.make()
-  let richTextSubject = Subject.make()
-  let joinClubSubject = Subject.make()
-  let shareLiveSubject = Subject.make()
-  let danmakuStopSubject = Subject.make()
-  let bananaCountSubject = Subject.make()
-  let displayInfoSubject = Subject.make()
-  let topUsersSubject = Subject.make()
-  let recentCommentsSubject = Subject.make()
-  let redpackListSubject = Subject.make()
-  let chatCallSubject = Subject.make()
-  let chatAcceptSubject = Subject.make()
-  let chatReadySubject = Subject.make()
-  let chatEndSubject = Subject.make()
-  let danmakuStopErrorStopSubject = Subject.make()
-  let kickedOutSubject = Subject.make()
-  let violationAlertSubject = Subject.make()
-  let managerStateSubject = Subject.make()
+  let unitSubject = makeSubject()
+  let websocketErrorSubject = makeSubject()
+  let jsonErrorSubject = makeSubject()
+  let loginSubject = makeSubject()
+  let setClientIDSubject = makeSubject()
+  let requestForwardSubject = makeSubject()
+  let receiveForwardSubject = makeSubject()
+  let setTokenSubject = makeSubject()
+  let getDanmakuSubject = makeSubject()
+  let stopDanmakuSubject = makeSubject()
+  let getWatchingListSubject = makeSubject()
+  let getBillboardSubject = makeSubject()
+  let getSummarySubject = makeSubject()
+  let getLuckListSubject = makeSubject()
+  let getPlaybackSubject = makeSubject()
+  let getAllGiftListSubject = makeSubject()
+  let getWalletBalanceSubject = makeSubject()
+  let getUserLiveInfoSubject = makeSubject()
+  let getAllLiveListSubject = makeSubject()
+  let getLiveDataSubject = makeSubject()
+  let getGiftListSubject = makeSubject()
+  let getUserInfoSubject = makeSubject()
+  let getLiveCutInfoSubject = makeSubject()
+  let getManagerListSubject = makeSubject()
+  let addManagerSubject = makeSubject()
+  let deleteManagerSubject = makeSubject()
+  let getAllKickHistorySubject = makeSubject()
+  let managerKickSubject = makeSubject()
+  let authorKickSubject = makeSubject()
+  let getMedalDetailSubject = makeSubject()
+  let getMedalListSubject = makeSubject()
+  let getMedalRankListSubject = makeSubject()
+  let getUserMedalSubject = makeSubject()
+  let wearMedalSubject = makeSubject()
+  let cancelWearMedalSubject = makeSubject()
+  let checkLiveAuthSubject = makeSubject()
+  let getLiveTypeListSubject = makeSubject()
+  let getPushConfigSubject = makeSubject()
+  let getLiveStatusSubject = makeSubject()
+  let getTranscodeInfoSubject = makeSubject()
+  let startLiveSubject = makeSubject()
+  let stopLiveSubject = makeSubject()
+  let changeTitleAndCoverSubject = makeSubject()
+  let getLiveCutStatusSubject = makeSubject()
+  let setLiveCutStatusSubject = makeSubject()
+  let commentSubject = makeSubject()
+  let likeSubject = makeSubject()
+  let enterRoomSubject = makeSubject()
+  let followAuthorSubject = makeSubject()
+  let throwBananaSubject = makeSubject()
+  let giftSubject = makeSubject()
+  let richTextSubject = makeSubject()
+  let joinClubSubject = makeSubject()
+  let shareLiveSubject = makeSubject()
+  let danmakuStopSubject = makeSubject()
+  let bananaCountSubject = makeSubject()
+  let displayInfoSubject = makeSubject()
+  let topUsersSubject = makeSubject()
+  let recentCommentsSubject = makeSubject()
+  let redpackListSubject = makeSubject()
+  let chatCallSubject = makeSubject()
+  let chatAcceptSubject = makeSubject()
+  let chatReadySubject = makeSubject()
+  let chatEndSubject = makeSubject()
+  let danmakuStopErrorStopSubject = makeSubject()
+  let kickedOutSubject = makeSubject()
+  let violationAlertSubject = makeSubject()
+  let managerStateSubject = makeSubject()
 
   let uuidDict = Dict.make()
 
@@ -529,7 +535,7 @@ let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfi
 
   // 避免UUID重复，虽然重复可能性极低
   let rec generateUuid = () => {
-    let uuid = Utils.uuidv4()
+    let uuid = AcLive__Utils.uuidv4()
     switch uuidDict->Dict.get(uuid) {
     | Some(_) => generateUuid()
     | None => {
@@ -563,7 +569,7 @@ let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfi
           reject(OneshotTimeout)
         }, timeout->Option.getWithDefault(config.oneshotTimeout))
 
-        let handleEmptyMessage = (subject: Subject.t<result<b, error>>, constructor) => {
+        let handleEmptyMessage = (subject: subject<result<b, error>>, constructor) => {
           constructor(makeEmptyMessage(~requestID))->sendRequest(w)
           unsubscribe := Some(subject.oneshot((value, ~key as _) => {
                 timeout->clearTimeout
@@ -575,7 +581,7 @@ let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfi
               }, ~key=requestID))
         }
 
-        let handleMessage = (subject: Subject.t<result<b, error>>, constructor) => {
+        let handleMessage = (subject: subject<result<b, error>>, constructor) => {
           constructor(data->makeMessage(~requestID))->sendRequest(w)
           unsubscribe := Some(subject.oneshot((value, ~key as _) => {
                 timeout->clearTimeout

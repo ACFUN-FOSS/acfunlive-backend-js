@@ -1,4 +1,4 @@
-open Message
+open AcLive__Message
 
 exception NotConnectBackend
 exception OneshotTimeout
@@ -139,6 +139,8 @@ type rec request<'a, 'b> =
   | @as("getLiveCutStatus") GetLiveCutStatus: request<unit, message<getLiveCutStatusResponse>>
   | @as("setLiveCutStatus") SetLiveCutStatus: request<setLiveCutStatusRequest, emptyMessage>
 
+type unsubscribe = AcLive__Subject.unsubscribe
+
 type t = {
   connect: unit => unit,
   disConnect: unit => unit,
@@ -148,7 +150,7 @@ type t = {
     ~key: 'b=?,
     ~onData: 'a => unit,
     ~onError: error => unit=?,
-  ) => Subject.unsubscribe,
+  ) => unsubscribe,
   request: 'a 'b. (request<'a, 'b>, 'a, ~requestID: string=?) => unit,
   oneshot: 'a 'b. (request<'a, 'b>, 'a, ~requestIDPrefix: string=?, ~timeout: int=?) => promise<'b>,
 }

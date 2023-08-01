@@ -1,4 +1,4 @@
-/* TypeScript file generated from Session.resi by genType. */
+/* TypeScript file generated from AcLive__Session.resi by genType. */
 /* eslint-disable import/first */
 
 
