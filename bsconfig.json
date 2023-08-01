@@ -1,0 +1,35 @@
+{
+  "name": "acfunlive-backend-js",
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    },
+    {
+      "dir": "tests",
+      "type": "dev",
+      "subdirs": true
+    }
+  ],
+  "package-specs": {
+    "module": "es6",
+    "in-source": true
+  },
+  "gentypeconfig": {
+    "language": "typescript",
+    "module": "es6",
+    "shims": {
+      "Js": "Js"
+    },
+    "generatedFileExtension": ".gen.ts"
+  },
+  "suffix": ".bs.mjs",
+  "external-stdlib": "@rescript/std",
+  "bsc-flags": [
+    "-open RescriptCore"
+  ],
+  "bs-dependencies": [
+    "@rescript/core",
+    "rescript-struct"
+  ]
+}

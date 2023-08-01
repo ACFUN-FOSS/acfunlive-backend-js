@@ -1,0 +1,47 @@
+{
+  "name": "acfunlive-backend-js",
+  "version": "0.1.0",
+  "description": "javascript/rescript bindings for acfunlive-backend",
+  "keywords": [
+    "rescript",
+    "acfun",
+    "acfunlive",
+    "acfunlive-backend"
+  ],
+  "license": "AGPL-3.0-only",
+  "author": "orzogc",
+  "scripts": {
+    "build": "rescript",
+    "clean": "rescript clean",
+    "dev": "rescript build -w"
+  },
+  "type": "module",
+  "files": [
+    "src",
+    "bsconfig.json",
+    "README.md"
+  ],
+  "dependencies": {
+    "@rescript/core": "^0.5.0",
+    "@rescript/std": "^11.0.0-beta.4",
+    "rescript-struct": "^4.1.1",
+    "uuid": "^9.0.0"
+  },
+  "peerDependencies": {
+    "tauri-plugin-websocket-api": "https://github.com/orzogc/tauri-plugin-websocket#ac-live-fix",
+    "ws": "^8.13.0"
+  },
+  "peerDependenciesMeta": {
+    "tauri-plugin-websocket-api": {
+      "optional": true
+    },
+    "ws": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "rescript": "^11.0.0-beta.4",
+    "tauri-plugin-websocket-api": "https://github.com/orzogc/tauri-plugin-websocket#ac-live-fix",
+    "ws": "^8.13.0"
+  }
+}
