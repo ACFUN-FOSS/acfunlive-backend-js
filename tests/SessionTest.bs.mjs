@@ -8,17 +8,17 @@ var session = AcFunLiveBackend.makeNodeSession(undefined);
 
 session.connect(undefined);
 
-session.on("heartbeat", undefined, (function () {
+session.on("heartbeat", (function () {
         console.log("heartbeat");
-      }), undefined);
+      }), undefined, undefined);
 
-session.on("login", undefined, (function (v) {
+session.on("login", (function (v) {
         console.log("login: ", v);
-      }), undefined);
+      }), undefined, undefined);
 
-session.on("getDanmaku", "aaa", (function (v) {
+session.on("getDanmaku", (function (v) {
         console.log("get danmaku: ", v);
-      }), (function (e) {
+      }), "aaa", (function (e) {
         console.log("get danmaku error: ", e);
       }));
 
@@ -44,32 +44,32 @@ async function action() {
   }
 }
 
-session.on("websocketOpen", undefined, (function () {
+session.on("websocketOpen", (function () {
         console.log("websocket open");
         action(undefined);
-      }), undefined);
+      }), undefined, undefined);
 
-session.on("jsonError", undefined, (function (v) {
+session.on("jsonError", (function (v) {
         console.log("json error: ", v);
-      }), undefined);
+      }), undefined, undefined);
 
-session.on("websocketError", undefined, (function (e) {
+session.on("websocketError", (function (e) {
         console.log("websocket error: ", e);
-      }), undefined);
+      }), undefined, undefined);
 
-session.on("websocketClose", undefined, (function () {
+session.on("websocketClose", (function () {
         console.log("websocket close");
-      }), undefined);
+      }), undefined, undefined);
 
-session.on("danmakuStop", undefined, (function (param) {
+session.on("danmakuStop", (function (param) {
         console.log("danmaku stop");
         session.disConnect(undefined);
-      }), undefined);
+      }), undefined, undefined);
 
-session.on("danmakuStopError", undefined, (function (e) {
+session.on("danmakuStopError", (function (e) {
         console.log("danmaku stop error: ", e);
         session.disConnect(undefined);
-      }), undefined);
+      }), undefined, undefined);
 
 export {
   session ,

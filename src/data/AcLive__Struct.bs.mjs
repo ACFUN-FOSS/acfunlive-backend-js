@@ -488,7 +488,7 @@ var getLiveDataResponseStruct = S$RescriptStruct.object(function (o) {
               endDate: S$RescriptStruct.field(o, "endDate", S$RescriptStruct.string(undefined)),
               overview: S$RescriptStruct.field(o, "overview", liveStatStruct),
               liveDetail: S$RescriptStruct.field(o, "liveDetail", S$RescriptStruct.dict(liveDetailStruct)),
-              dailyData: S$RescriptStruct.field(o, "dailyData", S$RescriptStruct.array(dailyDataStruct))
+              dailyData: S$RescriptStruct.field(o, "dailyData", S$RescriptStruct.$$null(S$RescriptStruct.array(dailyDataStruct)))
             };
     });
 
@@ -576,7 +576,7 @@ var getMedalDetailResponseStruct = S$RescriptStruct.object(function (o) {
             };
     });
 
-var getMedalListResponseStruct = S$RescriptStruct.array(medalStruct);
+var getMedalListResponseStruct = S$RescriptStruct.$$null(S$RescriptStruct.array(medalStruct));
 
 var userMedalInfoStruct = S$RescriptStruct.object(function (o) {
       return {
@@ -589,7 +589,7 @@ var userMedalInfoStruct = S$RescriptStruct.object(function (o) {
 var getMedalRankListResponseStruct = S$RescriptStruct.object(function (o) {
       return {
               hasFansClub: S$RescriptStruct.field(o, "hasFansClub", S$RescriptStruct.bool(undefined)),
-              rankList: S$RescriptStruct.field(o, "rankList", S$RescriptStruct.array(userMedalInfoStruct)),
+              rankList: S$RescriptStruct.field(o, "rankList", S$RescriptStruct.$$null(S$RescriptStruct.array(userMedalInfoStruct))),
               clubName: S$RescriptStruct.field(o, "clubName", S$RescriptStruct.string(undefined)),
               medalCount: S$RescriptStruct.field(o, "medalCount", S$RescriptStruct.$$int(undefined)),
               hasMedal: S$RescriptStruct.field(o, "hasMedal", S$RescriptStruct.bool(undefined)),
@@ -608,7 +608,7 @@ var getPushConfigResponseStruct = S$RescriptStruct.object(function (o) {
       return {
               streamName: S$RescriptStruct.field(o, "streamName", S$RescriptStruct.string(undefined)),
               streamPullAddress: S$RescriptStruct.field(o, "streamPullAddress", S$RescriptStruct.string(undefined)),
-              streamPushAddress: S$RescriptStruct.field(o, "streamPushAddress", S$RescriptStruct.array(S$RescriptStruct.string(undefined))),
+              streamPushAddress: S$RescriptStruct.field(o, "streamPushAddress", S$RescriptStruct.$$null(S$RescriptStruct.array(S$RescriptStruct.string(undefined)))),
               panoramic: S$RescriptStruct.field(o, "panoramic", S$RescriptStruct.bool(undefined)),
               interval: S$RescriptStruct.field(o, "interval", S$RescriptStruct.$$int(undefined)),
               rtmpServer: S$RescriptStruct.field(o, "rtmpServer", S$RescriptStruct.string(undefined)),

@@ -17,7 +17,13 @@ function makeTauriSession(config) {
   return AcLive__Session.make(Tauri__WebSocket, config);
 }
 
+var Message;
+
+var Session;
+
 export {
+  Message ,
+  Session ,
   makeWebAPISession ,
   makeNodeSession ,
   makeTauriSession ,

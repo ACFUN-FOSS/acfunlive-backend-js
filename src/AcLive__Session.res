@@ -146,8 +146,8 @@ type t = {
   isConnecting: unit => bool,
   on: 'a 'b. (
     event<'a, 'b>,
-    ~key: 'b=?,
     ~onData: 'a => unit,
+    ~key: 'b=?,
     ~onError: error => unit=?,
   ) => unsubscribe,
   request: 'a 'b. (request<'a, 'b>, 'a, ~requestID: string=?) => unit,
@@ -404,7 +404,7 @@ let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfi
     | None => ()
     }
 
-  let on = (type a b, event: event<a, b>, ~key: option<b>=?, ~onData: a => unit, ~onError=?) =>
+  let on = (type a b, event: event<a, b>, ~onData: a => unit, ~key: option<b>=?, ~onError=?) =>
     switch event {
     | WebsocketOpen => unitSubject->fixKeyCallback("websocketOpen", ~onData)
     | WebsocketClose => unitSubject->fixKeyCallback("websocketClose", ~onData)

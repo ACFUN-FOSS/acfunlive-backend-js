@@ -298,7 +298,7 @@ export type getLiveDataResponse = {
   readonly endDate: string; 
   readonly overview: liveStat; 
   readonly liveDetail: {[id: string]: liveDetail}; 
-  readonly dailyData: dailyData[]
+  readonly dailyData?: dailyData[]
 };
 
 // tslint:disable-next-line:interface-over-type-literal
@@ -415,7 +415,7 @@ export type getMedalDetailResponse = {
 };
 
 // tslint:disable-next-line:interface-over-type-literal
-export type getMedalListResponse = medal[];
+export type getMedalListResponse = (undefined | medal[]);
 
 // tslint:disable-next-line:interface-over-type-literal
 export type getMedalRankListRequest = liverUID;
@@ -430,7 +430,7 @@ export type userMedalInfo = {
 // tslint:disable-next-line:interface-over-type-literal
 export type getMedalRankListResponse = {
   readonly hasFansClub: boolean; 
-  readonly rankList: userMedalInfo[]; 
+  readonly rankList?: userMedalInfo[]; 
   readonly clubName: string; 
   readonly medalCount: number; 
   readonly hasMedal: boolean; 
@@ -457,7 +457,7 @@ export type getLiveTypeListResponse = liveType;
 export type getPushConfigResponse = {
   readonly streamName: string; 
   readonly streamPullAddress: string; 
-  readonly streamPushAddress: string[]; 
+  readonly streamPushAddress?: string[]; 
   readonly panoramic: boolean; 
   readonly interval: number; 
   readonly rtmpServer: string; 

@@ -340,7 +340,7 @@ function make($$WebSocket, $staropt$star) {
     }
     
   };
-  var on = function ($$event, key, onData, onError) {
+  var on = function ($$event, onData, key, onError) {
     switch ($$event) {
       case "websocketOpen" :
           return fixKeyCallback(unitSubject, "websocketOpen", onData);

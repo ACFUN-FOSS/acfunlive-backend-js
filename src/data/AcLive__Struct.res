@@ -374,7 +374,7 @@ let getLiveDataResponseStruct = S.object(o => {
   endDate: o->S.field("endDate", S.string()),
   overview: o->S.field("overview", liveStatStruct),
   liveDetail: o->S.field("liveDetail", S.dict(liveDetailStruct)),
-  dailyData: o->S.field("dailyData", S.array(dailyDataStruct)),
+  dailyData: ?o->S.field("dailyData", S.null(S.array(dailyDataStruct))),
 })
 
 let getGiftListResponseStruct = S.array(giftDetailStruct)
@@ -447,7 +447,7 @@ let getMedalDetailResponseStruct = S.object(o => {
   userRank: o->S.field("userRank", S.string()),
 })
 
-let getMedalListResponseStruct = S.array(medalStruct)
+let getMedalListResponseStruct = S.null(S.array(medalStruct))
 
 let userMedalInfoStruct = S.object(o => {
   profile: o->S.field("profile", userProfileStruct),
@@ -457,7 +457,7 @@ let userMedalInfoStruct = S.object(o => {
 
 let getMedalRankListResponseStruct = S.object(o => {
   hasFansClub: o->S.field("hasFansClub", S.bool()),
-  rankList: o->S.field("rankList", S.array(userMedalInfoStruct)),
+  rankList: ?o->S.field("rankList", S.null(S.array(userMedalInfoStruct))),
   clubName: o->S.field("clubName", S.string()),
   medalCount: o->S.field("medalCount", S.int()),
   hasMedal: o->S.field("hasMedal", S.bool()),
@@ -474,7 +474,7 @@ let getLiveTypeListResponseStruct = liveTypeStruct
 let getPushConfigResponseStruct = S.object(o => {
   streamName: o->S.field("streamName", S.string()),
   streamPullAddress: o->S.field("streamPullAddress", S.string()),
-  streamPushAddress: o->S.field("streamPushAddress", S.array(S.string())),
+  streamPushAddress: ?o->S.field("streamPushAddress", S.null(S.array(S.string()))),
   panoramic: o->S.field("panoramic", S.bool()),
   interval: o->S.field("interval", S.int()),
   rtmpServer: o->S.field("rtmpServer", S.string()),

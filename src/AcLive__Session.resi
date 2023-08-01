@@ -147,8 +147,8 @@ type t = {
   isConnecting: unit => bool,
   on: 'a 'b. (
     event<'a, 'b>,
-    ~key: 'b=?,
     ~onData: 'a => unit,
+    ~key: 'b=?,
     ~onError: error => unit=?,
   ) => unsubscribe,
   request: 'a 'b. (request<'a, 'b>, 'a, ~requestID: string=?) => unit,

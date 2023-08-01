@@ -16,10 +16,11 @@
     "dev": "rescript build -w"
   },
   "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
   "files": [
     "src",
-    "bsconfig.json",
-    "README.md"
+    "bsconfig.json"
   ],
   "dependencies": {
     "@rescript/core": "^0.5.0",

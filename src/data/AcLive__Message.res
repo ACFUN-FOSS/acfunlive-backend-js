@@ -512,7 +512,7 @@ type getLiveDataResponse = {
   endDate: string,
   overview: liveStat,
   liveDetail: Js.Dict.t<liveDetail>,
-  dailyData: array<dailyData>,
+  dailyData?: array<dailyData>,
 }
 
 @genType
@@ -635,7 +635,7 @@ type getMedalDetailResponse = {
 }
 
 @genType
-type getMedalListResponse = array<medal>
+type getMedalListResponse = option<array<medal>>
 
 @genType
 type getMedalRankListRequest = liverUID
@@ -650,7 +650,7 @@ type userMedalInfo = {
 @genType
 type getMedalRankListResponse = {
   hasFansClub: bool,
-  rankList: array<userMedalInfo>,
+  rankList?: array<userMedalInfo>,
   clubName: string,
   medalCount: int,
   hasMedal: bool,
@@ -677,7 +677,7 @@ type getLiveTypeListResponse = liveType
 type getPushConfigResponse = {
   streamName: string,
   streamPullAddress: string,
-  streamPushAddress: array<string>,
+  streamPushAddress?: array<string>,
   panoramic: bool,
   interval: int,
   rtmpServer: string,
