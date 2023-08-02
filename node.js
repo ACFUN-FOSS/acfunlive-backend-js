@@ -4006,7 +4006,7 @@ function make$2() {
 
 var NotConnectBackend = /* @__PURE__ */create("AcLive__Session.NotConnectBackend");
 
-var OneshotTimeout = /* @__PURE__ */create("AcLive__Session.OneshotTimeout");
+var AsyncRequestTimeout = /* @__PURE__ */create("AcLive__Session.AsyncRequestTimeout");
 
 var ResponseError = /* @__PURE__ */create("AcLive__Session.ResponseError");
 
@@ -4052,7 +4052,7 @@ function make$1($$WebSocket, $staropt$star) {
   var config = $staropt$star !== undefined ? $staropt$star : ({
         websocketUrl: "ws://localhost:15368",
         autoReconnect: true,
-        oneshotTimeout: 10000
+        asyncRequestTimeout: 10000
       });
   var ws = {
     contents: undefined
@@ -4723,7 +4723,7 @@ function make$1($$WebSocket, $staropt$star) {
               }(uuid))
             ];
     }  };
-  var oneshot = function (request, data, requestIDPrefix, timeout) {
+  var asyncRequest = function (request, data, requestIDPrefix, timeout) {
     var w = ws.contents;
     if (w === undefined) {
       return Promise.reject({
@@ -4745,9 +4745,9 @@ function make$1($$WebSocket, $staropt$star) {
                           }
                           deleteUuid(undefined);
                           reject({
-                                RE_EXN_ID: OneshotTimeout
+                                RE_EXN_ID: AsyncRequestTimeout
                               });
-                        }), getWithDefault(timeout, config.oneshotTimeout));
+                        }), getWithDefault(timeout, config.asyncRequestTimeout));
                   var handleEmptyMessage = function (subject, constructor) {
                     sendRequest(constructor(makeEmptyMessage(requestID)), w$1);
                     unsubscribe.contents = subject.oneshot((function (value, param) {
@@ -5076,7 +5076,7 @@ function make$1($$WebSocket, $staropt$star) {
           isConnecting: isConnecting,
           on: on,
           request: request,
-          oneshot: oneshot
+          asyncRequest: asyncRequest
         };
 }
 /* uuid Not a pure module */

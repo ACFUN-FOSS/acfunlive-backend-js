@@ -11,7 +11,7 @@ import * as Caml_exceptions from "rescript/lib/es6/caml_exceptions.js";
 
 var NotConnectBackend = /* @__PURE__ */Caml_exceptions.create("AcLive__Session.NotConnectBackend");
 
-var OneshotTimeout = /* @__PURE__ */Caml_exceptions.create("AcLive__Session.OneshotTimeout");
+var AsyncRequestTimeout = /* @__PURE__ */Caml_exceptions.create("AcLive__Session.AsyncRequestTimeout");
 
 var ResponseError = /* @__PURE__ */Caml_exceptions.create("AcLive__Session.ResponseError");
 
@@ -57,7 +57,7 @@ function make($$WebSocket, $staropt$star) {
   var config = $staropt$star !== undefined ? $staropt$star : ({
         websocketUrl: "ws://localhost:15368",
         autoReconnect: true,
-        oneshotTimeout: 10000
+        asyncRequestTimeout: 10000
       });
   var ws = {
     contents: undefined
@@ -729,7 +729,7 @@ function make($$WebSocket, $staropt$star) {
             ];
     };
   };
-  var oneshot = function (request, data, requestIDPrefix, timeout) {
+  var asyncRequest = function (request, data, requestIDPrefix, timeout) {
     var w = ws.contents;
     if (w === undefined) {
       return Promise.reject({
@@ -751,9 +751,9 @@ function make($$WebSocket, $staropt$star) {
                           }
                           deleteUuid(undefined);
                           reject({
-                                RE_EXN_ID: OneshotTimeout
+                                RE_EXN_ID: AsyncRequestTimeout
                               });
-                        }), Core__Option.getWithDefault(timeout, config.oneshotTimeout));
+                        }), Core__Option.getWithDefault(timeout, config.asyncRequestTimeout));
                   var handleEmptyMessage = function (subject, constructor) {
                     sendRequest(constructor(AcLive__Message.makeEmptyMessage(requestID)), w$1);
                     unsubscribe.contents = subject.oneshot((function (value, param) {
@@ -1082,13 +1082,13 @@ function make($$WebSocket, $staropt$star) {
           isConnecting: isConnecting,
           on: on,
           request: request,
-          oneshot: oneshot
+          asyncRequest: asyncRequest
         };
 }
 
 export {
   NotConnectBackend ,
-  OneshotTimeout ,
+  AsyncRequestTimeout ,
   ResponseError ,
   make ,
 }

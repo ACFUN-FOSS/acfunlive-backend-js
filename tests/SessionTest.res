@@ -12,13 +12,13 @@ session.on(
 
 let action = async () => {
   try {
-    let info = await session.oneshot(Login, {account: "", password: ""})
+    let info = await session.asyncRequest(Login, {account: "", password: ""})
     Console.log2("login call: ", info)
 
-    let liveList = await session.oneshot(GetAllLiveList, ())
+    let liveList = await session.asyncRequest(GetAllLiveList, ())
     Console.log2("live list: ", liveList)
 
-    let stream = await session.oneshot(
+    let stream = await session.asyncRequest(
       GetDanmaku,
       {liverUID: (liveList.data[0]->Option.getExn).profile.userID},
     )

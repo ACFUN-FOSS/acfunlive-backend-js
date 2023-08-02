@@ -16,5 +16,5 @@ export type jsonError = { readonly json?: string; readonly error: RescriptStruct
 export type config = {
   readonly websocketUrl: string; 
   readonly autoReconnect: boolean; 
-  readonly oneshotTimeout: number
+  readonly asyncRequestTimeout: number
 };

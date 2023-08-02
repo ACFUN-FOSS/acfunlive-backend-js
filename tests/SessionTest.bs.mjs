@@ -24,14 +24,14 @@ session.on("getDanmaku", (function (v) {
 
 async function action() {
   try {
-    var info = await session.oneshot("login", {
+    var info = await session.asyncRequest("login", {
           account: "",
           password: ""
         }, undefined, undefined);
     console.log("login call: ", info);
-    var liveList = await session.oneshot("getAllLiveList", undefined, undefined, undefined);
+    var liveList = await session.asyncRequest("getAllLiveList", undefined, undefined, undefined);
     console.log("live list: ", liveList);
-    var stream = await session.oneshot("getDanmaku", {
+    var stream = await session.asyncRequest("getDanmaku", {
           liverUID: Core__Option.getExn(liveList.data[0]).profile.userID
         }, undefined, undefined);
     console.log("get danmaku stream: ", stream);

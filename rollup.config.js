@@ -2,38 +2,32 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default [
     {
-        input: './src/platform/WebAPI.js',
+        input: 'src/platform/WebAPI.js',
         output: {
-            file: './webapi.js'
+            file: 'webapi.js'
+        },
+        external: ['uuid'],
+        plugins: [nodeResolve()]
+    },
+    {
+        input: 'src/platform/Node.js',
+        output: {
+            file: 'node.js'
         },
         external: [
-            'tauri-plugin-websocket-api',
             'uuid',
             'ws'
         ],
         plugins: [nodeResolve()]
     },
     {
-        input: './src/platform/Node.js',
+        input: 'src/platform/Tauri.js',
         output: {
-            file: './node.js'
+            file: 'tauri.js'
         },
         external: [
             'tauri-plugin-websocket-api',
-            'uuid',
-            'ws'
-        ],
-        plugins: [nodeResolve()]
-    },
-    {
-        input: './src/platform/Tauri.js',
-        output: {
-            file: './tauri.js'
-        },
-        external: [
-            'tauri-plugin-websocket-api',
-            'uuid',
-            'ws'
+            'uuid'
         ],
         plugins: [nodeResolve()]
     }

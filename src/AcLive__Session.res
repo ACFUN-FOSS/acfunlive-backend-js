@@ -2,7 +2,7 @@ open AcLive__Message
 open AcLive__Struct
 
 exception NotConnectBackend
-exception OneshotTimeout
+exception AsyncRequestTimeout
 exception ResponseError(error)
 
 type websocketError = {
@@ -151,19 +151,24 @@ type t = {
     ~onError: error => unit=?,
   ) => unsubscribe,
   request: 'a 'b. (request<'a, 'b>, 'a, ~requestID: string=?) => unit,
-  oneshot: 'a 'b. (request<'a, 'b>, 'a, ~requestIDPrefix: string=?, ~timeout: int=?) => promise<'b>,
+  asyncRequest: 'a 'b. (
+    request<'a, 'b>,
+    'a,
+    ~requestIDPrefix: string=?,
+    ~timeout: int=?,
+  ) => promise<'b>,
 }
 
 type config = {
   websocketUrl: string,
   autoReconnect: bool,
-  oneshotTimeout: int,
+  asyncRequestTimeout: int,
 }
 
 let defaultConfig = {
   websocketUrl: "ws://localhost:15368",
   autoReconnect: true,
-  oneshotTimeout: 10000,
+  asyncRequestTimeout: 10000,
 }
 
 type subject<'a> = AcLive__Subject.t<'a>
@@ -545,7 +550,7 @@ let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfi
     }
   }
 
-  let oneshot = (
+  let asyncRequest = (
     type a b,
     request: request<a, b>,
     data: a,
@@ -566,8 +571,8 @@ let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfi
           | None => ()
           }
           deleteUuid()
-          reject(OneshotTimeout)
-        }, timeout->Option.getWithDefault(config.oneshotTimeout))
+          reject(AsyncRequestTimeout)
+        }, timeout->Option.getWithDefault(config.asyncRequestTimeout))
 
         let handleEmptyMessage = (subject: subject<result<b, error>>, constructor) => {
           constructor(makeEmptyMessage(~requestID))->sendRequest(w)
@@ -648,6 +653,6 @@ let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfi
     isConnecting,
     on,
     request,
-    oneshot,
+    asyncRequest,
   }
 }

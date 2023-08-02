@@ -131,5 +131,5 @@ export interface Session {
 
     request<K extends keyof request>(request: K, data: request[K][0], requestID?: string): void;
 
-    oneshot<K extends keyof request>(request: K, data: request[K][0], requestIDPrefix?: string, timeout?: number): Promise<request[K][1]>;
+    asyncRequest<K extends keyof request>(request: K, data: request[K][0], requestIDPrefix?: string, timeout?: number): Promise<request[K][1]>;
 }

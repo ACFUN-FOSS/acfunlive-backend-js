@@ -1,7 +1,7 @@
 open AcLive__Message
 
 exception NotConnectBackend
-exception OneshotTimeout
+exception AsyncRequestTimeout
 exception ResponseError(error)
 
 @genType
@@ -152,14 +152,19 @@ type t = {
     ~onError: error => unit=?,
   ) => unsubscribe,
   request: 'a 'b. (request<'a, 'b>, 'a, ~requestID: string=?) => unit,
-  oneshot: 'a 'b. (request<'a, 'b>, 'a, ~requestIDPrefix: string=?, ~timeout: int=?) => promise<'b>,
+  asyncRequest: 'a 'b. (
+    request<'a, 'b>,
+    'a,
+    ~requestIDPrefix: string=?,
+    ~timeout: int=?,
+  ) => promise<'b>,
 }
 
 @genType
 type config = {
   websocketUrl: string,
   autoReconnect: bool,
-  oneshotTimeout: int,
+  asyncRequestTimeout: int,
 }
 
 let make: (module(AcLive__WebSocket.WebSocket), ~config: config=?) => t
