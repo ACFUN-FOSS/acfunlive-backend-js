@@ -47,7 +47,7 @@
     "ws": "^8.13.0"
   },
   "peerDependencies": {
-    "tauri-plugin-websocket-api": "*",
+    "tauri-plugin-websocket-api": "https://github.com/orzogc/tauri-plugin-websocket#ac-live-fix",
     "ws": "^8.13.0"
   },
   "peerDependenciesMeta": {

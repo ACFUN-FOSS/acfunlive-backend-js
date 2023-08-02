@@ -10,4 +10,6 @@ package-lock.json
 .yarnrc.yml
 yarn.lock
 
+pnpm-lock.yaml
+
 dist/
