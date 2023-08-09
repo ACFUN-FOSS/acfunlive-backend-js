@@ -5139,4 +5139,4 @@ function makeSession(config) {
 
 const nodeSession = makeSession;
 
-export { nodeSession };
+export { nodeSession as default };

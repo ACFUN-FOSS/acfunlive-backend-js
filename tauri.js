@@ -5276,4 +5276,4 @@ function makeSession(config) {
 
 const tauriSession = makeSession;
 
-export { tauriSession };
+export { tauriSession as default };

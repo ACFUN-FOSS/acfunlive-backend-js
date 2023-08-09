@@ -5138,4 +5138,4 @@ function makeSession(config) {
 
 const webApiSession = makeSession;
 
-export { webApiSession };
+export { webApiSession as default };

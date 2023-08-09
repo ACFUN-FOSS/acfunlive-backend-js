@@ -1,3 +1,4 @@
-import { makeSession } from './AcLive__Node.bs.mjs'
+import { makeSession } from './AcLive__Node.bs.mjs';
 
-export const nodeSession = makeSession;
+const nodeSession = makeSession;
+export default nodeSession;

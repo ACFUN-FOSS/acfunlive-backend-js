@@ -1,3 +1,4 @@
-import { makeSession } from './AcLive__Tauri.bs.mjs'
+import { makeSession } from './AcLive__Tauri.bs.mjs';
 
-export const tauriSession = makeSession;
+const tauriSession = makeSession;
+export default tauriSession;
