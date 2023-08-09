@@ -144,8 +144,30 @@ function make($$WebSocket, $staropt$star) {
       return ;
     }
     var w = $$WebSocket.make(config.websocketUrl);
+    ws.contents = Caml_option.some(w);
     var heartbeatInterval = {
       contents: undefined
+    };
+    var cleanup = function () {
+      var id = heartbeatInterval.contents;
+      if (id !== undefined) {
+        clearInterval(Caml_option.valFromOption(id));
+        heartbeatInterval.contents = undefined;
+      }
+      var w = ws.contents;
+      if (w !== undefined) {
+        ws.contents = undefined;
+        $$WebSocket.close(Caml_option.valFromOption(w));
+        if (config.autoReconnect) {
+          setTimeout((function () {
+                  connect(undefined);
+                }), 5000);
+          return ;
+        } else {
+          return ;
+        }
+      }
+      
     };
     $$WebSocket.addOpenListener(w, (function (param) {
             heartbeatInterval.contents = Caml_option.some(setInterval((function () {
@@ -154,31 +176,15 @@ function make($$WebSocket, $staropt$star) {
             unitSubject.set(undefined, "websocketOpen");
           }));
     $$WebSocket.addCloseListener(w, (function (param) {
-            var id = heartbeatInterval.contents;
-            if (id !== undefined) {
-              clearInterval(Caml_option.valFromOption(id));
-            }
             unitSubject.set(undefined, "websocketClose");
-            var w = ws.contents;
-            if (w !== undefined) {
-              $$WebSocket.close(Caml_option.valFromOption(w));
-              ws.contents = undefined;
-              if (config.autoReconnect) {
-                setTimeout((function () {
-                        connect(undefined);
-                      }), 5000);
-                return ;
-              } else {
-                return ;
-              }
-            }
-            
+            cleanup(undefined);
           }));
     $$WebSocket.addErrorListener(w, (function (e) {
             websocketErrorSubject.set({
                   error: e.error,
                   message: e.message
                 }, "websocketError");
+            cleanup(undefined);
           }));
     $$WebSocket.addMessageListener(w, (function (param) {
             var data = param.data;
@@ -329,14 +335,12 @@ function make($$WebSocket, $staropt$star) {
               
             }
           }));
-    ws.contents = Caml_option.some(w);
   };
   var disConnect = function () {
     var w = ws.contents;
     if (w !== undefined) {
-      $$WebSocket.close(Caml_option.valFromOption(w));
       ws.contents = undefined;
-      return ;
+      return $$WebSocket.close(Caml_option.valFromOption(w));
     }
     
   };

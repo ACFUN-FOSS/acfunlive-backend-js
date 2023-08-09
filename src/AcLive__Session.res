@@ -290,24 +290,24 @@ let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfi
   let rec connect = () => {
     if !isConnecting() {
       let w = WebSocket.make(config.websocketUrl)
+      ws := Some(w)
 
       let heartbeatInterval = ref(None)
-      w->WebSocket.addOpenListener(_ => {
-        heartbeatInterval := Some(setInterval(() => w->WebSocket.send(heartbeat), 5000))
-        unitSubject.set((), ~key="websocketOpen")
-      })
-      w->WebSocket.addCloseListener(_ => {
+
+      let cleanup = () => {
         switch heartbeatInterval.contents {
-        | Some(id) => id->clearInterval
+        | Some(id) => {
+            id->clearInterval
+            heartbeatInterval := None
+          }
         | None => ()
         }
-        unitSubject.set((), ~key="websocketClose")
 
         switch ws.contents {
         | Some(w) => {
             // 并非主动关闭
-            w->WebSocket.close
             ws := None
+            w->WebSocket.close
 
             if config.autoReconnect {
               // 延迟5秒后重新连接
@@ -316,10 +316,21 @@ let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfi
           }
         | None => ()
         }
+      }
+
+      w->WebSocket.addOpenListener(_ => {
+        heartbeatInterval := Some(setInterval(() => w->WebSocket.send(heartbeat), 5000))
+        unitSubject.set((), ~key="websocketOpen")
       })
-      w->WebSocket.addErrorListener(e =>
+      w->WebSocket.addCloseListener(_ => {
+        unitSubject.set((), ~key="websocketClose")
+        cleanup()
+      })
+      w->WebSocket.addErrorListener(e => {
         websocketErrorSubject.set({error: ?e.error, message: ?e.message}, ~key="websocketError")
-      )
+        // 出现错误就关闭连接重连
+        cleanup()
+      })
 
       w->WebSocket.addMessageListener(({data}) => {
         switch data->parseResponse {
@@ -395,16 +406,14 @@ let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfi
         | Error(e) => jsonErrorSubject.set({json: data, error: e}, ~key="jsonError")
         }
       })
-
-      ws := Some(w)
     }
   }
 
   let disConnect = () =>
     switch ws.contents {
     | Some(w) => {
-        w->WebSocket.close
         ws := None
+        w->WebSocket.close
       }
     | None => ()
     }
