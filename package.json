@@ -42,12 +42,12 @@
     "@rollup/plugin-node-resolve": "^15.1.0",
     "concurrently": "^8.2.0",
     "rescript": "^11.0.0-beta.4",
-    "rollup": "^3.27.0",
-    "tauri-plugin-websocket-api": "https://github.com/orzogc/tauri-plugin-websocket#ac-live-fix",
+    "rollup": "^3.28.0",
+    "tauri-plugin-websocket-api": "github:orzogc/tauri-plugin-websocket#ac-live-fix",
     "ws": "^8.13.0"
   },
   "peerDependencies": {
-    "tauri-plugin-websocket-api": "https://github.com/orzogc/tauri-plugin-websocket#ac-live-fix",
+    "tauri-plugin-websocket-api": "*",
     "ws": "^8.13.0"
   },
   "peerDependenciesMeta": {

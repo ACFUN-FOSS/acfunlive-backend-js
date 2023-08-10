@@ -23,11 +23,26 @@ external close: t => unit = "close"
 external addOpenListener: (t, @as("open") _, event<t> => unit) => unit = "addEventListener"
 
 @send
+external removeOpenListener: (t, @as("open") _, event<t> => unit) => unit = "removeEventListener"
+
+@send
 external addCloseListener: (t, @as("close") _, closeEvent<t> => unit) => unit = "addEventListener"
+
+@send
+external removeCloseListener: (t, @as("close") _, closeEvent<t> => unit) => unit =
+  "removeEventListener"
 
 @send
 external addMessageListener: (t, @as("message") _, messageEvent<t> => unit) => unit =
   "addEventListener"
 
 @send
+external removeMessageListener: (t, @as("message") _, messageEvent<t> => unit) => unit =
+  "removeEventListener"
+
+@send
 external addErrorListener: (t, @as("error") _, errorEvent<t> => unit) => unit = "addEventListener"
+
+@send
+external removeErrorListener: (t, @as("error") _, errorEvent<t> => unit) => unit =
+  "removeEventListener"

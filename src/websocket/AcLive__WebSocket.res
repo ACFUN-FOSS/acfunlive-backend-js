@@ -22,9 +22,17 @@ module type WebSocket = {
 
   let addOpenListener: (t, event<t> => unit) => unit
 
+  let removeOpenListener: (t, event<t> => unit) => unit
+
   let addCloseListener: (t, closeEvent<t> => unit) => unit
+
+  let removeCloseListener: (t, closeEvent<t> => unit) => unit
 
   let addMessageListener: (t, messageEvent<t> => unit) => unit
 
+  let removeMessageListener: (t, messageEvent<t> => unit) => unit
+
   let addErrorListener: (t, errorEvent<t> => unit) => unit
+
+  let removeErrorListener: (t, errorEvent<t> => unit) => unit
 }

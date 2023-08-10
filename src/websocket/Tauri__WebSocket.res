@@ -98,7 +98,6 @@ let close = ws =>
   | Some(w) =>
     w
     ->disconnect
-    //->thenResolve(_ => ws->closeWithCode(1000))
     ->catch(e => {
       notifyError(ws, e)
       ws->clearAndNotifyClose->resolve
@@ -168,10 +167,30 @@ let send = (ws, message) =>
   | None => ()
   }
 
-let addOpenListener = (ws, fn) => ws.openListeners->Array.push(fn)
+let addListener = (array, fn) =>
+  if array->Array.indexOf(fn) === -1 {
+    array->Array.push(fn)
+  }
 
-let addCloseListener = (ws, fn) => ws.closeListeners->Array.push(fn)
+let removeListener = (array, fn) => {
+  let index = array->Array.indexOf(fn)
+  if index > -1 {
+    array->Array.splice(~start=index, ~remove=1, ~insert=[])
+  }
+}
 
-let addMessageListener = (ws, fn) => ws.messageListeners->Array.push(fn)
+let addOpenListener = (ws, fn) => ws.openListeners->addListener(fn)
 
-let addErrorListener = (ws, fn) => ws.errorListeners->Array.push(fn)
+let removeOpenListener = (ws, fn) => ws.openListeners->removeListener(fn)
+
+let addCloseListener = (ws, fn) => ws.closeListeners->addListener(fn)
+
+let removeCloseListener = (ws, fn) => ws.closeListeners->removeListener(fn)
+
+let addMessageListener = (ws, fn) => ws.messageListeners->addListener(fn)
+
+let removeMessageListener = (ws, fn) => ws.messageListeners->removeListener(fn)
+
+let addErrorListener = (ws, fn) => ws.errorListeners->addListener(fn)
+
+let removeErrorListener = (ws, fn) => ws.errorListeners->removeListener(fn)

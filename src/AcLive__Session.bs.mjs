@@ -139,6 +139,14 @@ function make($$WebSocket, $staropt$star) {
       return false;
     }
   };
+  var disConnect = function () {
+    var w = ws.contents;
+    if (w !== undefined) {
+      ws.contents = undefined;
+      return $$WebSocket.close(Caml_option.valFromOption(w));
+    }
+    
+  };
   var connect = function () {
     if (isConnecting(undefined)) {
       return ;
@@ -148,16 +156,22 @@ function make($$WebSocket, $staropt$star) {
     var heartbeatInterval = {
       contents: undefined
     };
+    var cleanupFn = {
+      contents: undefined
+    };
     var cleanup = function () {
       var id = heartbeatInterval.contents;
       if (id !== undefined) {
         clearInterval(Caml_option.valFromOption(id));
         heartbeatInterval.contents = undefined;
       }
-      var w = ws.contents;
-      if (w !== undefined) {
-        ws.contents = undefined;
-        $$WebSocket.close(Caml_option.valFromOption(w));
+      var fn = cleanupFn.contents;
+      if (fn !== undefined) {
+        fn(undefined);
+        cleanupFn.contents = undefined;
+      }
+      if (Core__Option.isSome(ws.contents)) {
+        disConnect(undefined);
         if (config.autoReconnect) {
           setTimeout((function () {
                   connect(undefined);
@@ -169,180 +183,182 @@ function make($$WebSocket, $staropt$star) {
       }
       
     };
-    $$WebSocket.addOpenListener(w, (function (param) {
-            heartbeatInterval.contents = Caml_option.some(setInterval((function () {
-                        $$WebSocket.send(w, AcLive__Message.heartbeat);
-                      }), 5000));
-            unitSubject.set(undefined, "websocketOpen");
-          }));
-    $$WebSocket.addCloseListener(w, (function (param) {
-            unitSubject.set(undefined, "websocketClose");
-            cleanup(undefined);
-          }));
-    $$WebSocket.addErrorListener(w, (function (e) {
-            websocketErrorSubject.set({
-                  error: e.error,
-                  message: e.message
-                }, "websocketError");
-            cleanup(undefined);
-          }));
-    $$WebSocket.addMessageListener(w, (function (param) {
-            var data = param.data;
-            var response = AcLive__Struct.parseResponse(data);
-            if (response.TAG !== "Ok") {
-              return jsonErrorSubject.set({
-                          json: data,
-                          error: response._0
-                        }, "jsonError");
-            }
-            var response$1 = response._0;
-            if (typeof response$1 !== "object") {
-              return unitSubject.set(undefined, "heartbeat");
-            }
-            switch (response$1.TAG) {
-              case 2 :
-                  return setResponse(loginSubject, response$1._0);
-              case 3 :
-                  return setEmptyResponse(setClientIDSubject, response$1._0);
-              case 4 :
-                  return setEmptyResponse(requestForwardSubject, response$1._0);
-              case 5 :
-                  return setResponse(receiveForwardSubject, response$1._0);
-              case 6 :
-                  return setEmptyResponse(setTokenSubject, response$1._0);
-              case 100 :
-                  var v = response$1._0;
-                  return getDanmakuSubject.set(v, AcLive__Message.getOptionalResponseRequestId(v));
-              case 101 :
-                  return setEmptyResponse(stopDanmakuSubject, response$1._0);
-              case 102 :
-                  return setResponse(getWatchingListSubject, response$1._0);
-              case 103 :
-                  return setResponse(getBillboardSubject, response$1._0);
-              case 104 :
-                  return setResponse(getSummarySubject, response$1._0);
-              case 105 :
-                  return setResponse(getLuckListSubject, response$1._0);
-              case 106 :
-                  return setResponse(getPlaybackSubject, response$1._0);
-              case 107 :
-                  return setResponse(getAllGiftListSubject, response$1._0);
-              case 108 :
-                  return setResponse(getWalletBalanceSubject, response$1._0);
-              case 109 :
-                  return setResponse(getUserLiveInfoSubject, response$1._0);
-              case 110 :
-                  return setResponse(getAllLiveListSubject, response$1._0);
-              case 112 :
-                  return setResponse(getLiveDataSubject, response$1._0);
-              case 114 :
-                  return setResponse(getGiftListSubject, response$1._0);
-              case 115 :
-                  return setResponse(getUserInfoSubject, response$1._0);
-              case 116 :
-                  return setResponse(getLiveCutInfoSubject, response$1._0);
-              case 200 :
-                  return setResponse(getManagerListSubject, response$1._0);
-              case 201 :
-                  return setEmptyResponse(addManagerSubject, response$1._0);
-              case 202 :
-                  return setEmptyResponse(deleteManagerSubject, response$1._0);
-              case 203 :
-                  return setResponse(getAllKickHistorySubject, response$1._0);
-              case 204 :
-                  return setEmptyResponse(managerKickSubject, response$1._0);
-              case 205 :
-                  return setEmptyResponse(authorKickSubject, response$1._0);
-              case 300 :
-                  return setResponse(getMedalDetailSubject, response$1._0);
-              case 301 :
-                  return setResponse(getMedalListSubject, response$1._0);
-              case 302 :
-                  return setResponse(getMedalRankListSubject, response$1._0);
-              case 303 :
-                  return setResponse(getUserMedalSubject, response$1._0);
-              case 304 :
-                  return setEmptyResponse(wearMedalSubject, response$1._0);
-              case 305 :
-                  return setEmptyResponse(cancelWearMedalSubject, response$1._0);
-              case 900 :
-                  return setResponse(checkLiveAuthSubject, response$1._0);
-              case 901 :
-                  return setResponse(getLiveTypeListSubject, response$1._0);
-              case 902 :
-                  return setResponse(getPushConfigSubject, response$1._0);
-              case 903 :
-                  return setResponse(getLiveStatusSubject, response$1._0);
-              case 904 :
-                  return setResponse(getTranscodeInfoSubject, response$1._0);
-              case 905 :
-                  return setResponse(startLiveSubject, response$1._0);
-              case 906 :
-                  return setResponse(stopLiveSubject, response$1._0);
-              case 907 :
-                  return setEmptyResponse(changeTitleAndCoverSubject, response$1._0);
-              case 908 :
-                  return setResponse(getLiveCutStatusSubject, response$1._0);
-              case 909 :
-                  return setEmptyResponse(setLiveCutStatusSubject, response$1._0);
-              case 1000 :
-                  return setDanmaku(commentSubject, response$1._0);
-              case 1001 :
-                  return setDanmaku(likeSubject, response$1._0);
-              case 1002 :
-                  return setDanmaku(enterRoomSubject, response$1._0);
-              case 1003 :
-                  return setDanmaku(followAuthorSubject, response$1._0);
-              case 1004 :
-                  return setDanmaku(throwBananaSubject, response$1._0);
-              case 1005 :
-                  return setDanmaku(giftSubject, response$1._0);
-              case 1006 :
-                  return setDanmaku(richTextSubject, response$1._0);
-              case 1007 :
-                  return setDanmaku(joinClubSubject, response$1._0);
-              case 1008 :
-                  return setDanmaku(shareLiveSubject, response$1._0);
-              case 2000 :
-                  var v$1 = response$1._0;
-                  return danmakuStopSubject.set(v$1, v$1.liverUID.toString());
-              case 2001 :
-                  return setDanmaku(bananaCountSubject, response$1._0);
-              case 2002 :
-                  return setDanmaku(displayInfoSubject, response$1._0);
-              case 2003 :
-                  return setDanmaku(topUsersSubject, response$1._0);
-              case 2004 :
-                  return setDanmaku(recentCommentsSubject, response$1._0);
-              case 2005 :
-                  return setDanmaku(redpackListSubject, response$1._0);
-              case 2100 :
-                  return setDanmaku(chatCallSubject, response$1._0);
-              case 2101 :
-                  return setDanmaku(chatAcceptSubject, response$1._0);
-              case 2102 :
-                  return setDanmaku(chatReadySubject, response$1._0);
-              case 2103 :
-                  return setDanmaku(chatEndSubject, response$1._0);
-              case 2999 :
-                  return setDanmaku(danmakuStopErrorStopSubject, response$1._0);
-              case 3000 :
-                  return setDanmaku(kickedOutSubject, response$1._0);
-              case 3001 :
-                  return setDanmaku(violationAlertSubject, response$1._0);
-              case 3002 :
-                  return setDanmaku(managerStateSubject, response$1._0);
-              
-            }
-          }));
-  };
-  var disConnect = function () {
-    var w = ws.contents;
-    if (w !== undefined) {
-      ws.contents = undefined;
-      return $$WebSocket.close(Caml_option.valFromOption(w));
-    }
-    
+    var openListener = function (param) {
+      heartbeatInterval.contents = Caml_option.some(setInterval((function () {
+                  $$WebSocket.send(w, AcLive__Message.heartbeat);
+                }), 5000));
+      unitSubject.set(undefined, "websocketOpen");
+    };
+    var closeListener = function (param) {
+      unitSubject.set(undefined, "websocketClose");
+      cleanup(undefined);
+    };
+    var errorListener = function (e) {
+      websocketErrorSubject.set({
+            error: e.error,
+            message: e.message
+          }, "websocketError");
+      cleanup(undefined);
+    };
+    $$WebSocket.addOpenListener(w, openListener);
+    $$WebSocket.addCloseListener(w, closeListener);
+    $$WebSocket.addErrorListener(w, errorListener);
+    var messageListener = function (param) {
+      var data = param.data;
+      var response = AcLive__Struct.parseResponse(data);
+      if (response.TAG !== "Ok") {
+        return jsonErrorSubject.set({
+                    json: data,
+                    error: response._0
+                  }, "jsonError");
+      }
+      var response$1 = response._0;
+      if (typeof response$1 !== "object") {
+        return unitSubject.set(undefined, "heartbeat");
+      }
+      switch (response$1.TAG) {
+        case 2 :
+            return setResponse(loginSubject, response$1._0);
+        case 3 :
+            return setEmptyResponse(setClientIDSubject, response$1._0);
+        case 4 :
+            return setEmptyResponse(requestForwardSubject, response$1._0);
+        case 5 :
+            return setResponse(receiveForwardSubject, response$1._0);
+        case 6 :
+            return setEmptyResponse(setTokenSubject, response$1._0);
+        case 100 :
+            var v = response$1._0;
+            return getDanmakuSubject.set(v, AcLive__Message.getOptionalResponseRequestId(v));
+        case 101 :
+            return setEmptyResponse(stopDanmakuSubject, response$1._0);
+        case 102 :
+            return setResponse(getWatchingListSubject, response$1._0);
+        case 103 :
+            return setResponse(getBillboardSubject, response$1._0);
+        case 104 :
+            return setResponse(getSummarySubject, response$1._0);
+        case 105 :
+            return setResponse(getLuckListSubject, response$1._0);
+        case 106 :
+            return setResponse(getPlaybackSubject, response$1._0);
+        case 107 :
+            return setResponse(getAllGiftListSubject, response$1._0);
+        case 108 :
+            return setResponse(getWalletBalanceSubject, response$1._0);
+        case 109 :
+            return setResponse(getUserLiveInfoSubject, response$1._0);
+        case 110 :
+            return setResponse(getAllLiveListSubject, response$1._0);
+        case 112 :
+            return setResponse(getLiveDataSubject, response$1._0);
+        case 114 :
+            return setResponse(getGiftListSubject, response$1._0);
+        case 115 :
+            return setResponse(getUserInfoSubject, response$1._0);
+        case 116 :
+            return setResponse(getLiveCutInfoSubject, response$1._0);
+        case 200 :
+            return setResponse(getManagerListSubject, response$1._0);
+        case 201 :
+            return setEmptyResponse(addManagerSubject, response$1._0);
+        case 202 :
+            return setEmptyResponse(deleteManagerSubject, response$1._0);
+        case 203 :
+            return setResponse(getAllKickHistorySubject, response$1._0);
+        case 204 :
+            return setEmptyResponse(managerKickSubject, response$1._0);
+        case 205 :
+            return setEmptyResponse(authorKickSubject, response$1._0);
+        case 300 :
+            return setResponse(getMedalDetailSubject, response$1._0);
+        case 301 :
+            return setResponse(getMedalListSubject, response$1._0);
+        case 302 :
+            return setResponse(getMedalRankListSubject, response$1._0);
+        case 303 :
+            return setResponse(getUserMedalSubject, response$1._0);
+        case 304 :
+            return setEmptyResponse(wearMedalSubject, response$1._0);
+        case 305 :
+            return setEmptyResponse(cancelWearMedalSubject, response$1._0);
+        case 900 :
+            return setResponse(checkLiveAuthSubject, response$1._0);
+        case 901 :
+            return setResponse(getLiveTypeListSubject, response$1._0);
+        case 902 :
+            return setResponse(getPushConfigSubject, response$1._0);
+        case 903 :
+            return setResponse(getLiveStatusSubject, response$1._0);
+        case 904 :
+            return setResponse(getTranscodeInfoSubject, response$1._0);
+        case 905 :
+            return setResponse(startLiveSubject, response$1._0);
+        case 906 :
+            return setResponse(stopLiveSubject, response$1._0);
+        case 907 :
+            return setEmptyResponse(changeTitleAndCoverSubject, response$1._0);
+        case 908 :
+            return setResponse(getLiveCutStatusSubject, response$1._0);
+        case 909 :
+            return setEmptyResponse(setLiveCutStatusSubject, response$1._0);
+        case 1000 :
+            return setDanmaku(commentSubject, response$1._0);
+        case 1001 :
+            return setDanmaku(likeSubject, response$1._0);
+        case 1002 :
+            return setDanmaku(enterRoomSubject, response$1._0);
+        case 1003 :
+            return setDanmaku(followAuthorSubject, response$1._0);
+        case 1004 :
+            return setDanmaku(throwBananaSubject, response$1._0);
+        case 1005 :
+            return setDanmaku(giftSubject, response$1._0);
+        case 1006 :
+            return setDanmaku(richTextSubject, response$1._0);
+        case 1007 :
+            return setDanmaku(joinClubSubject, response$1._0);
+        case 1008 :
+            return setDanmaku(shareLiveSubject, response$1._0);
+        case 2000 :
+            var v$1 = response$1._0;
+            return danmakuStopSubject.set(v$1, v$1.liverUID.toString());
+        case 2001 :
+            return setDanmaku(bananaCountSubject, response$1._0);
+        case 2002 :
+            return setDanmaku(displayInfoSubject, response$1._0);
+        case 2003 :
+            return setDanmaku(topUsersSubject, response$1._0);
+        case 2004 :
+            return setDanmaku(recentCommentsSubject, response$1._0);
+        case 2005 :
+            return setDanmaku(redpackListSubject, response$1._0);
+        case 2100 :
+            return setDanmaku(chatCallSubject, response$1._0);
+        case 2101 :
+            return setDanmaku(chatAcceptSubject, response$1._0);
+        case 2102 :
+            return setDanmaku(chatReadySubject, response$1._0);
+        case 2103 :
+            return setDanmaku(chatEndSubject, response$1._0);
+        case 2999 :
+            return setDanmaku(danmakuStopErrorStopSubject, response$1._0);
+        case 3000 :
+            return setDanmaku(kickedOutSubject, response$1._0);
+        case 3001 :
+            return setDanmaku(violationAlertSubject, response$1._0);
+        case 3002 :
+            return setDanmaku(managerStateSubject, response$1._0);
+        
+      }
+    };
+    $$WebSocket.addMessageListener(w, messageListener);
+    cleanupFn.contents = (function () {
+        $$WebSocket.removeOpenListener(w, openListener);
+        $$WebSocket.removeCloseListener(w, closeListener);
+        $$WebSocket.removeErrorListener(w, errorListener);
+        $$WebSocket.removeMessageListener(w, messageListener);
+      });
   };
   var on = function ($$event, onData, key, onError) {
     switch ($$event) {
@@ -752,6 +768,7 @@ function make($$WebSocket, $staropt$star) {
                           var f = unsubscribe.contents;
                           if (f !== undefined) {
                             f(undefined);
+                            unsubscribe.contents = undefined;
                           }
                           deleteUuid(undefined);
                           reject({

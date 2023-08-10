@@ -145,20 +145,53 @@ function send(ws, message) {
   
 }
 
+function addListener(array, fn) {
+  if (array.indexOf(fn) === -1) {
+    array.push(fn);
+    return ;
+  }
+  
+}
+
+function removeListener(array, fn) {
+  var index = array.indexOf(fn);
+  if (index > -1) {
+    array.splice(index, 1);
+    return ;
+  }
+  
+}
+
 function addOpenListener(ws, fn) {
-  ws.openListeners.push(fn);
+  addListener(ws.openListeners, fn);
+}
+
+function removeOpenListener(ws, fn) {
+  removeListener(ws.openListeners, fn);
 }
 
 function addCloseListener(ws, fn) {
-  ws.closeListeners.push(fn);
+  addListener(ws.closeListeners, fn);
+}
+
+function removeCloseListener(ws, fn) {
+  removeListener(ws.closeListeners, fn);
 }
 
 function addMessageListener(ws, fn) {
-  ws.messageListeners.push(fn);
+  addListener(ws.messageListeners, fn);
+}
+
+function removeMessageListener(ws, fn) {
+  removeListener(ws.messageListeners, fn);
 }
 
 function addErrorListener(ws, fn) {
-  ws.errorListeners.push(fn);
+  addListener(ws.errorListeners, fn);
+}
+
+function removeErrorListener(ws, fn) {
+  removeListener(ws.errorListeners, fn);
 }
 
 export {
@@ -167,8 +200,12 @@ export {
   send ,
   close ,
   addOpenListener ,
+  removeOpenListener ,
   addCloseListener ,
+  removeCloseListener ,
   addMessageListener ,
+  removeMessageListener ,
   addErrorListener ,
+  removeErrorListener ,
 }
 /* tauri-plugin-websocket-api Not a pure module */

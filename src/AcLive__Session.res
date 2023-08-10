@@ -287,12 +287,22 @@ let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfi
     | None => false
     }
 
+  let disConnect = () =>
+    switch ws.contents {
+    | Some(w) => {
+        ws := None
+        w->WebSocket.close
+      }
+    | None => ()
+    }
+
   let rec connect = () => {
     if !isConnecting() {
       let w = WebSocket.make(config.websocketUrl)
       ws := Some(w)
 
       let heartbeatInterval = ref(None)
+      let cleanupFn = ref(None)
 
       let cleanup = () => {
         switch heartbeatInterval.contents {
@@ -303,36 +313,44 @@ let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfi
         | None => ()
         }
 
-        switch ws.contents {
-        | Some(w) => {
-            // 并非主动关闭
-            ws := None
-            w->WebSocket.close
-
-            if config.autoReconnect {
-              // 延迟5秒后重新连接
-              setTimeout(() => connect(), 5000)->ignore
-            }
+        switch cleanupFn.contents {
+        | Some(fn) => {
+            fn()
+            cleanupFn := None
           }
         | None => ()
         }
+
+        if ws.contents->Option.isSome {
+          // 并非主动关闭
+          disConnect()
+
+          if config.autoReconnect {
+            // 延迟5秒后重新连接
+            setTimeout(() => connect(), 5000)->ignore
+          }
+        }
       }
 
-      w->WebSocket.addOpenListener(_ => {
+      let openListener = _ => {
         heartbeatInterval := Some(setInterval(() => w->WebSocket.send(heartbeat), 5000))
         unitSubject.set((), ~key="websocketOpen")
-      })
-      w->WebSocket.addCloseListener(_ => {
+      }
+      let closeListener = _ => {
         unitSubject.set((), ~key="websocketClose")
         cleanup()
-      })
-      w->WebSocket.addErrorListener(e => {
+      }
+      let errorListener = (e: AcLive__WebSocket.errorEvent<WebSocket.t>) => {
         websocketErrorSubject.set({error: ?e.error, message: ?e.message}, ~key="websocketError")
         // 出现错误就关闭连接重连
         cleanup()
-      })
+      }
 
-      w->WebSocket.addMessageListener(({data}) => {
+      w->WebSocket.addOpenListener(openListener)
+      w->WebSocket.addCloseListener(closeListener)
+      w->WebSocket.addErrorListener(errorListener)
+
+      let messageListener = ({data}: AcLive__WebSocket.messageEvent<WebSocket.t>) => {
         switch data->parseResponse {
         | Ok(response) =>
           switch response {
@@ -405,18 +423,21 @@ let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfi
           }
         | Error(e) => jsonErrorSubject.set({json: data, error: e}, ~key="jsonError")
         }
-      })
+      }
+
+      w->WebSocket.addMessageListener(messageListener)
+
+      cleanupFn :=
+        Some(
+          () => {
+            w->WebSocket.removeOpenListener(openListener)
+            w->WebSocket.removeCloseListener(closeListener)
+            w->WebSocket.removeErrorListener(errorListener)
+            w->WebSocket.removeMessageListener(messageListener)
+          },
+        )
     }
   }
-
-  let disConnect = () =>
-    switch ws.contents {
-    | Some(w) => {
-        ws := None
-        w->WebSocket.close
-      }
-    | None => ()
-    }
 
   let on = (type a b, event: event<a, b>, ~onData: a => unit, ~key: option<b>=?, ~onError=?) =>
     switch event {
@@ -576,7 +597,10 @@ let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfi
         let unsubscribe = ref(None)
         let timeout = setTimeout(() => {
           switch unsubscribe.contents {
-          | Some(f) => f()
+          | Some(f) => {
+              f()
+              unsubscribe := None
+            }
           | None => ()
           }
           deleteUuid()

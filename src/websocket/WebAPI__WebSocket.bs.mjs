@@ -21,16 +21,32 @@ function addOpenListener(prim0, prim1) {
   prim0.addEventListener("open", prim1);
 }
 
+function removeOpenListener(prim0, prim1) {
+  prim0.removeEventListener("open", prim1);
+}
+
 function addCloseListener(prim0, prim1) {
   prim0.addEventListener("close", prim1);
+}
+
+function removeCloseListener(prim0, prim1) {
+  prim0.removeEventListener("close", prim1);
 }
 
 function addMessageListener(prim0, prim1) {
   prim0.addEventListener("message", prim1);
 }
 
+function removeMessageListener(prim0, prim1) {
+  prim0.removeEventListener("message", prim1);
+}
+
 function addErrorListener(prim0, prim1) {
   prim0.addEventListener("error", prim1);
+}
+
+function removeErrorListener(prim0, prim1) {
+  prim0.removeEventListener("error", prim1);
 }
 
 export {
@@ -39,8 +55,12 @@ export {
   send ,
   close ,
   addOpenListener ,
+  removeOpenListener ,
   addCloseListener ,
+  removeCloseListener ,
   addMessageListener ,
+  removeMessageListener ,
   addErrorListener ,
+  removeErrorListener ,
 }
 /* No side effect */
