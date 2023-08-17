@@ -891,19 +891,19 @@ var managerStateStruct = S$RescriptStruct.object(function (o) {
 var responseModelStruct = S$RescriptStruct.object(function (o) {
       return {
               type_: S$RescriptStruct.field(o, "type", responseTypeStruct),
-              liverUID: S$RescriptStruct.field(o, "liverUID", S$RescriptStruct.$$default(S$RescriptStruct.option(S$RescriptStruct.$$int(undefined)), (function () {
+              liverUID: S$RescriptStruct.field(o, "liverUID", S$RescriptStruct.default(S$RescriptStruct.option(S$RescriptStruct.$$int(undefined)), (function () {
                           return 0;
                         }))),
-              requestID: S$RescriptStruct.field(o, "requestID", S$RescriptStruct.$$default(S$RescriptStruct.option(S$RescriptStruct.string(undefined)), (function () {
+              requestID: S$RescriptStruct.field(o, "requestID", S$RescriptStruct.default(S$RescriptStruct.option(S$RescriptStruct.string(undefined)), (function () {
                           return "";
                         }))),
-              result: S$RescriptStruct.field(o, "result", S$RescriptStruct.$$default(S$RescriptStruct.option(responseResultStruct), (function () {
+              result: S$RescriptStruct.field(o, "result", S$RescriptStruct.default(S$RescriptStruct.option(responseResultStruct), (function () {
                           return {
                                   TAG: "UnknownResult",
                                   _0: 0
                                 };
                         }))),
-              error: S$RescriptStruct.field(o, "error", S$RescriptStruct.$$default(S$RescriptStruct.option(S$RescriptStruct.string(undefined)), (function () {
+              error: S$RescriptStruct.field(o, "error", S$RescriptStruct.default(S$RescriptStruct.option(S$RescriptStruct.string(undefined)), (function () {
                           return "";
                         })))
             };
