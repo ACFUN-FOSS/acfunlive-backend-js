@@ -13,7 +13,7 @@ type websocketError = {
 @genType
 type jsonError = {
   json?: string,
-  error: RescriptStruct.S.Error.t,
+  error: RescriptStruct.S.error,
 }
 
 type rec event<'a, 'b> =

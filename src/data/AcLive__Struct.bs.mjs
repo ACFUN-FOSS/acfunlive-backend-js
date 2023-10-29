@@ -5,67 +5,61 @@ import * as AcLive__Message from "./AcLive__Message.bs.mjs";
 import * as S$RescriptStruct from "rescript-struct/src/S.bs.mjs";
 
 function makeEmptyRequestStruct(type_) {
-  return S$RescriptStruct.object(function (o) {
-              S$RescriptStruct.field(o, "type", S$RescriptStruct.literal({
-                        TAG: "Int",
-                        _0: type_
-                      }));
+  return S$RescriptStruct.object(function (s) {
+              s.t("type", type_);
               return {
-                      requestID: S$RescriptStruct.field(o, "requestID", S$RescriptStruct.string(undefined))
+                      requestID: s.f("requestID", S$RescriptStruct.string)
                     };
             });
 }
 
 function makeRequestStruct(type_, struct) {
-  return S$RescriptStruct.object(function (o) {
-              S$RescriptStruct.field(o, "type", S$RescriptStruct.literal({
-                        TAG: "Int",
-                        _0: type_
-                      }));
+  return S$RescriptStruct.object(function (s) {
+              s.t("type", type_);
               return {
-                      requestID: S$RescriptStruct.field(o, "requestID", S$RescriptStruct.string(undefined)),
-                      data: S$RescriptStruct.field(o, "data", struct)
+                      requestID: s.f("requestID", S$RescriptStruct.string),
+                      data: s.f("data", struct)
                     };
             });
 }
 
-var loginRequestStruct = makeRequestStruct(2, S$RescriptStruct.object(function (o) {
+var loginRequestStruct = makeRequestStruct(2, S$RescriptStruct.object(function (s) {
           return {
-                  account: S$RescriptStruct.field(o, "account", S$RescriptStruct.string(undefined)),
-                  password: S$RescriptStruct.field(o, "password", S$RescriptStruct.string(undefined))
+                  account: s.f("account", S$RescriptStruct.string),
+                  password: s.f("password", S$RescriptStruct.string)
                 };
         }));
 
-var setClientIDRequestStruct = makeRequestStruct(3, S$RescriptStruct.object(function (o) {
+var setClientIDRequestStruct = makeRequestStruct(3, S$RescriptStruct.object(function (s) {
           return {
-                  clientID: S$RescriptStruct.field(o, "clientID", S$RescriptStruct.string(undefined))
+                  clientID: s.f("clientID", S$RescriptStruct.string)
                 };
         }));
 
-var forwardDataStruct = S$RescriptStruct.object(function (o) {
+var forwardDataStruct = S$RescriptStruct.object(function (s) {
       return {
-              clientID: S$RescriptStruct.field(o, "clientID", S$RescriptStruct.string(undefined)),
-              message: S$RescriptStruct.field(o, "message", S$RescriptStruct.string(undefined))
+              clientID: s.f("clientID", S$RescriptStruct.string),
+              message: s.f("message", S$RescriptStruct.string)
             };
     });
 
 var requestForwardRequestStruct = makeRequestStruct(4, forwardDataStruct);
 
-var tokenInfoStruct = S$RescriptStruct.object(function (o) {
+var tokenInfoStruct = S$RescriptStruct.object(function (s) {
       return {
-              userID: S$RescriptStruct.field(o, "userID", S$RescriptStruct.$$float(undefined)),
-              securityKey: S$RescriptStruct.field(o, "securityKey", S$RescriptStruct.string(undefined)),
-              serviceToken: S$RescriptStruct.field(o, "serviceToken", S$RescriptStruct.string(undefined)),
-              deviceID: S$RescriptStruct.field(o, "deviceID", S$RescriptStruct.string(undefined)),
-              cookies: S$RescriptStruct.field(o, "cookies", S$RescriptStruct.array(S$RescriptStruct.string(undefined)))
+              userID: s.f("userID", S$RescriptStruct.$$float),
+              securityKey: s.f("securityKey", S$RescriptStruct.string),
+              serviceToken: s.f("serviceToken", S$RescriptStruct.string),
+              deviceID: s.f("deviceID", S$RescriptStruct.string),
+              cookies: s.f("cookies", S$RescriptStruct.array(S$RescriptStruct.string))
             };
     });
 
 var setTokenRequestStruct = makeRequestStruct(6, tokenInfoStruct);
 
-var liverUIDStruct = S$RescriptStruct.object(function (o) {
+var liverUIDStruct = S$RescriptStruct.object(function (s) {
       return {
-              liverUID: S$RescriptStruct.field(o, "liverUID", S$RescriptStruct.$$int(undefined))
+              liverUID: s.f("liverUID", S$RescriptStruct.$$int)
             };
     });
 
@@ -73,9 +67,9 @@ var getDanmakuRequestStruct = makeRequestStruct(100, liverUIDStruct);
 
 var stopDanmakuRequestStruct = makeRequestStruct(101, liverUIDStruct);
 
-var liveIDStruct = S$RescriptStruct.object(function (o) {
+var liveIDStruct = S$RescriptStruct.object(function (s) {
       return {
-              liveID: S$RescriptStruct.field(o, "liveID", S$RescriptStruct.string(undefined))
+              liveID: s.f("liveID", S$RescriptStruct.string)
             };
     });
 
@@ -85,27 +79,27 @@ var getBillboardRequestStruct = makeRequestStruct(103, liverUIDStruct);
 
 var getSummaryRequestStruct = makeRequestStruct(104, liveIDStruct);
 
-var getLuckListRequestStruct = makeRequestStruct(105, S$RescriptStruct.object(function (o) {
+var getLuckListRequestStruct = makeRequestStruct(105, S$RescriptStruct.object(function (s) {
           return {
-                  liveID: S$RescriptStruct.field(o, "liveID", S$RescriptStruct.string(undefined)),
-                  redpackID: S$RescriptStruct.field(o, "redpackID", S$RescriptStruct.string(undefined)),
-                  redpackBizUnit: S$RescriptStruct.field(o, "redpackBizUnit", S$RescriptStruct.string(undefined))
+                  liveID: s.f("liveID", S$RescriptStruct.string),
+                  redpackID: s.f("redpackID", S$RescriptStruct.string),
+                  redpackBizUnit: s.f("redpackBizUnit", S$RescriptStruct.string)
                 };
         }));
 
 var getPlaybackRequestStruct = makeRequestStruct(106, liveIDStruct);
 
-var userIDStruct = S$RescriptStruct.object(function (o) {
+var userIDStruct = S$RescriptStruct.object(function (s) {
       return {
-              userID: S$RescriptStruct.field(o, "userID", S$RescriptStruct.$$int(undefined))
+              userID: s.f("userID", S$RescriptStruct.$$int)
             };
     });
 
 var getUserLiveInfoRequestStruct = makeRequestStruct(109, userIDStruct);
 
-var getLiveDataRequestStruct = makeRequestStruct(112, S$RescriptStruct.object(function (o) {
+var getLiveDataRequestStruct = makeRequestStruct(112, S$RescriptStruct.object(function (s) {
           return {
-                  days: S$RescriptStruct.field(o, "days", S$RescriptStruct.$$int(undefined))
+                  days: s.f("days", S$RescriptStruct.$$int)
                 };
         }));
 
@@ -113,16 +107,16 @@ var getGiftListRequestStruct = makeRequestStruct(114, liveIDStruct);
 
 var getUserInfoRequestStruct = makeRequestStruct(115, userIDStruct);
 
-var getLiveCutInfoRequestStruct = makeRequestStruct(116, S$RescriptStruct.object(function (o) {
+var getLiveCutInfoRequestStruct = makeRequestStruct(116, S$RescriptStruct.object(function (s) {
           return {
-                  liverUID: S$RescriptStruct.field(o, "liverUID", S$RescriptStruct.$$int(undefined)),
-                  liveID: S$RescriptStruct.field(o, "liveID", S$RescriptStruct.string(undefined))
+                  liverUID: s.f("liverUID", S$RescriptStruct.$$int),
+                  liveID: s.f("liveID", S$RescriptStruct.string)
                 };
         }));
 
-var managerUIDStruct = S$RescriptStruct.object(function (o) {
+var managerUIDStruct = S$RescriptStruct.object(function (s) {
       return {
-              managerUID: S$RescriptStruct.field(o, "managerUID", S$RescriptStruct.$$int(undefined))
+              managerUID: s.f("managerUID", S$RescriptStruct.$$int)
             };
     });
 
@@ -132,10 +126,10 @@ var deleteManagerRequestStruct = makeRequestStruct(202, managerUIDStruct);
 
 var getAllKickHistoryRequestStruct = makeRequestStruct(203, liveIDStruct);
 
-var kickUserStruct = S$RescriptStruct.object(function (o) {
+var kickUserStruct = S$RescriptStruct.object(function (s) {
       return {
-              liveID: S$RescriptStruct.field(o, "liveID", S$RescriptStruct.string(undefined)),
-              kickedUID: S$RescriptStruct.field(o, "kickedUID", S$RescriptStruct.$$int(undefined))
+              liveID: s.f("liveID", S$RescriptStruct.string),
+              kickedUID: s.f("kickedUID", S$RescriptStruct.$$int)
             };
     });
 
@@ -151,37 +145,37 @@ var getUserMedalRequestStruct = makeRequestStruct(303, userIDStruct);
 
 var wearMedalRequestStruct = makeRequestStruct(304, liverUIDStruct);
 
-var getTranscodeInfoRequestStruct = makeRequestStruct(904, S$RescriptStruct.object(function (o) {
+var getTranscodeInfoRequestStruct = makeRequestStruct(904, S$RescriptStruct.object(function (s) {
           return {
-                  streamName: S$RescriptStruct.field(o, "streamName", S$RescriptStruct.string(undefined))
+                  streamName: s.f("streamName", S$RescriptStruct.string)
                 };
         }));
 
-var startLiveRequestStruct = makeRequestStruct(905, S$RescriptStruct.object(function (o) {
+var startLiveRequestStruct = makeRequestStruct(905, S$RescriptStruct.object(function (s) {
           return {
-                  title: S$RescriptStruct.field(o, "title", S$RescriptStruct.string(undefined)),
-                  coverFile: S$RescriptStruct.field(o, "coverFile", S$RescriptStruct.string(undefined)),
-                  streamName: S$RescriptStruct.field(o, "streamName", S$RescriptStruct.string(undefined)),
-                  portrait: S$RescriptStruct.field(o, "portrait", S$RescriptStruct.bool(undefined)),
-                  panoramic: S$RescriptStruct.field(o, "panoramic", S$RescriptStruct.bool(undefined)),
-                  categoryID: S$RescriptStruct.field(o, "categoryID", S$RescriptStruct.$$int(undefined)),
-                  subCategoryID: S$RescriptStruct.field(o, "subCategoryID", S$RescriptStruct.$$int(undefined))
+                  title: s.f("title", S$RescriptStruct.string),
+                  coverFile: s.f("coverFile", S$RescriptStruct.string),
+                  streamName: s.f("streamName", S$RescriptStruct.string),
+                  portrait: s.f("portrait", S$RescriptStruct.bool),
+                  panoramic: s.f("panoramic", S$RescriptStruct.bool),
+                  categoryID: s.f("categoryID", S$RescriptStruct.$$int),
+                  subCategoryID: s.f("subCategoryID", S$RescriptStruct.$$int)
                 };
         }));
 
 var stopLiveRequestStruct = makeRequestStruct(906, liveIDStruct);
 
-var changeTitleAndCoverRequestStruct = makeRequestStruct(907, S$RescriptStruct.object(function (o) {
+var changeTitleAndCoverRequestStruct = makeRequestStruct(907, S$RescriptStruct.object(function (s) {
           return {
-                  title: S$RescriptStruct.field(o, "title", S$RescriptStruct.string(undefined)),
-                  coverFile: S$RescriptStruct.field(o, "coverFile", S$RescriptStruct.string(undefined)),
-                  liveID: S$RescriptStruct.field(o, "liveID", S$RescriptStruct.string(undefined))
+                  title: s.f("title", S$RescriptStruct.string),
+                  coverFile: s.f("coverFile", S$RescriptStruct.string),
+                  liveID: s.f("liveID", S$RescriptStruct.string)
                 };
         }));
 
-var canCutLiveStruct = S$RescriptStruct.object(function (o) {
+var canCutLiveStruct = S$RescriptStruct.object(function (s) {
       return {
-              canCut: S$RescriptStruct.field(o, "canCut", S$RescriptStruct.bool(undefined))
+              canCut: s.f("canCut", S$RescriptStruct.bool)
             };
     });
 
@@ -190,154 +184,154 @@ var setLiveCutStatusRequestStruct = makeRequestStruct(909, canCutLiveStruct);
 function serializeRequest(request) {
   switch (request.TAG) {
     case 2 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, loginRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, loginRequestStruct, undefined);
     case 3 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, setClientIDRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, setClientIDRequestStruct, undefined);
     case 4 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, requestForwardRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, requestForwardRequestStruct, undefined);
     case 6 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, setTokenRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, setTokenRequestStruct, undefined);
     case 100 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, getDanmakuRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, getDanmakuRequestStruct, undefined);
     case 101 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, stopDanmakuRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, stopDanmakuRequestStruct, undefined);
     case 102 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, getWatchingListRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, getWatchingListRequestStruct, undefined);
     case 103 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, getBillboardRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, getBillboardRequestStruct, undefined);
     case 104 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, getSummaryRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, getSummaryRequestStruct, undefined);
     case 105 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, getLuckListRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, getLuckListRequestStruct, undefined);
     case 106 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, getPlaybackRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, getPlaybackRequestStruct, undefined);
     case 107 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, makeEmptyRequestStruct(107));
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, makeEmptyRequestStruct(107), undefined);
     case 108 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, makeEmptyRequestStruct(108));
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, makeEmptyRequestStruct(108), undefined);
     case 109 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, getUserLiveInfoRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, getUserLiveInfoRequestStruct, undefined);
     case 110 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, makeEmptyRequestStruct(110));
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, makeEmptyRequestStruct(110), undefined);
     case 112 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, getLiveDataRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, getLiveDataRequestStruct, undefined);
     case 114 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, getGiftListRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, getGiftListRequestStruct, undefined);
     case 115 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, getUserInfoRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, getUserInfoRequestStruct, undefined);
     case 116 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, getLiveCutInfoRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, getLiveCutInfoRequestStruct, undefined);
     case 200 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, makeEmptyRequestStruct(200));
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, makeEmptyRequestStruct(200), undefined);
     case 201 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, addManagerRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, addManagerRequestStruct, undefined);
     case 202 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, deleteManagerRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, deleteManagerRequestStruct, undefined);
     case 203 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, getAllKickHistoryRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, getAllKickHistoryRequestStruct, undefined);
     case 204 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, managerKickRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, managerKickRequestStruct, undefined);
     case 205 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, authorKickRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, authorKickRequestStruct, undefined);
     case 300 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, getMedalDetailRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, getMedalDetailRequestStruct, undefined);
     case 301 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, makeEmptyRequestStruct(301));
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, makeEmptyRequestStruct(301), undefined);
     case 302 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, getMedalRankListRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, getMedalRankListRequestStruct, undefined);
     case 303 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, getUserMedalRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, getUserMedalRequestStruct, undefined);
     case 304 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, wearMedalRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, wearMedalRequestStruct, undefined);
     case 305 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, makeEmptyRequestStruct(305));
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, makeEmptyRequestStruct(305), undefined);
     case 900 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, makeEmptyRequestStruct(900));
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, makeEmptyRequestStruct(900), undefined);
     case 901 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, makeEmptyRequestStruct(901));
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, makeEmptyRequestStruct(901), undefined);
     case 902 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, makeEmptyRequestStruct(902));
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, makeEmptyRequestStruct(902), undefined);
     case 903 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, makeEmptyRequestStruct(903));
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, makeEmptyRequestStruct(903), undefined);
     case 904 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, getTranscodeInfoRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, getTranscodeInfoRequestStruct, undefined);
     case 905 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, startLiveRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, startLiveRequestStruct, undefined);
     case 906 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, stopLiveRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, stopLiveRequestStruct, undefined);
     case 907 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, changeTitleAndCoverRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, changeTitleAndCoverRequestStruct, undefined);
     case 908 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, makeEmptyRequestStruct(908));
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, makeEmptyRequestStruct(908), undefined);
     case 909 :
-        return S$RescriptStruct.serializeToJsonWith(request._0, undefined, setLiveCutStatusRequestStruct);
+        return S$RescriptStruct.serializeToJsonStringWith(request._0, setLiveCutStatusRequestStruct, undefined);
     
   }
 }
 
-var responseTypeStruct = S$RescriptStruct.variant(S$RescriptStruct.$$int(undefined), (function (v) {
+var responseTypeStruct = S$RescriptStruct.variant(S$RescriptStruct.$$int, (function (v) {
         return AcLive__Message.intToResponseType(v);
       }));
 
-var responseResultStruct = S$RescriptStruct.variant(S$RescriptStruct.$$int(undefined), (function (v) {
+var responseResultStruct = S$RescriptStruct.variant(S$RescriptStruct.$$int, (function (v) {
         return AcLive__Message.intToResponseResult(v);
       }));
 
-var loginResponseStruct = S$RescriptStruct.object(function (o) {
-      return S$RescriptStruct.field(o, "tokenInfo", tokenInfoStruct);
+var loginResponseStruct = S$RescriptStruct.object(function (s) {
+      return s.f("tokenInfo", tokenInfoStruct);
     });
 
-var streamURLStruct = S$RescriptStruct.object(function (o) {
+var streamURLStruct = S$RescriptStruct.object(function (s) {
       return {
-              url: S$RescriptStruct.field(o, "url", S$RescriptStruct.string(undefined)),
-              bitrate: S$RescriptStruct.field(o, "bitrate", S$RescriptStruct.$$int(undefined)),
-              qualityType: S$RescriptStruct.field(o, "qualityType", S$RescriptStruct.string(undefined)),
-              qualityName: S$RescriptStruct.field(o, "qualityName", S$RescriptStruct.string(undefined))
+              url: s.f("url", S$RescriptStruct.string),
+              bitrate: s.f("bitrate", S$RescriptStruct.$$int),
+              qualityType: s.f("qualityType", S$RescriptStruct.string),
+              qualityName: s.f("qualityName", S$RescriptStruct.string)
             };
     });
 
-var streamInfoStruct = S$RescriptStruct.object(function (o) {
+var streamInfoStruct = S$RescriptStruct.object(function (s) {
       return {
-              liveID: S$RescriptStruct.field(o, "liveID", S$RescriptStruct.string(undefined)),
-              title: S$RescriptStruct.field(o, "title", S$RescriptStruct.string(undefined)),
-              liveStartTime: S$RescriptStruct.field(o, "liveStartTime", S$RescriptStruct.$$float(undefined)),
-              panoramic: S$RescriptStruct.field(o, "panoramic", S$RescriptStruct.bool(undefined)),
-              streamList: S$RescriptStruct.field(o, "streamList", S$RescriptStruct.array(streamURLStruct)),
-              streamName: S$RescriptStruct.field(o, "streamName", S$RescriptStruct.string(undefined))
+              liveID: s.f("liveID", S$RescriptStruct.string),
+              title: s.f("title", S$RescriptStruct.string),
+              liveStartTime: s.f("liveStartTime", S$RescriptStruct.$$float),
+              panoramic: s.f("panoramic", S$RescriptStruct.bool),
+              streamList: s.f("streamList", S$RescriptStruct.array(streamURLStruct)),
+              streamName: s.f("streamName", S$RescriptStruct.string)
             };
     });
 
-var getDanmakuResponse = S$RescriptStruct.object(function (o) {
-      return S$RescriptStruct.field(o, "StreamInfo", streamInfoStruct);
+var getDanmakuResponse = S$RescriptStruct.object(function (s) {
+      return s.f("StreamInfo", streamInfoStruct);
     });
 
-var medalInfoStruct = S$RescriptStruct.object(function (o) {
+var medalInfoStruct = S$RescriptStruct.object(function (s) {
       return {
-              uperID: S$RescriptStruct.field(o, "uperID", S$RescriptStruct.$$int(undefined)),
-              userID: S$RescriptStruct.field(o, "userID", S$RescriptStruct.$$int(undefined)),
-              clubName: S$RescriptStruct.field(o, "clubName", S$RescriptStruct.string(undefined)),
-              level: S$RescriptStruct.field(o, "level", S$RescriptStruct.$$int(undefined))
+              uperID: s.f("uperID", S$RescriptStruct.$$int),
+              userID: s.f("userID", S$RescriptStruct.$$int),
+              clubName: s.f("clubName", S$RescriptStruct.string),
+              level: s.f("level", S$RescriptStruct.$$int)
             };
     });
 
-var userInfoStruct = S$RescriptStruct.object(function (o) {
+var userInfoStruct = S$RescriptStruct.object(function (s) {
       return {
-              userID: S$RescriptStruct.field(o, "userID", S$RescriptStruct.$$float(undefined)),
-              nickname: S$RescriptStruct.field(o, "nickname", S$RescriptStruct.string(undefined)),
-              avatar: S$RescriptStruct.field(o, "avatar", S$RescriptStruct.string(undefined)),
-              medal: S$RescriptStruct.field(o, "medal", medalInfoStruct),
-              managerType: S$RescriptStruct.field(o, "managerType", S$RescriptStruct.variant(S$RescriptStruct.$$int(undefined), (function (v) {
+              userID: s.f("userID", S$RescriptStruct.$$float),
+              nickname: s.f("nickname", S$RescriptStruct.string),
+              avatar: s.f("avatar", S$RescriptStruct.string),
+              medal: s.f("medal", medalInfoStruct),
+              managerType: s.f("managerType", S$RescriptStruct.variant(S$RescriptStruct.$$int, (function (v) {
                           return AcLive__Message.intToManagerType(v);
                         })))
             };
     });
 
-var watchingUserStruct = S$RescriptStruct.object(function (o) {
+var watchingUserStruct = S$RescriptStruct.object(function (s) {
       return {
-              userInfo: S$RescriptStruct.field(o, "userInfo", userInfoStruct),
-              anonymousUser: S$RescriptStruct.field(o, "anonymousUser", S$RescriptStruct.bool(undefined)),
-              displaySendAmount: S$RescriptStruct.field(o, "displaySendAmount", S$RescriptStruct.string(undefined)),
-              customData: S$RescriptStruct.field(o, "customData", S$RescriptStruct.string(undefined))
+              userInfo: s.f("userInfo", userInfoStruct),
+              anonymousUser: s.f("anonymousUser", S$RescriptStruct.bool),
+              displaySendAmount: s.f("displaySendAmount", S$RescriptStruct.string),
+              customData: s.f("customData", S$RescriptStruct.string)
             };
     });
 
@@ -345,462 +339,453 @@ var getWatchingListResponseStruct = S$RescriptStruct.array(watchingUserStruct);
 
 var getBillboardResponseStruct = S$RescriptStruct.array(watchingUserStruct);
 
-var getSummaryResponseStruct = S$RescriptStruct.object(function (o) {
+var getSummaryResponseStruct = S$RescriptStruct.object(function (s) {
       return {
-              duration: S$RescriptStruct.field(o, "duration", S$RescriptStruct.$$int(undefined)),
-              likeCount: S$RescriptStruct.field(o, "likeCount", S$RescriptStruct.string(undefined)),
-              watchCount: S$RescriptStruct.field(o, "watchCount", S$RescriptStruct.string(undefined)),
-              giftCount: S$RescriptStruct.field(o, "giftCount", S$RescriptStruct.$$int(undefined)),
-              diamondCount: S$RescriptStruct.field(o, "diamondCount", S$RescriptStruct.$$int(undefined)),
-              bananaCount: S$RescriptStruct.field(o, "bananaCount", S$RescriptStruct.$$int(undefined))
+              duration: s.f("duration", S$RescriptStruct.$$int),
+              likeCount: s.f("likeCount", S$RescriptStruct.string),
+              watchCount: s.f("watchCount", S$RescriptStruct.string),
+              giftCount: s.f("giftCount", S$RescriptStruct.$$int),
+              diamondCount: s.f("diamondCount", S$RescriptStruct.$$int),
+              bananaCount: s.f("bananaCount", S$RescriptStruct.$$int)
             };
     });
 
-var luckyUserStruct = S$RescriptStruct.object(function (o) {
+var luckyUserStruct = S$RescriptStruct.object(function (s) {
       return {
-              userInfo: S$RescriptStruct.field(o, "userInfo", userInfoStruct),
-              grabAmount: S$RescriptStruct.field(o, "grabAmount", S$RescriptStruct.$$int(undefined))
+              userInfo: s.f("userInfo", userInfoStruct),
+              grabAmount: s.f("grabAmount", S$RescriptStruct.$$int)
             };
     });
 
 var getLuckListResponseStruct = S$RescriptStruct.array(luckyUserStruct);
 
-var getPlaybackResponseStruct = S$RescriptStruct.object(function (o) {
+var getPlaybackResponseStruct = S$RescriptStruct.object(function (s) {
       return {
-              duration: S$RescriptStruct.field(o, "duration", S$RescriptStruct.$$int(undefined)),
-              url: S$RescriptStruct.field(o, "url", S$RescriptStruct.string(undefined)),
-              backupURL: S$RescriptStruct.field(o, "backupURL", S$RescriptStruct.string(undefined)),
-              m3u8Slice: S$RescriptStruct.field(o, "m3u8Slice", S$RescriptStruct.string(undefined)),
-              width: S$RescriptStruct.field(o, "width", S$RescriptStruct.$$int(undefined)),
-              height: S$RescriptStruct.field(o, "height", S$RescriptStruct.$$int(undefined))
+              duration: s.f("duration", S$RescriptStruct.$$int),
+              url: s.f("url", S$RescriptStruct.string),
+              backupURL: s.f("backupURL", S$RescriptStruct.string),
+              m3u8Slice: s.f("m3u8Slice", S$RescriptStruct.string),
+              width: s.f("width", S$RescriptStruct.$$int),
+              height: s.f("height", S$RescriptStruct.$$int)
             };
     });
 
-var giftDetailStruct = S$RescriptStruct.object(function (o) {
+var giftDetailStruct = S$RescriptStruct.object(function (s) {
       return {
-              giftID: S$RescriptStruct.field(o, "giftID", S$RescriptStruct.$$int(undefined)),
-              giftName: S$RescriptStruct.field(o, "giftName", S$RescriptStruct.string(undefined)),
-              arLiveName: S$RescriptStruct.field(o, "arLiveName", S$RescriptStruct.string(undefined)),
-              payWalletType: S$RescriptStruct.field(o, "payWalletType", S$RescriptStruct.variant(S$RescriptStruct.$$int(undefined), (function (v) {
+              giftID: s.f("giftID", S$RescriptStruct.$$int),
+              giftName: s.f("giftName", S$RescriptStruct.string),
+              arLiveName: s.f("arLiveName", S$RescriptStruct.string),
+              payWalletType: s.f("payWalletType", S$RescriptStruct.variant(S$RescriptStruct.$$int, (function (v) {
                           return AcLive__Message.intToGiftPayType(v);
                         }))),
-              price: S$RescriptStruct.field(o, "price", S$RescriptStruct.$$int(undefined)),
-              webpPic: S$RescriptStruct.field(o, "webpPic", S$RescriptStruct.string(undefined)),
-              pngPic: S$RescriptStruct.field(o, "pngPic", S$RescriptStruct.string(undefined)),
-              smallPngPic: S$RescriptStruct.field(o, "smallPngPic", S$RescriptStruct.string(undefined)),
-              allowBatchSendSizeList: S$RescriptStruct.field(o, "allowBatchSendSizeList", S$RescriptStruct.$$null(S$RescriptStruct.array(S$RescriptStruct.$$int(undefined)))),
-              canCombo: S$RescriptStruct.field(o, "canCombo", S$RescriptStruct.bool(undefined)),
-              canDraw: S$RescriptStruct.field(o, "canDraw", S$RescriptStruct.bool(undefined)),
-              magicFaceID: S$RescriptStruct.field(o, "magicFaceID", S$RescriptStruct.$$int(undefined)),
-              vupArID: S$RescriptStruct.field(o, "vupArID", S$RescriptStruct.$$int(undefined)),
-              description: S$RescriptStruct.field(o, "description", S$RescriptStruct.string(undefined)),
-              redpackPrice: S$RescriptStruct.field(o, "redpackPrice", S$RescriptStruct.$$int(undefined)),
-              cornerMarkerText: S$RescriptStruct.field(o, "cornerMarkerText", S$RescriptStruct.string(undefined))
+              price: s.f("price", S$RescriptStruct.$$int),
+              webpPic: s.f("webpPic", S$RescriptStruct.string),
+              pngPic: s.f("pngPic", S$RescriptStruct.string),
+              smallPngPic: s.f("smallPngPic", S$RescriptStruct.string),
+              allowBatchSendSizeList: s.f("allowBatchSendSizeList", S$RescriptStruct.$$null(S$RescriptStruct.array(S$RescriptStruct.$$int))),
+              canCombo: s.f("canCombo", S$RescriptStruct.bool),
+              canDraw: s.f("canDraw", S$RescriptStruct.bool),
+              magicFaceID: s.f("magicFaceID", S$RescriptStruct.$$int),
+              vupArID: s.f("vupArID", S$RescriptStruct.$$int),
+              description: s.f("description", S$RescriptStruct.string),
+              redpackPrice: s.f("redpackPrice", S$RescriptStruct.$$int),
+              cornerMarkerText: s.f("cornerMarkerText", S$RescriptStruct.string)
             };
     });
 
 var getAllGiftListResponseStruct = S$RescriptStruct.array(giftDetailStruct);
 
-var getWalletBalanceResponseStruct = S$RescriptStruct.object(function (o) {
+var getWalletBalanceResponseStruct = S$RescriptStruct.object(function (s) {
       return {
-              acCoin: S$RescriptStruct.field(o, "acCoin", S$RescriptStruct.$$int(undefined)),
-              banana: S$RescriptStruct.field(o, "banana", S$RescriptStruct.$$int(undefined))
+              acCoin: s.f("acCoin", S$RescriptStruct.$$int),
+              banana: s.f("banana", S$RescriptStruct.$$int)
             };
     });
 
-var userProfileStruct = S$RescriptStruct.object(function (o) {
+var userProfileStruct = S$RescriptStruct.object(function (s) {
       return {
-              userID: S$RescriptStruct.field(o, "userID", S$RescriptStruct.$$int(undefined)),
-              nickname: S$RescriptStruct.field(o, "nickname", S$RescriptStruct.string(undefined)),
-              avatar: S$RescriptStruct.field(o, "avatar", S$RescriptStruct.string(undefined)),
-              avatarFrame: S$RescriptStruct.field(o, "avatarFrame", S$RescriptStruct.string(undefined)),
-              followingCount: S$RescriptStruct.field(o, "followingCount", S$RescriptStruct.$$int(undefined)),
-              fansCount: S$RescriptStruct.field(o, "fansCount", S$RescriptStruct.$$int(undefined)),
-              contributeCount: S$RescriptStruct.field(o, "contributeCount", S$RescriptStruct.$$int(undefined)),
-              signature: S$RescriptStruct.field(o, "signature", S$RescriptStruct.string(undefined)),
-              verifiedText: S$RescriptStruct.field(o, "verifiedText", S$RescriptStruct.string(undefined)),
-              isJoinUpCollege: S$RescriptStruct.field(o, "isJoinUpCollege", S$RescriptStruct.bool(undefined)),
-              isFollowing: S$RescriptStruct.field(o, "isFollowing", S$RescriptStruct.bool(undefined)),
-              isFollowed: S$RescriptStruct.field(o, "isFollowed", S$RescriptStruct.bool(undefined))
+              userID: s.f("userID", S$RescriptStruct.$$int),
+              nickname: s.f("nickname", S$RescriptStruct.string),
+              avatar: s.f("avatar", S$RescriptStruct.string),
+              avatarFrame: s.f("avatarFrame", S$RescriptStruct.string),
+              followingCount: s.f("followingCount", S$RescriptStruct.$$int),
+              fansCount: s.f("fansCount", S$RescriptStruct.$$int),
+              contributeCount: s.f("contributeCount", S$RescriptStruct.$$int),
+              signature: s.f("signature", S$RescriptStruct.string),
+              verifiedText: s.f("verifiedText", S$RescriptStruct.string),
+              isJoinUpCollege: s.f("isJoinUpCollege", S$RescriptStruct.bool),
+              isFollowing: s.f("isFollowing", S$RescriptStruct.bool),
+              isFollowed: s.f("isFollowed", S$RescriptStruct.bool)
             };
     });
 
-var liveTypeStruct = S$RescriptStruct.object(function (o) {
+var liveTypeStruct = S$RescriptStruct.object(function (s) {
       return {
-              categoryID: S$RescriptStruct.field(o, "categoryID", S$RescriptStruct.$$int(undefined)),
-              categoryName: S$RescriptStruct.field(o, "categoryName", S$RescriptStruct.string(undefined)),
-              subCategoryID: S$RescriptStruct.field(o, "subCategoryID", S$RescriptStruct.$$int(undefined)),
-              subCategoryName: S$RescriptStruct.field(o, "subCategoryName", S$RescriptStruct.string(undefined))
+              categoryID: s.f("categoryID", S$RescriptStruct.$$int),
+              categoryName: s.f("categoryName", S$RescriptStruct.string),
+              subCategoryID: s.f("subCategoryID", S$RescriptStruct.$$int),
+              subCategoryName: s.f("subCategoryName", S$RescriptStruct.string)
             };
     });
 
-var userLiveInfoStruct = S$RescriptStruct.object(function (o) {
+var userLiveInfoStruct = S$RescriptStruct.object(function (s) {
       return {
-              profile: S$RescriptStruct.field(o, "profile", userProfileStruct),
-              liveType: S$RescriptStruct.field(o, "liveType", liveTypeStruct),
-              liveID: S$RescriptStruct.field(o, "liveID", S$RescriptStruct.string(undefined)),
-              streamName: S$RescriptStruct.field(o, "streamName", S$RescriptStruct.string(undefined)),
-              title: S$RescriptStruct.field(o, "title", S$RescriptStruct.string(undefined)),
-              liveStartTime: S$RescriptStruct.field(o, "liveStartTime", S$RescriptStruct.$$float(undefined)),
-              portrait: S$RescriptStruct.field(o, "portrait", S$RescriptStruct.bool(undefined)),
-              panoramic: S$RescriptStruct.field(o, "panoramic", S$RescriptStruct.bool(undefined)),
-              liveCover: S$RescriptStruct.field(o, "liveCover", S$RescriptStruct.string(undefined)),
-              onlineCount: S$RescriptStruct.field(o, "onlineCount", S$RescriptStruct.$$int(undefined)),
-              likeCount: S$RescriptStruct.field(o, "likeCount", S$RescriptStruct.$$int(undefined)),
-              hasFansClub: S$RescriptStruct.field(o, "hasFansClub", S$RescriptStruct.bool(undefined)),
-              disableDanmakuShow: S$RescriptStruct.field(o, "disableDanmakuShow", S$RescriptStruct.bool(undefined)),
-              paidShowUserBuyStatus: S$RescriptStruct.field(o, "paidShowUserBuyStatus", S$RescriptStruct.bool(undefined))
+              profile: s.f("profile", userProfileStruct),
+              liveType: s.f("liveType", liveTypeStruct),
+              liveID: s.f("liveID", S$RescriptStruct.string),
+              streamName: s.f("streamName", S$RescriptStruct.string),
+              title: s.f("title", S$RescriptStruct.string),
+              liveStartTime: s.f("liveStartTime", S$RescriptStruct.$$float),
+              portrait: s.f("portrait", S$RescriptStruct.bool),
+              panoramic: s.f("panoramic", S$RescriptStruct.bool),
+              liveCover: s.f("liveCover", S$RescriptStruct.string),
+              onlineCount: s.f("onlineCount", S$RescriptStruct.$$int),
+              likeCount: s.f("likeCount", S$RescriptStruct.$$int),
+              hasFansClub: s.f("hasFansClub", S$RescriptStruct.bool),
+              disableDanmakuShow: s.f("disableDanmakuShow", S$RescriptStruct.bool),
+              paidShowUserBuyStatus: s.f("paidShowUserBuyStatus", S$RescriptStruct.bool)
             };
     });
 
 var getAllLiveListResponseStruct = S$RescriptStruct.array(userLiveInfoStruct);
 
-var liveStatStruct = S$RescriptStruct.object(function (o) {
+var liveStatStruct = S$RescriptStruct.object(function (s) {
       return {
-              duration: S$RescriptStruct.field(o, "duration", S$RescriptStruct.$$int(undefined)),
-              maxPopularityValue: S$RescriptStruct.field(o, "maxPopularityValue", S$RescriptStruct.$$int(undefined)),
-              watchCount: S$RescriptStruct.field(o, "watchCount", S$RescriptStruct.$$int(undefined)),
-              diamondCount: S$RescriptStruct.field(o, "diamondCount", S$RescriptStruct.$$int(undefined)),
-              commentCount: S$RescriptStruct.field(o, "commentCount", S$RescriptStruct.$$int(undefined)),
-              bananaCount: S$RescriptStruct.field(o, "bananaCount", S$RescriptStruct.$$int(undefined))
+              duration: s.f("duration", S$RescriptStruct.$$int),
+              maxPopularityValue: s.f("maxPopularityValue", S$RescriptStruct.$$int),
+              watchCount: s.f("watchCount", S$RescriptStruct.$$int),
+              diamondCount: s.f("diamondCount", S$RescriptStruct.$$int),
+              commentCount: s.f("commentCount", S$RescriptStruct.$$int),
+              bananaCount: s.f("bananaCount", S$RescriptStruct.$$int)
             };
     });
 
-var liveDetailStruct = S$RescriptStruct.object(function (o) {
+var liveDetailStruct = S$RescriptStruct.object(function (s) {
       return {
-              liveStartTime: S$RescriptStruct.field(o, "liveStartTime", S$RescriptStruct.$$float(undefined)),
-              liveEndTime: S$RescriptStruct.field(o, "liveEndTime", S$RescriptStruct.$$float(undefined)),
-              liveStat: S$RescriptStruct.field(o, "liveStat", liveStatStruct)
+              liveStartTime: s.f("liveStartTime", S$RescriptStruct.$$float),
+              liveEndTime: s.f("liveEndTime", S$RescriptStruct.$$float),
+              liveStat: s.f("liveStat", liveStatStruct)
             };
     });
 
-var dailyDataStruct = S$RescriptStruct.object(function (o) {
+var dailyDataStruct = S$RescriptStruct.object(function (s) {
       return {
-              date: S$RescriptStruct.field(o, "date", S$RescriptStruct.string(undefined)),
-              liveTimes: S$RescriptStruct.field(o, "liveTimes", S$RescriptStruct.$$int(undefined)),
-              liveStat: S$RescriptStruct.field(o, "liveStat", liveStatStruct)
+              date: s.f("date", S$RescriptStruct.string),
+              liveTimes: s.f("liveTimes", S$RescriptStruct.$$int),
+              liveStat: s.f("liveStat", liveStatStruct)
             };
     });
 
-var getLiveDataResponseStruct = S$RescriptStruct.object(function (o) {
+var getLiveDataResponseStruct = S$RescriptStruct.object(function (s) {
       return {
-              beginDate: S$RescriptStruct.field(o, "beginDate", S$RescriptStruct.string(undefined)),
-              endDate: S$RescriptStruct.field(o, "endDate", S$RescriptStruct.string(undefined)),
-              overview: S$RescriptStruct.field(o, "overview", liveStatStruct),
-              liveDetail: S$RescriptStruct.field(o, "liveDetail", S$RescriptStruct.dict(liveDetailStruct)),
-              dailyData: S$RescriptStruct.field(o, "dailyData", S$RescriptStruct.$$null(S$RescriptStruct.array(dailyDataStruct)))
+              beginDate: s.f("beginDate", S$RescriptStruct.string),
+              endDate: s.f("endDate", S$RescriptStruct.string),
+              overview: s.f("overview", liveStatStruct),
+              liveDetail: s.f("liveDetail", S$RescriptStruct.dict(liveDetailStruct)),
+              dailyData: s.f("dailyData", S$RescriptStruct.$$null(S$RescriptStruct.array(dailyDataStruct)))
             };
     });
 
 var getGiftListResponseStruct = S$RescriptStruct.array(giftDetailStruct);
 
-var getUserInfoResponseStruct = S$RescriptStruct.object(function (o) {
+var getUserInfoResponseStruct = S$RescriptStruct.object(function (s) {
       return {
-              userID: S$RescriptStruct.field(o, "userID", S$RescriptStruct.$$int(undefined)),
-              nickname: S$RescriptStruct.field(o, "nickname", S$RescriptStruct.string(undefined)),
-              avatar: S$RescriptStruct.field(o, "avatar", S$RescriptStruct.string(undefined)),
-              avatarFrame: S$RescriptStruct.field(o, "avatarFrame", S$RescriptStruct.string(undefined)),
-              followingCount: S$RescriptStruct.field(o, "followingCount", S$RescriptStruct.string(undefined)),
-              fansCount: S$RescriptStruct.field(o, "fansCount", S$RescriptStruct.string(undefined)),
-              contributeCount: S$RescriptStruct.field(o, "contributeCount", S$RescriptStruct.string(undefined)),
-              signature: S$RescriptStruct.field(o, "signature", S$RescriptStruct.string(undefined)),
-              verifiedText: S$RescriptStruct.field(o, "verifiedText", S$RescriptStruct.string(undefined)),
-              isJoinUpCollege: S$RescriptStruct.field(o, "isJoinUpCollege", S$RescriptStruct.bool(undefined)),
-              isFollowing: S$RescriptStruct.field(o, "isFollowing", S$RescriptStruct.bool(undefined)),
-              isFollowed: S$RescriptStruct.field(o, "isFollowed", S$RescriptStruct.bool(undefined)),
-              liveID: S$RescriptStruct.field(o, "liveID", S$RescriptStruct.string(undefined)),
-              likeCount: S$RescriptStruct.field(o, "likeCount", S$RescriptStruct.$$int(undefined))
+              userID: s.f("userID", S$RescriptStruct.$$int),
+              nickname: s.f("nickname", S$RescriptStruct.string),
+              avatar: s.f("avatar", S$RescriptStruct.string),
+              avatarFrame: s.f("avatarFrame", S$RescriptStruct.string),
+              followingCount: s.f("followingCount", S$RescriptStruct.string),
+              fansCount: s.f("fansCount", S$RescriptStruct.string),
+              contributeCount: s.f("contributeCount", S$RescriptStruct.string),
+              signature: s.f("signature", S$RescriptStruct.string),
+              verifiedText: s.f("verifiedText", S$RescriptStruct.string),
+              isJoinUpCollege: s.f("isJoinUpCollege", S$RescriptStruct.bool),
+              isFollowing: s.f("isFollowing", S$RescriptStruct.bool),
+              isFollowed: s.f("isFollowed", S$RescriptStruct.bool),
+              liveID: s.f("liveID", S$RescriptStruct.string),
+              likeCount: s.f("likeCount", S$RescriptStruct.$$int)
             };
     });
 
-var getLiveCutInfoResponseStruct = S$RescriptStruct.object(function (o) {
+var getLiveCutInfoResponseStruct = S$RescriptStruct.object(function (s) {
       return {
-              status: S$RescriptStruct.field(o, "status", S$RescriptStruct.bool(undefined)),
-              url: S$RescriptStruct.field(o, "url", S$RescriptStruct.string(undefined)),
-              redirectURL: S$RescriptStruct.field(o, "redirectURL", S$RescriptStruct.string(undefined))
+              status: s.f("status", S$RescriptStruct.bool),
+              url: s.f("url", S$RescriptStruct.string),
+              redirectURL: s.f("redirectURL", S$RescriptStruct.string)
             };
     });
 
-var managerStruct = S$RescriptStruct.object(function (o) {
+var managerStruct = S$RescriptStruct.object(function (s) {
       return {
-              userInfo: S$RescriptStruct.field(o, "userInfo", userInfoStruct),
-              customData: S$RescriptStruct.field(o, "customData", S$RescriptStruct.string(undefined)),
-              online: S$RescriptStruct.field(o, "online", S$RescriptStruct.bool(undefined))
+              userInfo: s.f("userInfo", userInfoStruct),
+              customData: s.f("customData", S$RescriptStruct.string),
+              online: s.f("online", S$RescriptStruct.bool)
             };
     });
 
 var getManagerListResponseStruct = S$RescriptStruct.array(managerStruct);
 
-var kickHistoryStruct = S$RescriptStruct.object(function (o) {
+var kickHistoryStruct = S$RescriptStruct.object(function (s) {
       return {
-              userID: S$RescriptStruct.field(o, "userID", S$RescriptStruct.$$int(undefined)),
-              nickname: S$RescriptStruct.field(o, "nickname", S$RescriptStruct.string(undefined)),
-              kickTime: S$RescriptStruct.field(o, "kickTime", S$RescriptStruct.$$float(undefined))
+              userID: s.f("userID", S$RescriptStruct.$$int),
+              nickname: s.f("nickname", S$RescriptStruct.string),
+              kickTime: s.f("kickTime", S$RescriptStruct.$$float)
             };
     });
 
 var getAllKickHistoryResponseStruct = S$RescriptStruct.array(kickHistoryStruct);
 
-var medalStruct = S$RescriptStruct.object(function (o) {
+var medalStruct = S$RescriptStruct.object(function (s) {
       return {
-              medalInfo: S$RescriptStruct.field(o, "medalInfo", medalInfoStruct),
-              uperName: S$RescriptStruct.field(o, "uperName", S$RescriptStruct.string(undefined)),
-              uperAvatar: S$RescriptStruct.field(o, "uperAvatar", S$RescriptStruct.string(undefined)),
-              wearMedal: S$RescriptStruct.field(o, "wearMedal", S$RescriptStruct.bool(undefined)),
-              friendshipDegree: S$RescriptStruct.field(o, "friendshipDegree", S$RescriptStruct.$$int(undefined)),
-              joinClubTime: S$RescriptStruct.field(o, "joinClubTime", S$RescriptStruct.$$float(undefined)),
-              currentDegreeLimit: S$RescriptStruct.field(o, "currentDegreeLimit", S$RescriptStruct.$$int(undefined)),
-              medalCount: S$RescriptStruct.field(o, "medalCount", S$RescriptStruct.$$int(undefined))
+              medalInfo: s.f("medalInfo", medalInfoStruct),
+              uperName: s.f("uperName", S$RescriptStruct.string),
+              uperAvatar: s.f("uperAvatar", S$RescriptStruct.string),
+              wearMedal: s.f("wearMedal", S$RescriptStruct.bool),
+              friendshipDegree: s.f("friendshipDegree", S$RescriptStruct.$$int),
+              joinClubTime: s.f("joinClubTime", S$RescriptStruct.$$float),
+              currentDegreeLimit: s.f("currentDegreeLimit", S$RescriptStruct.$$int),
+              medalCount: s.f("medalCount", S$RescriptStruct.$$int)
             };
     });
 
-var medalDegreeStruct = S$RescriptStruct.object(function (o) {
+var medalDegreeStruct = S$RescriptStruct.object(function (s) {
       return {
-              uperID: S$RescriptStruct.field(o, "uperID", S$RescriptStruct.$$int(undefined)),
-              giftDegree: S$RescriptStruct.field(o, "giftDegree", S$RescriptStruct.$$int(undefined)),
-              giftDegreeLimit: S$RescriptStruct.field(o, "giftDegreeLimit", S$RescriptStruct.$$int(undefined)),
-              peachDegree: S$RescriptStruct.field(o, "peachDegree", S$RescriptStruct.$$int(undefined)),
-              peachDegreeLimit: S$RescriptStruct.field(o, "peachDegreeLimit", S$RescriptStruct.$$int(undefined)),
-              liveWatchDegree: S$RescriptStruct.field(o, "liveWatchDegree", S$RescriptStruct.$$int(undefined)),
-              liveWatchDegreeLimit: S$RescriptStruct.field(o, "liveWatchDegreeLimit", S$RescriptStruct.$$int(undefined)),
-              bananaDegree: S$RescriptStruct.field(o, "bananaDegree", S$RescriptStruct.$$int(undefined)),
-              bananaDegreeLimit: S$RescriptStruct.field(o, "bananaDegreeLimit", S$RescriptStruct.$$int(undefined))
+              uperID: s.f("uperID", S$RescriptStruct.$$int),
+              giftDegree: s.f("giftDegree", S$RescriptStruct.$$int),
+              giftDegreeLimit: s.f("giftDegreeLimit", S$RescriptStruct.$$int),
+              peachDegree: s.f("peachDegree", S$RescriptStruct.$$int),
+              peachDegreeLimit: s.f("peachDegreeLimit", S$RescriptStruct.$$int),
+              liveWatchDegree: s.f("liveWatchDegree", S$RescriptStruct.$$int),
+              liveWatchDegreeLimit: s.f("liveWatchDegreeLimit", S$RescriptStruct.$$int),
+              bananaDegree: s.f("bananaDegree", S$RescriptStruct.$$int),
+              bananaDegreeLimit: s.f("bananaDegreeLimit", S$RescriptStruct.$$int)
             };
     });
 
-var getMedalDetailResponseStruct = S$RescriptStruct.object(function (o) {
+var getMedalDetailResponseStruct = S$RescriptStruct.object(function (s) {
       return {
-              medal: S$RescriptStruct.field(o, "medal", medalStruct),
-              medalDegree: S$RescriptStruct.field(o, "medalDegree", medalDegreeStruct),
-              userRank: S$RescriptStruct.field(o, "userRank", S$RescriptStruct.string(undefined))
+              medal: s.f("medal", medalStruct),
+              medalDegree: s.f("medalDegree", medalDegreeStruct),
+              userRank: s.f("userRank", S$RescriptStruct.string)
             };
     });
 
 var getMedalListResponseStruct = S$RescriptStruct.$$null(S$RescriptStruct.array(medalStruct));
 
-var userMedalInfoStruct = S$RescriptStruct.object(function (o) {
+var userMedalInfoStruct = S$RescriptStruct.object(function (s) {
       return {
-              profile: S$RescriptStruct.field(o, "profile", userProfileStruct),
-              friendshipDegree: S$RescriptStruct.field(o, "friendshipDegree", S$RescriptStruct.$$int(undefined)),
-              level: S$RescriptStruct.field(o, "level", S$RescriptStruct.$$int(undefined))
+              profile: s.f("profile", userProfileStruct),
+              friendshipDegree: s.f("friendshipDegree", S$RescriptStruct.$$int),
+              level: s.f("level", S$RescriptStruct.$$int)
             };
     });
 
-var getMedalRankListResponseStruct = S$RescriptStruct.object(function (o) {
+var getMedalRankListResponseStruct = S$RescriptStruct.object(function (s) {
       return {
-              hasFansClub: S$RescriptStruct.field(o, "hasFansClub", S$RescriptStruct.bool(undefined)),
-              rankList: S$RescriptStruct.field(o, "rankList", S$RescriptStruct.$$null(S$RescriptStruct.array(userMedalInfoStruct))),
-              clubName: S$RescriptStruct.field(o, "clubName", S$RescriptStruct.string(undefined)),
-              medalCount: S$RescriptStruct.field(o, "medalCount", S$RescriptStruct.$$int(undefined)),
-              hasMedal: S$RescriptStruct.field(o, "hasMedal", S$RescriptStruct.bool(undefined)),
-              userFriendshipDegree: S$RescriptStruct.field(o, "userFriendshipDegree", S$RescriptStruct.$$int(undefined)),
-              userRank: S$RescriptStruct.field(o, "userRank", S$RescriptStruct.string(undefined))
+              hasFansClub: s.f("hasFansClub", S$RescriptStruct.bool),
+              rankList: s.f("rankList", S$RescriptStruct.$$null(S$RescriptStruct.array(userMedalInfoStruct))),
+              clubName: s.f("clubName", S$RescriptStruct.string),
+              medalCount: s.f("medalCount", S$RescriptStruct.$$int),
+              hasMedal: s.f("hasMedal", S$RescriptStruct.bool),
+              userFriendshipDegree: s.f("userFriendshipDegree", S$RescriptStruct.$$int),
+              userRank: s.f("userRank", S$RescriptStruct.string)
             };
     });
 
-var checkLiveAuthResponseStruct = S$RescriptStruct.object(function (o) {
+var checkLiveAuthResponseStruct = S$RescriptStruct.object(function (s) {
       return {
-              liveAuth: S$RescriptStruct.field(o, "liveAuth", S$RescriptStruct.bool(undefined))
+              liveAuth: s.f("liveAuth", S$RescriptStruct.bool)
             };
     });
 
-var getPushConfigResponseStruct = S$RescriptStruct.object(function (o) {
+var getPushConfigResponseStruct = S$RescriptStruct.object(function (s) {
       return {
-              streamName: S$RescriptStruct.field(o, "streamName", S$RescriptStruct.string(undefined)),
-              streamPullAddress: S$RescriptStruct.field(o, "streamPullAddress", S$RescriptStruct.string(undefined)),
-              streamPushAddress: S$RescriptStruct.field(o, "streamPushAddress", S$RescriptStruct.$$null(S$RescriptStruct.array(S$RescriptStruct.string(undefined)))),
-              panoramic: S$RescriptStruct.field(o, "panoramic", S$RescriptStruct.bool(undefined)),
-              interval: S$RescriptStruct.field(o, "interval", S$RescriptStruct.$$int(undefined)),
-              rtmpServer: S$RescriptStruct.field(o, "rtmpServer", S$RescriptStruct.string(undefined)),
-              streamKey: S$RescriptStruct.field(o, "streamKey", S$RescriptStruct.string(undefined))
+              streamName: s.f("streamName", S$RescriptStruct.string),
+              streamPullAddress: s.f("streamPullAddress", S$RescriptStruct.string),
+              streamPushAddress: s.f("streamPushAddress", S$RescriptStruct.$$null(S$RescriptStruct.array(S$RescriptStruct.string))),
+              panoramic: s.f("panoramic", S$RescriptStruct.bool),
+              interval: s.f("interval", S$RescriptStruct.$$int),
+              rtmpServer: s.f("rtmpServer", S$RescriptStruct.string),
+              streamKey: s.f("streamKey", S$RescriptStruct.string)
             };
     });
 
-var getLiveStatusResponseStruct = S$RescriptStruct.object(function (o) {
+var getLiveStatusResponseStruct = S$RescriptStruct.object(function (s) {
       return {
-              liveID: S$RescriptStruct.field(o, "liveID", S$RescriptStruct.string(undefined)),
-              streamName: S$RescriptStruct.field(o, "streamName", S$RescriptStruct.string(undefined)),
-              title: S$RescriptStruct.field(o, "title", S$RescriptStruct.string(undefined)),
-              liveCover: S$RescriptStruct.field(o, "liveCover", S$RescriptStruct.string(undefined)),
-              liveStartTime: S$RescriptStruct.field(o, "liveStartTime", S$RescriptStruct.$$float(undefined)),
-              panoramic: S$RescriptStruct.field(o, "panoramic", S$RescriptStruct.bool(undefined)),
-              bizUnit: S$RescriptStruct.field(o, "bizUnit", S$RescriptStruct.string(undefined)),
-              bizCustomData: S$RescriptStruct.field(o, "bizCustomData", S$RescriptStruct.string(undefined))
+              liveID: s.f("liveID", S$RescriptStruct.string),
+              streamName: s.f("streamName", S$RescriptStruct.string),
+              title: s.f("title", S$RescriptStruct.string),
+              liveCover: s.f("liveCover", S$RescriptStruct.string),
+              liveStartTime: s.f("liveStartTime", S$RescriptStruct.$$float),
+              panoramic: s.f("panoramic", S$RescriptStruct.bool),
+              bizUnit: s.f("bizUnit", S$RescriptStruct.string),
+              bizCustomData: s.f("bizCustomData", S$RescriptStruct.string)
             };
     });
 
-var transcodeInfoStruct = S$RescriptStruct.object(function (o) {
+var transcodeInfoStruct = S$RescriptStruct.object(function (s) {
       return {
-              streamURL: S$RescriptStruct.field(o, "streamURL", streamURLStruct),
-              resolution: S$RescriptStruct.field(o, "resolution", S$RescriptStruct.string(undefined)),
-              frameRate: S$RescriptStruct.field(o, "frameRate", S$RescriptStruct.$$int(undefined)),
-              template: S$RescriptStruct.field(o, "template", S$RescriptStruct.string(undefined))
+              streamURL: s.f("streamURL", streamURLStruct),
+              resolution: s.f("resolution", S$RescriptStruct.string),
+              frameRate: s.f("frameRate", S$RescriptStruct.$$int),
+              template: s.f("template", S$RescriptStruct.string)
             };
     });
 
 var getTranscodeInfoResponseStruct = S$RescriptStruct.array(transcodeInfoStruct);
 
-var stopLiveResponseStruct = S$RescriptStruct.object(function (o) {
+var stopLiveResponseStruct = S$RescriptStruct.object(function (s) {
       return {
-              duration: S$RescriptStruct.field(o, "duration", S$RescriptStruct.$$int(undefined)),
-              endReason: S$RescriptStruct.field(o, "endReason", S$RescriptStruct.string(undefined))
+              duration: s.f("duration", S$RescriptStruct.$$int),
+              endReason: s.f("endReason", S$RescriptStruct.string)
             };
     });
 
-var danmuInfoStruct = S$RescriptStruct.object(function (o) {
+var danmuInfoStruct = S$RescriptStruct.object(function (s) {
       return {
-              sendTime: S$RescriptStruct.field(o, "sendTime", S$RescriptStruct.$$float(undefined)),
-              userInfo: S$RescriptStruct.field(o, "userInfo", userInfoStruct)
+              sendTime: s.f("sendTime", S$RescriptStruct.$$float),
+              userInfo: s.f("userInfo", userInfoStruct)
             };
     });
 
-var commentStruct = S$RescriptStruct.object(function (o) {
+var commentStruct = S$RescriptStruct.object(function (s) {
       return {
-              danmuInfo: S$RescriptStruct.field(o, "danmuInfo", danmuInfoStruct),
-              content: S$RescriptStruct.field(o, "content", S$RescriptStruct.string(undefined))
+              danmuInfo: s.f("danmuInfo", danmuInfoStruct),
+              content: s.f("content", S$RescriptStruct.string)
             };
     });
 
-var throwBananaStruct = S$RescriptStruct.object(function (o) {
+var throwBananaStruct = S$RescriptStruct.object(function (s) {
       return {
-              danmuInfo: S$RescriptStruct.field(o, "danmuInfo", danmuInfoStruct),
-              bananaCount: S$RescriptStruct.field(o, "bananaCount", S$RescriptStruct.$$int(undefined))
+              danmuInfo: s.f("danmuInfo", danmuInfoStruct),
+              bananaCount: s.f("bananaCount", S$RescriptStruct.$$int)
             };
     });
 
-var drawPointStruct = S$RescriptStruct.object(function (o) {
+var drawPointStruct = S$RescriptStruct.object(function (s) {
       return {
-              marginLeft: S$RescriptStruct.field(o, "marginLeft", S$RescriptStruct.$$int(undefined)),
-              marginTop: S$RescriptStruct.field(o, "marginTop", S$RescriptStruct.$$int(undefined)),
-              scaleRatio: S$RescriptStruct.field(o, "scaleRatio", S$RescriptStruct.$$int(undefined)),
-              handup: S$RescriptStruct.field(o, "handup", S$RescriptStruct.bool(undefined)),
-              pointWidth: S$RescriptStruct.field(o, "pointWidth", S$RescriptStruct.$$int(undefined)),
-              pointHeight: S$RescriptStruct.field(o, "pointHeight", S$RescriptStruct.$$int(undefined))
+              marginLeft: s.f("marginLeft", S$RescriptStruct.$$int),
+              marginTop: s.f("marginTop", S$RescriptStruct.$$int),
+              scaleRatio: s.f("scaleRatio", S$RescriptStruct.$$int),
+              handup: s.f("handup", S$RescriptStruct.bool),
+              pointWidth: s.f("pointWidth", S$RescriptStruct.$$int),
+              pointHeight: s.f("pointHeight", S$RescriptStruct.$$int)
             };
     });
 
-var drawGiftInfoStruct = S$RescriptStruct.object(function (o) {
+var drawGiftInfoStruct = S$RescriptStruct.object(function (s) {
       return {
-              screenWidth: S$RescriptStruct.field(o, "screenWidth", S$RescriptStruct.$$int(undefined)),
-              screenHeight: S$RescriptStruct.field(o, "screenHeight", S$RescriptStruct.$$int(undefined)),
-              drawPoint: S$RescriptStruct.field(o, "drawPoint", S$RescriptStruct.$$null(S$RescriptStruct.array(drawPointStruct)))
+              screenWidth: s.f("screenWidth", S$RescriptStruct.$$int),
+              screenHeight: s.f("screenHeight", S$RescriptStruct.$$int),
+              drawPoint: s.f("drawPoint", S$RescriptStruct.$$null(S$RescriptStruct.array(drawPointStruct)))
             };
     });
 
-var giftStruct = S$RescriptStruct.object(function (o) {
+var giftStruct = S$RescriptStruct.object(function (s) {
       return {
-              danmuInfo: S$RescriptStruct.field(o, "danmuInfo", danmuInfoStruct),
-              giftDetail: S$RescriptStruct.field(o, "giftDetail", giftDetailStruct),
-              count: S$RescriptStruct.field(o, "count", S$RescriptStruct.$$int(undefined)),
-              combo: S$RescriptStruct.field(o, "combo", S$RescriptStruct.$$int(undefined)),
-              value: S$RescriptStruct.field(o, "value", S$RescriptStruct.$$int(undefined)),
-              comboID: S$RescriptStruct.field(o, "comboID", S$RescriptStruct.string(undefined)),
-              slotDisplayDuration: S$RescriptStruct.field(o, "slotDisplayDuration", S$RescriptStruct.$$int(undefined)),
-              expireDuration: S$RescriptStruct.field(o, "expireDuration", S$RescriptStruct.$$int(undefined)),
-              drawGiftInfo: S$RescriptStruct.field(o, "drawGiftInfo", drawGiftInfoStruct)
+              danmuInfo: s.f("danmuInfo", danmuInfoStruct),
+              giftDetail: s.f("giftDetail", giftDetailStruct),
+              count: s.f("count", S$RescriptStruct.$$int),
+              combo: s.f("combo", S$RescriptStruct.$$int),
+              value: s.f("value", S$RescriptStruct.$$int),
+              comboID: s.f("comboID", S$RescriptStruct.string),
+              slotDisplayDuration: s.f("slotDisplayDuration", S$RescriptStruct.$$int),
+              expireDuration: s.f("expireDuration", S$RescriptStruct.$$int),
+              drawGiftInfo: s.f("drawGiftInfo", drawGiftInfoStruct)
             };
     });
 
-var richTextUserInfoStruct = S$RescriptStruct.object(function (o) {
+var richTextUserInfoStruct = S$RescriptStruct.object(function (s) {
       return {
-              userInfo: S$RescriptStruct.field(o, "userInfo", userInfoStruct),
-              color: S$RescriptStruct.field(o, "color", S$RescriptStruct.string(undefined))
+              userInfo: s.f("userInfo", userInfoStruct),
+              color: s.f("color", S$RescriptStruct.string)
             };
     });
 
-var richTextPlainStruct = S$RescriptStruct.object(function (o) {
+var richTextPlainStruct = S$RescriptStruct.object(function (s) {
       return {
-              text: S$RescriptStruct.field(o, "text", S$RescriptStruct.string(undefined)),
-              color: S$RescriptStruct.field(o, "color", S$RescriptStruct.string(undefined))
+              text: s.f("text", S$RescriptStruct.string),
+              color: s.f("color", S$RescriptStruct.string)
             };
     });
 
-var richTextImageStruct = S$RescriptStruct.object(function (o) {
+var richTextImageStruct = S$RescriptStruct.object(function (s) {
       return {
-              pictures: S$RescriptStruct.field(o, "pictures", S$RescriptStruct.array(S$RescriptStruct.string(undefined))),
-              alternativeText: S$RescriptStruct.field(o, "alternativeText", S$RescriptStruct.string(undefined)),
-              alternativeColor: S$RescriptStruct.field(o, "alternativeColor", S$RescriptStruct.string(undefined))
+              pictures: s.f("pictures", S$RescriptStruct.array(S$RescriptStruct.string)),
+              alternativeText: s.f("alternativeText", S$RescriptStruct.string),
+              alternativeColor: s.f("alternativeColor", S$RescriptStruct.string)
             };
     });
 
 var richTextSegmentStruct = S$RescriptStruct.union([
-      S$RescriptStruct.object(function (o) {
-            S$RescriptStruct.field(o, "type", S$RescriptStruct.literal({
-                      TAG: "Int",
-                      _0: 1900
-                    }));
+      S$RescriptStruct.object(function (s) {
+            s.t("type", 1900);
             return {
                     type: "UserInfo",
-                    segment: S$RescriptStruct.field(o, "segment", richTextUserInfoStruct)
+                    segment: s.f("segment", richTextUserInfoStruct)
                   };
           }),
-      S$RescriptStruct.object(function (o) {
-            S$RescriptStruct.field(o, "type", S$RescriptStruct.literal({
-                      TAG: "Int",
-                      _0: 1901
-                    }));
+      S$RescriptStruct.object(function (s) {
+            s.t("type", 1901);
             return {
                     type: "Plain",
-                    segment: S$RescriptStruct.field(o, "segment", richTextPlainStruct)
+                    segment: s.f("segment", richTextPlainStruct)
                   };
           }),
-      S$RescriptStruct.object(function (o) {
-            S$RescriptStruct.field(o, "type", S$RescriptStruct.literal({
-                      TAG: "Int",
-                      _0: 1902
-                    }));
+      S$RescriptStruct.object(function (s) {
+            s.t("type", 1902);
             return {
                     type: "Image",
-                    segment: S$RescriptStruct.field(o, "segment", richTextImageStruct)
+                    segment: s.f("segment", richTextImageStruct)
                   };
           })
     ]);
 
-var richTextStruct = S$RescriptStruct.object(function (o) {
+var richTextStruct = S$RescriptStruct.object(function (s) {
       return {
-              sendTime: S$RescriptStruct.field(o, "sendTime", S$RescriptStruct.$$float(undefined)),
-              segments: S$RescriptStruct.field(o, "segments", S$RescriptStruct.array(richTextSegmentStruct))
+              sendTime: s.f("sendTime", S$RescriptStruct.$$float),
+              segments: s.f("segments", S$RescriptStruct.array(richTextSegmentStruct))
             };
     });
 
-var joinClubStruct = S$RescriptStruct.object(function (o) {
+var joinClubStruct = S$RescriptStruct.object(function (s) {
       return {
-              joinTime: S$RescriptStruct.field(o, "joinTime", S$RescriptStruct.$$float(undefined)),
-              fansInfo: S$RescriptStruct.field(o, "fansInfo", userInfoStruct),
-              uperInfo: S$RescriptStruct.field(o, "uperInfo", userInfoStruct)
+              joinTime: s.f("joinTime", S$RescriptStruct.$$float),
+              fansInfo: s.f("fansInfo", userInfoStruct),
+              uperInfo: s.f("uperInfo", userInfoStruct)
             };
     });
 
-var shareLiveStruct = S$RescriptStruct.object(function (o) {
+var shareLiveStruct = S$RescriptStruct.object(function (s) {
       return {
-              danmuInfo: S$RescriptStruct.field(o, "danmuInfo", danmuInfoStruct),
-              sharePlatform: S$RescriptStruct.field(o, "sharePlatform", S$RescriptStruct.variant(S$RescriptStruct.$$int(undefined), (function (v) {
+              danmuInfo: s.f("danmuInfo", danmuInfoStruct),
+              sharePlatform: s.f("sharePlatform", S$RescriptStruct.variant(S$RescriptStruct.$$int, (function (v) {
                           return AcLive__Message.intToSharePlatformType(v);
                         }))),
-              sharePlatformIcon: S$RescriptStruct.field(o, "sharePlatformIcon", S$RescriptStruct.string(undefined))
+              sharePlatformIcon: s.f("sharePlatformIcon", S$RescriptStruct.string)
             };
     });
 
-var bananaCountStruct = S$RescriptStruct.object(function (o) {
+var bananaCountStruct = S$RescriptStruct.object(function (s) {
       return {
-              bananaCount: S$RescriptStruct.field(o, "bananaCount", S$RescriptStruct.string(undefined))
+              bananaCount: s.f("bananaCount", S$RescriptStruct.string)
             };
     });
 
-var displayInfoStruct = S$RescriptStruct.object(function (o) {
+var displayInfoStruct = S$RescriptStruct.object(function (s) {
       return {
-              watchingCount: S$RescriptStruct.field(o, "watchingCount", S$RescriptStruct.string(undefined)),
-              likeCount: S$RescriptStruct.field(o, "likeCount", S$RescriptStruct.string(undefined)),
-              likeDelta: S$RescriptStruct.field(o, "likeDelta", S$RescriptStruct.$$int(undefined))
+              watchingCount: s.f("watchingCount", S$RescriptStruct.string),
+              likeCount: s.f("likeCount", S$RescriptStruct.string),
+              likeDelta: s.f("likeDelta", S$RescriptStruct.$$int)
             };
     });
 
-var watchingUserStruct$1 = S$RescriptStruct.object(function (o) {
+var watchingUserStruct$1 = S$RescriptStruct.object(function (s) {
       return {
-              userInfo: S$RescriptStruct.field(o, "userInfo", userInfoStruct),
-              anonymousUser: S$RescriptStruct.field(o, "anonymousUser", S$RescriptStruct.bool(undefined)),
-              displaySendAmount: S$RescriptStruct.field(o, "displaySendAmount", S$RescriptStruct.string(undefined)),
-              customData: S$RescriptStruct.field(o, "customData", S$RescriptStruct.string(undefined))
+              userInfo: s.f("userInfo", userInfoStruct),
+              anonymousUser: s.f("anonymousUser", S$RescriptStruct.bool),
+              displaySendAmount: s.f("displaySendAmount", S$RescriptStruct.string),
+              customData: s.f("customData", S$RescriptStruct.string)
             };
     });
 
@@ -808,108 +793,100 @@ var topUsersStruct = S$RescriptStruct.array(watchingUserStruct$1);
 
 var recentCommentsStruct = S$RescriptStruct.array(commentStruct);
 
-var redpackStruct = S$RescriptStruct.object(function (o) {
+var redpackStruct = S$RescriptStruct.object(function (s) {
       return {
-              userInfo: S$RescriptStruct.field(o, "userInfo", userInfoStruct),
-              displayStatus: S$RescriptStruct.field(o, "displayStatus", S$RescriptStruct.variant(S$RescriptStruct.$$int(undefined), (function (v) {
+              userInfo: s.f("userInfo", userInfoStruct),
+              displayStatus: s.f("displayStatus", S$RescriptStruct.variant(S$RescriptStruct.$$int, (function (v) {
                           return AcLive__Message.intToRedpackDisplayStatus(v);
                         }))),
-              grabBeginTime: S$RescriptStruct.field(o, "grabBeginTime", S$RescriptStruct.$$float(undefined)),
-              getTokenLatestTime: S$RescriptStruct.field(o, "getTokenLatestTime", S$RescriptStruct.$$float(undefined)),
-              redpackID: S$RescriptStruct.field(o, "redpackID", S$RescriptStruct.string(undefined)),
-              redpackBizUnit: S$RescriptStruct.field(o, "redpackBizUnit", S$RescriptStruct.string(undefined)),
-              redpackAmount: S$RescriptStruct.field(o, "redpackAmount", S$RescriptStruct.$$int(undefined)),
-              settleBeginTime: S$RescriptStruct.field(o, "settleBeginTime", S$RescriptStruct.$$float(undefined))
+              grabBeginTime: s.f("grabBeginTime", S$RescriptStruct.$$float),
+              getTokenLatestTime: s.f("getTokenLatestTime", S$RescriptStruct.$$float),
+              redpackID: s.f("redpackID", S$RescriptStruct.string),
+              redpackBizUnit: s.f("redpackBizUnit", S$RescriptStruct.string),
+              redpackAmount: s.f("redpackAmount", S$RescriptStruct.$$int),
+              settleBeginTime: s.f("settleBeginTime", S$RescriptStruct.$$float)
             };
     });
 
 var redpackListStruct = S$RescriptStruct.array(redpackStruct);
 
-var chatCallStruct = S$RescriptStruct.object(function (o) {
+var chatCallStruct = S$RescriptStruct.object(function (s) {
       return {
-              chatID: S$RescriptStruct.field(o, "chatID", S$RescriptStruct.string(undefined)),
-              liveID: S$RescriptStruct.field(o, "liveID", S$RescriptStruct.string(undefined)),
-              callTime: S$RescriptStruct.field(o, "callTime", S$RescriptStruct.$$float(undefined))
+              chatID: s.f("chatID", S$RescriptStruct.string),
+              liveID: s.f("liveID", S$RescriptStruct.string),
+              callTime: s.f("callTime", S$RescriptStruct.$$float)
             };
     });
 
-var chatAcceptStruct = S$RescriptStruct.object(function (o) {
+var chatAcceptStruct = S$RescriptStruct.object(function (s) {
       return {
-              chatID: S$RescriptStruct.field(o, "chatID", S$RescriptStruct.string(undefined)),
-              mediaType: S$RescriptStruct.field(o, "mediaType", S$RescriptStruct.variant(S$RescriptStruct.$$int(undefined), (function (v) {
+              chatID: s.f("chatID", S$RescriptStruct.string),
+              mediaType: s.f("mediaType", S$RescriptStruct.variant(S$RescriptStruct.$$int, (function (v) {
                           return AcLive__Message.intToChatMediaType(v);
                         }))),
-              signalInfo: S$RescriptStruct.field(o, "signalInfo", S$RescriptStruct.string(undefined))
+              signalInfo: s.f("signalInfo", S$RescriptStruct.string)
             };
     });
 
-var chatReadyStruct = S$RescriptStruct.object(function (o) {
+var chatReadyStruct = S$RescriptStruct.object(function (s) {
       return {
-              chatID: S$RescriptStruct.field(o, "chatID", S$RescriptStruct.string(undefined)),
-              guest: S$RescriptStruct.field(o, "guest", userInfoStruct),
-              mediaType: S$RescriptStruct.field(o, "mediaType", S$RescriptStruct.variant(S$RescriptStruct.$$int(undefined), (function (v) {
+              chatID: s.f("chatID", S$RescriptStruct.string),
+              guest: s.f("guest", userInfoStruct),
+              mediaType: s.f("mediaType", S$RescriptStruct.variant(S$RescriptStruct.$$int, (function (v) {
                           return AcLive__Message.intToChatMediaType(v);
                         })))
             };
     });
 
-var chatEndStruct = S$RescriptStruct.object(function (o) {
+var chatEndStruct = S$RescriptStruct.object(function (s) {
       return {
-              chatID: S$RescriptStruct.field(o, "chatID", S$RescriptStruct.string(undefined)),
-              endType: S$RescriptStruct.field(o, "endType", S$RescriptStruct.variant(S$RescriptStruct.$$int(undefined), (function (v) {
+              chatID: s.f("chatID", S$RescriptStruct.string),
+              endType: s.f("endType", S$RescriptStruct.variant(S$RescriptStruct.$$int, (function (v) {
                           return AcLive__Message.intToChatEndType(v);
                         })))
             };
     });
 
-var danmakuStopErrorStruct = S$RescriptStruct.object(function (o) {
+var danmakuStopErrorStruct = S$RescriptStruct.object(function (s) {
       return {
-              error: S$RescriptStruct.field(o, "error", S$RescriptStruct.string(undefined))
+              error: s.f("error", S$RescriptStruct.string)
             };
     });
 
-var kickedOutStruct = S$RescriptStruct.object(function (o) {
+var kickedOutStruct = S$RescriptStruct.object(function (s) {
       return {
-              kickedOutReason: S$RescriptStruct.field(o, "kickedOutReason", S$RescriptStruct.string(undefined))
+              kickedOutReason: s.f("kickedOutReason", S$RescriptStruct.string)
             };
     });
 
-var violationAlertStruct = S$RescriptStruct.object(function (o) {
+var violationAlertStruct = S$RescriptStruct.object(function (s) {
       return {
-              violationContent: S$RescriptStruct.field(o, "violationContent", S$RescriptStruct.string(undefined))
+              violationContent: s.f("violationContent", S$RescriptStruct.string)
             };
     });
 
-var managerStateStruct = S$RescriptStruct.object(function (o) {
+var managerStateStruct = S$RescriptStruct.object(function (s) {
       return {
-              managerState: S$RescriptStruct.field(o, "managerState", S$RescriptStruct.variant(S$RescriptStruct.$$int(undefined), (function (v) {
+              managerState: s.f("managerState", S$RescriptStruct.variant(S$RescriptStruct.$$int, (function (v) {
                           return AcLive__Message.intToManagerStateType(v);
                         })))
             };
     });
 
-var responseModelStruct = S$RescriptStruct.object(function (o) {
+var responseModelStruct = S$RescriptStruct.object(function (s) {
       return {
-              type_: S$RescriptStruct.field(o, "type", responseTypeStruct),
-              liverUID: S$RescriptStruct.field(o, "liverUID", S$RescriptStruct.default(S$RescriptStruct.option(S$RescriptStruct.$$int(undefined)), (function () {
-                          return 0;
-                        }))),
-              requestID: S$RescriptStruct.field(o, "requestID", S$RescriptStruct.default(S$RescriptStruct.option(S$RescriptStruct.string(undefined)), (function () {
-                          return "";
-                        }))),
-              result: S$RescriptStruct.field(o, "result", S$RescriptStruct.default(S$RescriptStruct.option(responseResultStruct), (function () {
-                          return {
-                                  TAG: "UnknownResult",
-                                  _0: 0
-                                };
-                        }))),
-              error: S$RescriptStruct.field(o, "error", S$RescriptStruct.default(S$RescriptStruct.option(S$RescriptStruct.string(undefined)), (function () {
-                          return "";
-                        })))
+              type_: s.f("type", responseTypeStruct),
+              liverUID: s.o("liverUID", S$RescriptStruct.$$int, 0),
+              requestID: s.o("requestID", S$RescriptStruct.string, ""),
+              result: s.o("result", responseResultStruct, {
+                    TAG: "UnknownResult",
+                    _0: 0
+                  }),
+              error: s.o("error", S$RescriptStruct.string, "")
             };
     });
 
-function makeEmptyResponseData(param, constructor) {
+function makeEmptyResponseData(s, param, constructor) {
   var result = param.result;
   var requestID = param.requestID;
   if (typeof result !== "object") {
@@ -931,15 +908,15 @@ function makeEmptyResponseData(param, constructor) {
                 });
     }
   } else {
-    return S$RescriptStruct.fail(undefined, "unknown result type: " + result._0.toString());
+    return s.fail("unknown result type: " + result._0.toString(), undefined);
   }
 }
 
-function makeResponseData(data, param, struct, constructor) {
+function makeResponseData(s, data, param, struct, constructor) {
   var result = param.result;
   var requestID = param.requestID;
   if (typeof result === "object") {
-    return S$RescriptStruct.fail(undefined, "unknown result type: " + result._0.toString());
+    return s.fail("unknown result type: " + result._0.toString(), undefined);
   }
   if (result !== "Success") {
     return constructor({
@@ -951,11 +928,11 @@ function makeResponseData(data, param, struct, constructor) {
                 }
               });
   }
-  var d = S$RescriptStruct.parseAnyWith(data, S$RescriptStruct.object(function (o) {
-            return S$RescriptStruct.field(o, "data", struct);
+  var d = S$RescriptStruct.parseAnyWith(data, S$RescriptStruct.object(function (s) {
+            return s.f("data", struct);
           }));
   if (d.TAG !== "Ok") {
-    return S$RescriptStruct.advancedFail(d._0);
+    return s.failWithError(d._0);
   }
   var message_data = d._0;
   var message = {
@@ -968,13 +945,13 @@ function makeResponseData(data, param, struct, constructor) {
             });
 }
 
-function makeDanmakuData(data, param, struct, constructor) {
+function makeDanmakuData(s, data, param, struct, constructor) {
   var liverUID = param.liverUID;
   if (liverUID <= 0) {
-    return S$RescriptStruct.fail(undefined, "missing liverUID or illegal liverUID");
+    return s.fail("missing liverUID or illegal liverUID", undefined);
   }
-  var d = S$RescriptStruct.parseAnyWith(data, S$RescriptStruct.object(function (o) {
-            return S$RescriptStruct.field(o, "data", struct);
+  var d = S$RescriptStruct.parseAnyWith(data, S$RescriptStruct.object(function (s) {
+            return s.f("data", struct);
           }));
   if (d.TAG === "Ok") {
     return constructor({
@@ -982,530 +959,534 @@ function makeDanmakuData(data, param, struct, constructor) {
                 data: d._0
               });
   } else {
-    return S$RescriptStruct.advancedFail(d._0);
+    return s.failWithError(d._0);
   }
 }
 
-var responseDataStruct = S$RescriptStruct.custom("responseData", (function (data) {
-        var model = S$RescriptStruct.parseAnyWith(data, responseModelStruct);
-        if (model.TAG !== "Ok") {
-          return S$RescriptStruct.advancedFail(model._0);
-        }
-        var model$1 = model._0;
-        var v = model$1.type_;
-        if (typeof v === "object") {
-          return S$RescriptStruct.fail(undefined, "unsupported message type: " + v._0.toString());
-        }
-        switch (v) {
-          case 2 :
-              return makeResponseData(data, model$1, loginResponseStruct, (function (v) {
+var responseDataStruct = S$RescriptStruct.custom("responseData", (function (s) {
+        return {
+                p: (function (data) {
+                    var model = S$RescriptStruct.parseAnyWith(data, responseModelStruct);
+                    if (model.TAG !== "Ok") {
+                      return s.failWithError(model._0);
+                    }
+                    var model$1 = model._0;
+                    var v = model$1.type_;
+                    if (typeof v === "object") {
+                      return s.fail("unsupported message type: " + v._0.toString(), undefined);
+                    }
+                    switch (v) {
+                      case 2 :
+                          return makeResponseData(s, data, model$1, loginResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 2,
+                                                _0: v
+                                              };
+                                      }));
+                      case 3 :
+                          return makeEmptyResponseData(s, model$1, (function (v) {
+                                        return {
+                                                TAG: 3,
+                                                _0: v
+                                              };
+                                      }));
+                      case 4 :
+                          return makeEmptyResponseData(s, model$1, (function (v) {
+                                        return {
+                                                TAG: 4,
+                                                _0: v
+                                              };
+                                      }));
+                      case 6 :
+                          return makeEmptyResponseData(s, model$1, (function (v) {
+                                        return {
+                                                TAG: 6,
+                                                _0: v
+                                              };
+                                      }));
+                      case 100 :
+                          var constructor = function (v) {
                             return {
-                                    TAG: 2,
+                                    TAG: 100,
                                     _0: v
                                   };
-                          }));
-          case 3 :
-              return makeEmptyResponseData(model$1, (function (v) {
+                          };
+                          var result = model$1.result;
+                          var requestID = model$1.requestID;
+                          if (typeof result === "object") {
+                            return s.fail("unknown result type: " + result._0.toString(), undefined);
+                          }
+                          if (result !== "Success") {
+                            return constructor({
+                                        TAG: "Error",
+                                        _0: {
+                                          requestID: requestID,
+                                          result: result,
+                                          error: model$1.error
+                                        }
+                                      });
+                          }
+                          var e = S$RescriptStruct.parseAnyWith(data, S$RescriptStruct.object(function (s) {
+                                    return s.f("data", S$RescriptStruct.option(getDanmakuResponse));
+                                  }));
+                          if (e.TAG !== "Ok") {
+                            return s.failWithError(e._0);
+                          }
+                          var d = e._0;
+                          if (d !== undefined) {
+                            return constructor({
+                                        TAG: "Ok",
+                                        _0: {
+                                          requestID: requestID,
+                                          data: Caml_option.some(Caml_option.valFromOption(d))
+                                        }
+                                      });
+                          } else {
+                            return constructor({
+                                        TAG: "Ok",
+                                        _0: {
+                                          requestID: requestID
+                                        }
+                                      });
+                          }
+                      case 101 :
+                          return makeEmptyResponseData(s, model$1, (function (v) {
+                                        return {
+                                                TAG: 101,
+                                                _0: v
+                                              };
+                                      }));
+                      case 102 :
+                          return makeResponseData(s, data, model$1, getWatchingListResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 102,
+                                                _0: v
+                                              };
+                                      }));
+                      case 103 :
+                          return makeResponseData(s, data, model$1, getBillboardResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 103,
+                                                _0: v
+                                              };
+                                      }));
+                      case 104 :
+                          return makeResponseData(s, data, model$1, getSummaryResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 104,
+                                                _0: v
+                                              };
+                                      }));
+                      case 105 :
+                          return makeResponseData(s, data, model$1, getLuckListResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 105,
+                                                _0: v
+                                              };
+                                      }));
+                      case 106 :
+                          return makeResponseData(s, data, model$1, getPlaybackResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 106,
+                                                _0: v
+                                              };
+                                      }));
+                      case 107 :
+                          return makeResponseData(s, data, model$1, getAllGiftListResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 107,
+                                                _0: v
+                                              };
+                                      }));
+                      case 108 :
+                          return makeResponseData(s, data, model$1, getWalletBalanceResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 108,
+                                                _0: v
+                                              };
+                                      }));
+                      case 109 :
+                          return makeResponseData(s, data, model$1, userLiveInfoStruct, (function (v) {
+                                        return {
+                                                TAG: 109,
+                                                _0: v
+                                              };
+                                      }));
+                      case 110 :
+                          return makeResponseData(s, data, model$1, getAllLiveListResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 110,
+                                                _0: v
+                                              };
+                                      }));
+                      case 112 :
+                          return makeResponseData(s, data, model$1, getLiveDataResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 112,
+                                                _0: v
+                                              };
+                                      }));
+                      case 114 :
+                          return makeResponseData(s, data, model$1, getGiftListResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 114,
+                                                _0: v
+                                              };
+                                      }));
+                      case 115 :
+                          return makeResponseData(s, data, model$1, getUserInfoResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 115,
+                                                _0: v
+                                              };
+                                      }));
+                      case 116 :
+                          return makeResponseData(s, data, model$1, getLiveCutInfoResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 116,
+                                                _0: v
+                                              };
+                                      }));
+                      case 200 :
+                          return makeResponseData(s, data, model$1, getManagerListResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 200,
+                                                _0: v
+                                              };
+                                      }));
+                      case 201 :
+                          return makeEmptyResponseData(s, model$1, (function (v) {
+                                        return {
+                                                TAG: 201,
+                                                _0: v
+                                              };
+                                      }));
+                      case 202 :
+                          return makeEmptyResponseData(s, model$1, (function (v) {
+                                        return {
+                                                TAG: 202,
+                                                _0: v
+                                              };
+                                      }));
+                      case 203 :
+                          return makeResponseData(s, data, model$1, getAllKickHistoryResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 203,
+                                                _0: v
+                                              };
+                                      }));
+                      case 204 :
+                          return makeEmptyResponseData(s, model$1, (function (v) {
+                                        return {
+                                                TAG: 204,
+                                                _0: v
+                                              };
+                                      }));
+                      case 205 :
+                          return makeEmptyResponseData(s, model$1, (function (v) {
+                                        return {
+                                                TAG: 205,
+                                                _0: v
+                                              };
+                                      }));
+                      case 300 :
+                          return makeResponseData(s, data, model$1, getMedalDetailResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 300,
+                                                _0: v
+                                              };
+                                      }));
+                      case 301 :
+                          return makeResponseData(s, data, model$1, getMedalListResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 301,
+                                                _0: v
+                                              };
+                                      }));
+                      case 302 :
+                          return makeResponseData(s, data, model$1, getMedalRankListResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 302,
+                                                _0: v
+                                              };
+                                      }));
+                      case 303 :
+                          return makeResponseData(s, data, model$1, medalStruct, (function (v) {
+                                        return {
+                                                TAG: 303,
+                                                _0: v
+                                              };
+                                      }));
+                      case 304 :
+                          return makeEmptyResponseData(s, model$1, (function (v) {
+                                        return {
+                                                TAG: 304,
+                                                _0: v
+                                              };
+                                      }));
+                      case 305 :
+                          return makeEmptyResponseData(s, model$1, (function (v) {
+                                        return {
+                                                TAG: 305,
+                                                _0: v
+                                              };
+                                      }));
+                      case 900 :
+                          return makeResponseData(s, data, model$1, checkLiveAuthResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 900,
+                                                _0: v
+                                              };
+                                      }));
+                      case 901 :
+                          return makeResponseData(s, data, model$1, liveTypeStruct, (function (v) {
+                                        return {
+                                                TAG: 901,
+                                                _0: v
+                                              };
+                                      }));
+                      case 902 :
+                          return makeResponseData(s, data, model$1, getPushConfigResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 902,
+                                                _0: v
+                                              };
+                                      }));
+                      case 903 :
+                          return makeResponseData(s, data, model$1, getLiveStatusResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 903,
+                                                _0: v
+                                              };
+                                      }));
+                      case 904 :
+                          return makeResponseData(s, data, model$1, getTranscodeInfoResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 904,
+                                                _0: v
+                                              };
+                                      }));
+                      case 905 :
+                          return makeResponseData(s, data, model$1, liveIDStruct, (function (v) {
+                                        return {
+                                                TAG: 905,
+                                                _0: v
+                                              };
+                                      }));
+                      case 906 :
+                          return makeResponseData(s, data, model$1, stopLiveResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 906,
+                                                _0: v
+                                              };
+                                      }));
+                      case 907 :
+                          return makeEmptyResponseData(s, model$1, (function (v) {
+                                        return {
+                                                TAG: 907,
+                                                _0: v
+                                              };
+                                      }));
+                      case 908 :
+                          return makeResponseData(s, data, model$1, canCutLiveStruct, (function (v) {
+                                        return {
+                                                TAG: 908,
+                                                _0: v
+                                              };
+                                      }));
+                      case 909 :
+                          return makeEmptyResponseData(s, model$1, (function (v) {
+                                        return {
+                                                TAG: 909,
+                                                _0: v
+                                              };
+                                      }));
+                      case 1 :
+                          return 1;
+                      case 5 :
+                          return makeResponseData(s, data, model$1, forwardDataStruct, (function (v) {
+                                        return {
+                                                TAG: 5,
+                                                _0: v
+                                              };
+                                      }));
+                      case 1000 :
+                          return makeDanmakuData(s, data, model$1, commentStruct, (function (v) {
+                                        return {
+                                                TAG: 1000,
+                                                _0: v
+                                              };
+                                      }));
+                      case 1001 :
+                          return makeDanmakuData(s, data, model$1, danmuInfoStruct, (function (v) {
+                                        return {
+                                                TAG: 1001,
+                                                _0: v
+                                              };
+                                      }));
+                      case 1002 :
+                          return makeDanmakuData(s, data, model$1, danmuInfoStruct, (function (v) {
+                                        return {
+                                                TAG: 1002,
+                                                _0: v
+                                              };
+                                      }));
+                      case 1003 :
+                          return makeDanmakuData(s, data, model$1, danmuInfoStruct, (function (v) {
+                                        return {
+                                                TAG: 1003,
+                                                _0: v
+                                              };
+                                      }));
+                      case 1004 :
+                          return makeDanmakuData(s, data, model$1, throwBananaStruct, (function (v) {
+                                        return {
+                                                TAG: 1004,
+                                                _0: v
+                                              };
+                                      }));
+                      case 1005 :
+                          return makeDanmakuData(s, data, model$1, giftStruct, (function (v) {
+                                        return {
+                                                TAG: 1005,
+                                                _0: v
+                                              };
+                                      }));
+                      case 1006 :
+                          return makeDanmakuData(s, data, model$1, richTextStruct, (function (v) {
+                                        return {
+                                                TAG: 1006,
+                                                _0: v
+                                              };
+                                      }));
+                      case 1007 :
+                          return makeDanmakuData(s, data, model$1, joinClubStruct, (function (v) {
+                                        return {
+                                                TAG: 1007,
+                                                _0: v
+                                              };
+                                      }));
+                      case 1008 :
+                          return makeDanmakuData(s, data, model$1, shareLiveStruct, (function (v) {
+                                        return {
+                                                TAG: 1008,
+                                                _0: v
+                                              };
+                                      }));
+                      case 2000 :
+                          var constructor$1 = function (v) {
                             return {
-                                    TAG: 3,
+                                    TAG: 2000,
                                     _0: v
                                   };
-                          }));
-          case 4 :
-              return makeEmptyResponseData(model$1, (function (v) {
-                            return {
-                                    TAG: 4,
-                                    _0: v
-                                  };
-                          }));
-          case 6 :
-              return makeEmptyResponseData(model$1, (function (v) {
-                            return {
-                                    TAG: 6,
-                                    _0: v
-                                  };
-                          }));
-          case 100 :
-              var constructor = function (v) {
-                return {
-                        TAG: 100,
-                        _0: v
-                      };
+                          };
+                          var liverUID = model$1.liverUID;
+                          if (liverUID <= 0) {
+                            return s.fail("missing liverUID or illegal liverUID", undefined);
+                          }
+                          var danmaku = {
+                            liverUID: liverUID
+                          };
+                          return constructor$1(danmaku);
+                      case 2001 :
+                          return makeDanmakuData(s, data, model$1, bananaCountStruct, (function (v) {
+                                        return {
+                                                TAG: 2001,
+                                                _0: v
+                                              };
+                                      }));
+                      case 2002 :
+                          return makeDanmakuData(s, data, model$1, displayInfoStruct, (function (v) {
+                                        return {
+                                                TAG: 2002,
+                                                _0: v
+                                              };
+                                      }));
+                      case 2003 :
+                          return makeDanmakuData(s, data, model$1, topUsersStruct, (function (v) {
+                                        return {
+                                                TAG: 2003,
+                                                _0: v
+                                              };
+                                      }));
+                      case 2004 :
+                          return makeDanmakuData(s, data, model$1, recentCommentsStruct, (function (v) {
+                                        return {
+                                                TAG: 2004,
+                                                _0: v
+                                              };
+                                      }));
+                      case 2005 :
+                          return makeDanmakuData(s, data, model$1, redpackListStruct, (function (v) {
+                                        return {
+                                                TAG: 2005,
+                                                _0: v
+                                              };
+                                      }));
+                      case 2100 :
+                          return makeDanmakuData(s, data, model$1, chatCallStruct, (function (v) {
+                                        return {
+                                                TAG: 2100,
+                                                _0: v
+                                              };
+                                      }));
+                      case 2101 :
+                          return makeDanmakuData(s, data, model$1, chatAcceptStruct, (function (v) {
+                                        return {
+                                                TAG: 2101,
+                                                _0: v
+                                              };
+                                      }));
+                      case 2102 :
+                          return makeDanmakuData(s, data, model$1, chatReadyStruct, (function (v) {
+                                        return {
+                                                TAG: 2102,
+                                                _0: v
+                                              };
+                                      }));
+                      case 2103 :
+                          return makeDanmakuData(s, data, model$1, chatEndStruct, (function (v) {
+                                        return {
+                                                TAG: 2103,
+                                                _0: v
+                                              };
+                                      }));
+                      case 2999 :
+                          return makeDanmakuData(s, data, model$1, danmakuStopErrorStruct, (function (v) {
+                                        return {
+                                                TAG: 2999,
+                                                _0: v
+                                              };
+                                      }));
+                      case 3000 :
+                          return makeDanmakuData(s, data, model$1, kickedOutStruct, (function (v) {
+                                        return {
+                                                TAG: 3000,
+                                                _0: v
+                                              };
+                                      }));
+                      case 3001 :
+                          return makeDanmakuData(s, data, model$1, violationAlertStruct, (function (v) {
+                                        return {
+                                                TAG: 3001,
+                                                _0: v
+                                              };
+                                      }));
+                      case 3002 :
+                          return makeDanmakuData(s, data, model$1, managerStateStruct, (function (v) {
+                                        return {
+                                                TAG: 3002,
+                                                _0: v
+                                              };
+                                      }));
+                      
+                    }
+                  })
               };
-              var result = model$1.result;
-              var requestID = model$1.requestID;
-              if (typeof result === "object") {
-                return S$RescriptStruct.fail(undefined, "unknown result type: " + result._0.toString());
-              }
-              if (result !== "Success") {
-                return constructor({
-                            TAG: "Error",
-                            _0: {
-                              requestID: requestID,
-                              result: result,
-                              error: model$1.error
-                            }
-                          });
-              }
-              var e = S$RescriptStruct.parseAnyWith(data, S$RescriptStruct.object(function (o) {
-                        return S$RescriptStruct.field(o, "data", S$RescriptStruct.option(getDanmakuResponse));
-                      }));
-              if (e.TAG !== "Ok") {
-                return S$RescriptStruct.advancedFail(e._0);
-              }
-              var d = e._0;
-              if (d !== undefined) {
-                return constructor({
-                            TAG: "Ok",
-                            _0: {
-                              requestID: requestID,
-                              data: Caml_option.some(Caml_option.valFromOption(d))
-                            }
-                          });
-              } else {
-                return constructor({
-                            TAG: "Ok",
-                            _0: {
-                              requestID: requestID
-                            }
-                          });
-              }
-          case 101 :
-              return makeEmptyResponseData(model$1, (function (v) {
-                            return {
-                                    TAG: 101,
-                                    _0: v
-                                  };
-                          }));
-          case 102 :
-              return makeResponseData(data, model$1, getWatchingListResponseStruct, (function (v) {
-                            return {
-                                    TAG: 102,
-                                    _0: v
-                                  };
-                          }));
-          case 103 :
-              return makeResponseData(data, model$1, getBillboardResponseStruct, (function (v) {
-                            return {
-                                    TAG: 103,
-                                    _0: v
-                                  };
-                          }));
-          case 104 :
-              return makeResponseData(data, model$1, getSummaryResponseStruct, (function (v) {
-                            return {
-                                    TAG: 104,
-                                    _0: v
-                                  };
-                          }));
-          case 105 :
-              return makeResponseData(data, model$1, getLuckListResponseStruct, (function (v) {
-                            return {
-                                    TAG: 105,
-                                    _0: v
-                                  };
-                          }));
-          case 106 :
-              return makeResponseData(data, model$1, getPlaybackResponseStruct, (function (v) {
-                            return {
-                                    TAG: 106,
-                                    _0: v
-                                  };
-                          }));
-          case 107 :
-              return makeResponseData(data, model$1, getAllGiftListResponseStruct, (function (v) {
-                            return {
-                                    TAG: 107,
-                                    _0: v
-                                  };
-                          }));
-          case 108 :
-              return makeResponseData(data, model$1, getWalletBalanceResponseStruct, (function (v) {
-                            return {
-                                    TAG: 108,
-                                    _0: v
-                                  };
-                          }));
-          case 109 :
-              return makeResponseData(data, model$1, userLiveInfoStruct, (function (v) {
-                            return {
-                                    TAG: 109,
-                                    _0: v
-                                  };
-                          }));
-          case 110 :
-              return makeResponseData(data, model$1, getAllLiveListResponseStruct, (function (v) {
-                            return {
-                                    TAG: 110,
-                                    _0: v
-                                  };
-                          }));
-          case 112 :
-              return makeResponseData(data, model$1, getLiveDataResponseStruct, (function (v) {
-                            return {
-                                    TAG: 112,
-                                    _0: v
-                                  };
-                          }));
-          case 114 :
-              return makeResponseData(data, model$1, getGiftListResponseStruct, (function (v) {
-                            return {
-                                    TAG: 114,
-                                    _0: v
-                                  };
-                          }));
-          case 115 :
-              return makeResponseData(data, model$1, getUserInfoResponseStruct, (function (v) {
-                            return {
-                                    TAG: 115,
-                                    _0: v
-                                  };
-                          }));
-          case 116 :
-              return makeResponseData(data, model$1, getLiveCutInfoResponseStruct, (function (v) {
-                            return {
-                                    TAG: 116,
-                                    _0: v
-                                  };
-                          }));
-          case 200 :
-              return makeResponseData(data, model$1, getManagerListResponseStruct, (function (v) {
-                            return {
-                                    TAG: 200,
-                                    _0: v
-                                  };
-                          }));
-          case 201 :
-              return makeEmptyResponseData(model$1, (function (v) {
-                            return {
-                                    TAG: 201,
-                                    _0: v
-                                  };
-                          }));
-          case 202 :
-              return makeEmptyResponseData(model$1, (function (v) {
-                            return {
-                                    TAG: 202,
-                                    _0: v
-                                  };
-                          }));
-          case 203 :
-              return makeResponseData(data, model$1, getAllKickHistoryResponseStruct, (function (v) {
-                            return {
-                                    TAG: 203,
-                                    _0: v
-                                  };
-                          }));
-          case 204 :
-              return makeEmptyResponseData(model$1, (function (v) {
-                            return {
-                                    TAG: 204,
-                                    _0: v
-                                  };
-                          }));
-          case 205 :
-              return makeEmptyResponseData(model$1, (function (v) {
-                            return {
-                                    TAG: 205,
-                                    _0: v
-                                  };
-                          }));
-          case 300 :
-              return makeResponseData(data, model$1, getMedalDetailResponseStruct, (function (v) {
-                            return {
-                                    TAG: 300,
-                                    _0: v
-                                  };
-                          }));
-          case 301 :
-              return makeResponseData(data, model$1, getMedalListResponseStruct, (function (v) {
-                            return {
-                                    TAG: 301,
-                                    _0: v
-                                  };
-                          }));
-          case 302 :
-              return makeResponseData(data, model$1, getMedalRankListResponseStruct, (function (v) {
-                            return {
-                                    TAG: 302,
-                                    _0: v
-                                  };
-                          }));
-          case 303 :
-              return makeResponseData(data, model$1, medalStruct, (function (v) {
-                            return {
-                                    TAG: 303,
-                                    _0: v
-                                  };
-                          }));
-          case 304 :
-              return makeEmptyResponseData(model$1, (function (v) {
-                            return {
-                                    TAG: 304,
-                                    _0: v
-                                  };
-                          }));
-          case 305 :
-              return makeEmptyResponseData(model$1, (function (v) {
-                            return {
-                                    TAG: 305,
-                                    _0: v
-                                  };
-                          }));
-          case 900 :
-              return makeResponseData(data, model$1, checkLiveAuthResponseStruct, (function (v) {
-                            return {
-                                    TAG: 900,
-                                    _0: v
-                                  };
-                          }));
-          case 901 :
-              return makeResponseData(data, model$1, liveTypeStruct, (function (v) {
-                            return {
-                                    TAG: 901,
-                                    _0: v
-                                  };
-                          }));
-          case 902 :
-              return makeResponseData(data, model$1, getPushConfigResponseStruct, (function (v) {
-                            return {
-                                    TAG: 902,
-                                    _0: v
-                                  };
-                          }));
-          case 903 :
-              return makeResponseData(data, model$1, getLiveStatusResponseStruct, (function (v) {
-                            return {
-                                    TAG: 903,
-                                    _0: v
-                                  };
-                          }));
-          case 904 :
-              return makeResponseData(data, model$1, getTranscodeInfoResponseStruct, (function (v) {
-                            return {
-                                    TAG: 904,
-                                    _0: v
-                                  };
-                          }));
-          case 905 :
-              return makeResponseData(data, model$1, liveIDStruct, (function (v) {
-                            return {
-                                    TAG: 905,
-                                    _0: v
-                                  };
-                          }));
-          case 906 :
-              return makeResponseData(data, model$1, stopLiveResponseStruct, (function (v) {
-                            return {
-                                    TAG: 906,
-                                    _0: v
-                                  };
-                          }));
-          case 907 :
-              return makeEmptyResponseData(model$1, (function (v) {
-                            return {
-                                    TAG: 907,
-                                    _0: v
-                                  };
-                          }));
-          case 908 :
-              return makeResponseData(data, model$1, canCutLiveStruct, (function (v) {
-                            return {
-                                    TAG: 908,
-                                    _0: v
-                                  };
-                          }));
-          case 909 :
-              return makeEmptyResponseData(model$1, (function (v) {
-                            return {
-                                    TAG: 909,
-                                    _0: v
-                                  };
-                          }));
-          case 1 :
-              return 1;
-          case 5 :
-              return makeResponseData(data, model$1, forwardDataStruct, (function (v) {
-                            return {
-                                    TAG: 5,
-                                    _0: v
-                                  };
-                          }));
-          case 1000 :
-              return makeDanmakuData(data, model$1, commentStruct, (function (v) {
-                            return {
-                                    TAG: 1000,
-                                    _0: v
-                                  };
-                          }));
-          case 1001 :
-              return makeDanmakuData(data, model$1, danmuInfoStruct, (function (v) {
-                            return {
-                                    TAG: 1001,
-                                    _0: v
-                                  };
-                          }));
-          case 1002 :
-              return makeDanmakuData(data, model$1, danmuInfoStruct, (function (v) {
-                            return {
-                                    TAG: 1002,
-                                    _0: v
-                                  };
-                          }));
-          case 1003 :
-              return makeDanmakuData(data, model$1, danmuInfoStruct, (function (v) {
-                            return {
-                                    TAG: 1003,
-                                    _0: v
-                                  };
-                          }));
-          case 1004 :
-              return makeDanmakuData(data, model$1, throwBananaStruct, (function (v) {
-                            return {
-                                    TAG: 1004,
-                                    _0: v
-                                  };
-                          }));
-          case 1005 :
-              return makeDanmakuData(data, model$1, giftStruct, (function (v) {
-                            return {
-                                    TAG: 1005,
-                                    _0: v
-                                  };
-                          }));
-          case 1006 :
-              return makeDanmakuData(data, model$1, richTextStruct, (function (v) {
-                            return {
-                                    TAG: 1006,
-                                    _0: v
-                                  };
-                          }));
-          case 1007 :
-              return makeDanmakuData(data, model$1, joinClubStruct, (function (v) {
-                            return {
-                                    TAG: 1007,
-                                    _0: v
-                                  };
-                          }));
-          case 1008 :
-              return makeDanmakuData(data, model$1, shareLiveStruct, (function (v) {
-                            return {
-                                    TAG: 1008,
-                                    _0: v
-                                  };
-                          }));
-          case 2000 :
-              var constructor$1 = function (v) {
-                return {
-                        TAG: 2000,
-                        _0: v
-                      };
-              };
-              var liverUID = model$1.liverUID;
-              if (liverUID <= 0) {
-                return S$RescriptStruct.fail(undefined, "missing liverUID or illegal liverUID");
-              }
-              var danmaku = {
-                liverUID: liverUID
-              };
-              return constructor$1(danmaku);
-          case 2001 :
-              return makeDanmakuData(data, model$1, bananaCountStruct, (function (v) {
-                            return {
-                                    TAG: 2001,
-                                    _0: v
-                                  };
-                          }));
-          case 2002 :
-              return makeDanmakuData(data, model$1, displayInfoStruct, (function (v) {
-                            return {
-                                    TAG: 2002,
-                                    _0: v
-                                  };
-                          }));
-          case 2003 :
-              return makeDanmakuData(data, model$1, topUsersStruct, (function (v) {
-                            return {
-                                    TAG: 2003,
-                                    _0: v
-                                  };
-                          }));
-          case 2004 :
-              return makeDanmakuData(data, model$1, recentCommentsStruct, (function (v) {
-                            return {
-                                    TAG: 2004,
-                                    _0: v
-                                  };
-                          }));
-          case 2005 :
-              return makeDanmakuData(data, model$1, redpackListStruct, (function (v) {
-                            return {
-                                    TAG: 2005,
-                                    _0: v
-                                  };
-                          }));
-          case 2100 :
-              return makeDanmakuData(data, model$1, chatCallStruct, (function (v) {
-                            return {
-                                    TAG: 2100,
-                                    _0: v
-                                  };
-                          }));
-          case 2101 :
-              return makeDanmakuData(data, model$1, chatAcceptStruct, (function (v) {
-                            return {
-                                    TAG: 2101,
-                                    _0: v
-                                  };
-                          }));
-          case 2102 :
-              return makeDanmakuData(data, model$1, chatReadyStruct, (function (v) {
-                            return {
-                                    TAG: 2102,
-                                    _0: v
-                                  };
-                          }));
-          case 2103 :
-              return makeDanmakuData(data, model$1, chatEndStruct, (function (v) {
-                            return {
-                                    TAG: 2103,
-                                    _0: v
-                                  };
-                          }));
-          case 2999 :
-              return makeDanmakuData(data, model$1, danmakuStopErrorStruct, (function (v) {
-                            return {
-                                    TAG: 2999,
-                                    _0: v
-                                  };
-                          }));
-          case 3000 :
-              return makeDanmakuData(data, model$1, kickedOutStruct, (function (v) {
-                            return {
-                                    TAG: 3000,
-                                    _0: v
-                                  };
-                          }));
-          case 3001 :
-              return makeDanmakuData(data, model$1, violationAlertStruct, (function (v) {
-                            return {
-                                    TAG: 3001,
-                                    _0: v
-                                  };
-                          }));
-          case 3002 :
-              return makeDanmakuData(data, model$1, managerStateStruct, (function (v) {
-                            return {
-                                    TAG: 3002,
-                                    _0: v
-                                  };
-                          }));
-          
-        }
-      }), undefined, undefined, undefined);
+      }));
 
 function parseResponse(response) {
-  return S$RescriptStruct.parseJsonWith(response, responseDataStruct);
+  return S$RescriptStruct.parseJsonStringWith(response, responseDataStruct);
 }
 
 export {
