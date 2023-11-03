@@ -197,10 +197,6 @@ function getEmptyResponseRequestId(response) {
   return response._0.requestID;
 }
 
-function getOptionalResponseRequestId(response) {
-  return response._0.requestID;
-}
-
 function intToManagerType(i) {
   if (i !== 0) {
     if (i !== 1) {
@@ -1071,7 +1067,7 @@ function primitiveName() {
 
 function containerName() {
   var tagged = this.t;
-  return tagged.TAG + "(" + tagged._0.n(undefined) + ")";
+  return tagged.TAG + "(" + tagged._0.n() + ")";
 }
 
 function custom$1(name, definer) {
@@ -1492,7 +1488,7 @@ function factory$3(definer) {
           n: (function () {
               return "Object({" + fieldNames$1.map(function (fieldName) {
                             var fieldStruct = fields$1[fieldName];
-                            return JSON.stringify(fieldName) + ": " + fieldStruct.n(undefined);
+                            return JSON.stringify(fieldName) + ": " + fieldStruct.n();
                           }).join(", ") + "})";
             }),
           p: makeParseOperationBuilder(itemDefinitions, itemDefinitionsSet$1, definition, noopRefinement, (function (b, selfStruct, inputVar, path) {
@@ -1724,7 +1720,7 @@ function factory$8(structs) {
           },
           n: (function () {
               return "Union(" + structs.map(function (s) {
-                            return s.n(undefined);
+                            return s.n();
                           }).join(", ") + ")";
             }),
           p: (function (b, selfStruct, path) {
@@ -1840,7 +1836,7 @@ function reason(error, nestedLevelOpt) {
     case "InvalidOperation" :
         return reason$1.description;
     case "InvalidType" :
-        return "Expected " + reason$1.expected.n(undefined) + ", received " + toText(classify(reason$1.received));
+        return "Expected " + reason$1.expected.n() + ", received " + toText(classify(reason$1.received));
     case "InvalidLiteral" :
         return "Expected " + toText(reason$1.expected) + ", received " + toText(classify(reason$1.received));
     case "InvalidTupleSize" :
@@ -1858,7 +1854,7 @@ function reason(error, nestedLevelOpt) {
         var reasons = Array.from(new Set(array));
         return "Invalid union with following errors" + lineBreak + reasons.join(lineBreak);
     case "InvalidJsonStruct" :
-        return "The struct " + reason$1._0.n(undefined) + " is not compatible with JSON";
+        return "The struct " + reason$1._0.n() + " is not compatible with JSON";
     
   }
 }
@@ -2229,8 +2225,11 @@ var streamInfoStruct = object(function (s) {
             };
     });
 
-var getDanmakuResponse = object(function (s) {
-      return s.f("StreamInfo", streamInfoStruct);
+var getDanmakuResponseStruct = object(function (s) {
+      return {
+              liverUID: s.f("liverUID", $$int),
+              streamInfo: s.f("StreamInfo", option(streamInfoStruct))
+            };
     });
 
 var medalInfoStruct = object(function (s) {
@@ -2933,52 +2932,14 @@ var responseDataStruct = custom("responseData", (function (s) {
                                               };
                                       }));
                       case 100 :
-                          var constructor = function (v) {
-                            return {
-                                    TAG: 100,
-                                    _0: v
-                                  };
-                          };
-                          var result = model$1.result;
-                          var requestID = model$1.requestID;
-                          if (typeof result === "object") {
-                            return s.fail("unknown result type: " + result._0.toString(), undefined);
-                          }
-                          if (result !== "Success") {
-                            return constructor({
-                                        TAG: "Error",
-                                        _0: {
-                                          requestID: requestID,
-                                          result: result,
-                                          error: model$1.error
-                                        }
-                                      });
-                          }
-                          var e = parseAnyWith(data, object(function (s) {
-                                    return s.f("data", option(getDanmakuResponse));
-                                  }));
-                          if (e.TAG !== "Ok") {
-                            return s.failWithError(e._0);
-                          }
-                          var d = e._0;
-                          if (d !== undefined) {
-                            return constructor({
-                                        TAG: "Ok",
-                                        _0: {
-                                          requestID: requestID,
-                                          data: some(valFromOption(d))
-                                        }
-                                      });
-                          } else {
-                            return constructor({
-                                        TAG: "Ok",
-                                        _0: {
-                                          requestID: requestID
-                                        }
-                                      });
-                          }
+                          return makeResponseData(s, data, model$1, getDanmakuResponseStruct, (function (v) {
+                                        return {
+                                                TAG: 100,
+                                                _0: v
+                                              };
+                                      }));
                       case 101 :
-                          return makeEmptyResponseData(s, model$1, (function (v) {
+                          return makeResponseData(s, data, model$1, liverUIDStruct, (function (v) {
                                         return {
                                                 TAG: 101,
                                                 _0: v
@@ -3302,7 +3263,7 @@ var responseDataStruct = custom("responseData", (function (s) {
                                               };
                                       }));
                       case 2000 :
-                          var constructor$1 = function (v) {
+                          var constructor = function (v) {
                             return {
                                     TAG: 2000,
                                     _0: v
@@ -3315,7 +3276,7 @@ var responseDataStruct = custom("responseData", (function (s) {
                           var danmaku = {
                             liverUID: liverUID
                           };
-                          return constructor$1(danmaku);
+                          return constructor(danmaku);
                       case 2001 :
                           return makeDanmakuData(s, data, model$1, bananaCountStruct, (function (v) {
                                         return {
@@ -3463,7 +3424,7 @@ function addSubcriberInDict(dict, subcriber, key) {
   }
   var unsubscribe = addSubcriber(d$1, subcriber);
   return function () {
-    unsubscribe(undefined);
+    unsubscribe();
     if (isEmpty(d$1.dict)) {
       return $$delete$1(dict, key);
     }
@@ -3675,7 +3636,7 @@ function make$1($$WebSocket, $staropt$star) {
       }
       var fn = cleanupFn.contents;
       if (fn !== undefined) {
-        fn(undefined);
+        fn();
         cleanupFn.contents = undefined;
       }
       if (isSome(ws.contents)) {
@@ -3736,10 +3697,9 @@ function make$1($$WebSocket, $staropt$star) {
         case 6 :
             return setEmptyResponse(setTokenSubject, response$1._0);
         case 100 :
-            var v = response$1._0;
-            return getDanmakuSubject.set(v, getOptionalResponseRequestId(v));
+            return setResponse(getDanmakuSubject, response$1._0);
         case 101 :
-            return setEmptyResponse(stopDanmakuSubject, response$1._0);
+            return setResponse(stopDanmakuSubject, response$1._0);
         case 102 :
             return setResponse(getWatchingListSubject, response$1._0);
         case 103 :
@@ -3829,8 +3789,8 @@ function make$1($$WebSocket, $staropt$star) {
         case 1008 :
             return setDanmaku(shareLiveSubject, response$1._0);
         case 2000 :
-            var v$1 = response$1._0;
-            return danmakuStopSubject.set(v$1, v$1.liverUID.toString());
+            var v = response$1._0;
+            return danmakuStopSubject.set(v, v.liverUID.toString());
         case 2001 :
             return setDanmaku(bananaCountSubject, response$1._0);
         case 2002 :
@@ -4274,10 +4234,10 @@ function make$1($$WebSocket, $staropt$star) {
                   var timeout$1 = setTimeout((function () {
                           var f = unsubscribe.contents;
                           if (f !== undefined) {
-                            f(undefined);
+                            f();
                             unsubscribe.contents = undefined;
                           }
-                          deleteUuid(undefined);
+                          deleteUuid();
                           reject({
                                 RE_EXN_ID: AsyncRequestTimeout
                               });
@@ -4286,7 +4246,7 @@ function make$1($$WebSocket, $staropt$star) {
                     sendRequest(constructor(makeEmptyMessage(requestID)), w$1);
                     unsubscribe.contents = subject.oneshot((function (value, param) {
                             clearTimeout(timeout$1);
-                            deleteUuid(undefined);
+                            deleteUuid();
                             if (value.TAG === "Ok") {
                               return resolve(value._0);
                             } else {
@@ -4301,7 +4261,7 @@ function make$1($$WebSocket, $staropt$star) {
                     sendRequest(constructor(makeMessage(data, requestID)), w$1);
                     unsubscribe.contents = subject.oneshot((function (value, param) {
                             clearTimeout(timeout$1);
-                            deleteUuid(undefined);
+                            deleteUuid();
                             if (value.TAG === "Ok") {
                               return resolve(value._0);
                             } else {

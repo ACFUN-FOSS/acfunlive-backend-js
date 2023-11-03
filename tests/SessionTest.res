@@ -18,11 +18,17 @@ let action = async () => {
     let liveList = await session.asyncRequest(GetAllLiveList, ())
     Console.log2("live list: ", liveList)
 
-    let stream = await session.asyncRequest(
-      GetDanmaku,
-      {liverUID: (liveList.data[0]->Option.getExn).profile.userID},
-    )
+    let liverUID = (liveList.data[0]->Option.getExn).profile.userID
+    let stream = await session.asyncRequest(GetDanmaku, {liverUID: liverUID})
     Console.log2("get danmaku stream: ", stream)
+
+    setTimeout(() => {
+      try {
+        session.asyncRequest(StopDanmaku, {liverUID: liverUID})->ignore
+      } catch {
+      | e => Console.log2("stop danmaku error: ", e)
+      }
+    }, 10000)->ignore
   } catch {
   | e => Console.log2("action error: ", e)
   }

@@ -27,8 +27,8 @@ type rec event<'a, 'b> =
   | @as("requestForward") RequestForward: event<emptyMessage, string>
   | @as("receiveForward") ReceiveForward: event<message<receiveForwardResponse>, string>
   | @as("setToken") SetToken: event<emptyMessage, string>
-  | @as("getDanmaku") GetDanmaku: event<optionalMessage<getDanmakuResponse>, string>
-  | @as("stopDanmaku") StopDanmaku: event<emptyMessage, string>
+  | @as("getDanmaku") GetDanmaku: event<message<getDanmakuResponse>, string>
+  | @as("stopDanmaku") StopDanmaku: event<message<stopDanmakuResponse>, string>
   | @as("getWatchingList") GetWatchingList: event<message<getWatchingListResponse>, string>
   | @as("getBillboard") GetBillboard: event<message<getBillboardResponse>, string>
   | @as("getSummary") GetSummary: event<message<getSummaryResponse>, string>
@@ -93,8 +93,8 @@ type rec request<'a, 'b> =
   | @as("setClientID") SetClientID: request<setClientIDRequest, emptyMessage>
   | @as("requestForward") RequestForward: request<requestForwardRequest, emptyMessage>
   | @as("setToken") SetToken: request<setTokenRequest, emptyMessage>
-  | @as("getDanmaku") GetDanmaku: request<getDanmakuRequest, optionalMessage<getDanmakuResponse>>
-  | @as("stopDanmaku") StopDanmaku: request<stopDanmakuRequest, emptyMessage>
+  | @as("getDanmaku") GetDanmaku: request<getDanmakuRequest, message<getDanmakuResponse>>
+  | @as("stopDanmaku") StopDanmaku: request<stopDanmakuRequest, message<stopDanmakuResponse>>
   | @as("getWatchingList")
   GetWatchingList: request<getWatchingListRequest, message<getWatchingListResponse>>
   | @as("getBillboard") GetBillboard: request<getBillboardRequest, message<getBillboardResponse>>

@@ -62,74 +62,74 @@ function make($$WebSocket, $staropt$star) {
   var ws = {
     contents: undefined
   };
-  var unitSubject = AcLive__Subject.make(undefined);
-  var websocketErrorSubject = AcLive__Subject.make(undefined);
-  var jsonErrorSubject = AcLive__Subject.make(undefined);
-  var loginSubject = AcLive__Subject.make(undefined);
-  var setClientIDSubject = AcLive__Subject.make(undefined);
-  var requestForwardSubject = AcLive__Subject.make(undefined);
-  var receiveForwardSubject = AcLive__Subject.make(undefined);
-  var setTokenSubject = AcLive__Subject.make(undefined);
-  var getDanmakuSubject = AcLive__Subject.make(undefined);
-  var stopDanmakuSubject = AcLive__Subject.make(undefined);
-  var getWatchingListSubject = AcLive__Subject.make(undefined);
-  var getBillboardSubject = AcLive__Subject.make(undefined);
-  var getSummarySubject = AcLive__Subject.make(undefined);
-  var getLuckListSubject = AcLive__Subject.make(undefined);
-  var getPlaybackSubject = AcLive__Subject.make(undefined);
-  var getAllGiftListSubject = AcLive__Subject.make(undefined);
-  var getWalletBalanceSubject = AcLive__Subject.make(undefined);
-  var getUserLiveInfoSubject = AcLive__Subject.make(undefined);
-  var getAllLiveListSubject = AcLive__Subject.make(undefined);
-  var getLiveDataSubject = AcLive__Subject.make(undefined);
-  var getGiftListSubject = AcLive__Subject.make(undefined);
-  var getUserInfoSubject = AcLive__Subject.make(undefined);
-  var getLiveCutInfoSubject = AcLive__Subject.make(undefined);
-  var getManagerListSubject = AcLive__Subject.make(undefined);
-  var addManagerSubject = AcLive__Subject.make(undefined);
-  var deleteManagerSubject = AcLive__Subject.make(undefined);
-  var getAllKickHistorySubject = AcLive__Subject.make(undefined);
-  var managerKickSubject = AcLive__Subject.make(undefined);
-  var authorKickSubject = AcLive__Subject.make(undefined);
-  var getMedalDetailSubject = AcLive__Subject.make(undefined);
-  var getMedalListSubject = AcLive__Subject.make(undefined);
-  var getMedalRankListSubject = AcLive__Subject.make(undefined);
-  var getUserMedalSubject = AcLive__Subject.make(undefined);
-  var wearMedalSubject = AcLive__Subject.make(undefined);
-  var cancelWearMedalSubject = AcLive__Subject.make(undefined);
-  var checkLiveAuthSubject = AcLive__Subject.make(undefined);
-  var getLiveTypeListSubject = AcLive__Subject.make(undefined);
-  var getPushConfigSubject = AcLive__Subject.make(undefined);
-  var getLiveStatusSubject = AcLive__Subject.make(undefined);
-  var getTranscodeInfoSubject = AcLive__Subject.make(undefined);
-  var startLiveSubject = AcLive__Subject.make(undefined);
-  var stopLiveSubject = AcLive__Subject.make(undefined);
-  var changeTitleAndCoverSubject = AcLive__Subject.make(undefined);
-  var getLiveCutStatusSubject = AcLive__Subject.make(undefined);
-  var setLiveCutStatusSubject = AcLive__Subject.make(undefined);
-  var commentSubject = AcLive__Subject.make(undefined);
-  var likeSubject = AcLive__Subject.make(undefined);
-  var enterRoomSubject = AcLive__Subject.make(undefined);
-  var followAuthorSubject = AcLive__Subject.make(undefined);
-  var throwBananaSubject = AcLive__Subject.make(undefined);
-  var giftSubject = AcLive__Subject.make(undefined);
-  var richTextSubject = AcLive__Subject.make(undefined);
-  var joinClubSubject = AcLive__Subject.make(undefined);
-  var shareLiveSubject = AcLive__Subject.make(undefined);
-  var danmakuStopSubject = AcLive__Subject.make(undefined);
-  var bananaCountSubject = AcLive__Subject.make(undefined);
-  var displayInfoSubject = AcLive__Subject.make(undefined);
-  var topUsersSubject = AcLive__Subject.make(undefined);
-  var recentCommentsSubject = AcLive__Subject.make(undefined);
-  var redpackListSubject = AcLive__Subject.make(undefined);
-  var chatCallSubject = AcLive__Subject.make(undefined);
-  var chatAcceptSubject = AcLive__Subject.make(undefined);
-  var chatReadySubject = AcLive__Subject.make(undefined);
-  var chatEndSubject = AcLive__Subject.make(undefined);
-  var danmakuStopErrorStopSubject = AcLive__Subject.make(undefined);
-  var kickedOutSubject = AcLive__Subject.make(undefined);
-  var violationAlertSubject = AcLive__Subject.make(undefined);
-  var managerStateSubject = AcLive__Subject.make(undefined);
+  var unitSubject = AcLive__Subject.make();
+  var websocketErrorSubject = AcLive__Subject.make();
+  var jsonErrorSubject = AcLive__Subject.make();
+  var loginSubject = AcLive__Subject.make();
+  var setClientIDSubject = AcLive__Subject.make();
+  var requestForwardSubject = AcLive__Subject.make();
+  var receiveForwardSubject = AcLive__Subject.make();
+  var setTokenSubject = AcLive__Subject.make();
+  var getDanmakuSubject = AcLive__Subject.make();
+  var stopDanmakuSubject = AcLive__Subject.make();
+  var getWatchingListSubject = AcLive__Subject.make();
+  var getBillboardSubject = AcLive__Subject.make();
+  var getSummarySubject = AcLive__Subject.make();
+  var getLuckListSubject = AcLive__Subject.make();
+  var getPlaybackSubject = AcLive__Subject.make();
+  var getAllGiftListSubject = AcLive__Subject.make();
+  var getWalletBalanceSubject = AcLive__Subject.make();
+  var getUserLiveInfoSubject = AcLive__Subject.make();
+  var getAllLiveListSubject = AcLive__Subject.make();
+  var getLiveDataSubject = AcLive__Subject.make();
+  var getGiftListSubject = AcLive__Subject.make();
+  var getUserInfoSubject = AcLive__Subject.make();
+  var getLiveCutInfoSubject = AcLive__Subject.make();
+  var getManagerListSubject = AcLive__Subject.make();
+  var addManagerSubject = AcLive__Subject.make();
+  var deleteManagerSubject = AcLive__Subject.make();
+  var getAllKickHistorySubject = AcLive__Subject.make();
+  var managerKickSubject = AcLive__Subject.make();
+  var authorKickSubject = AcLive__Subject.make();
+  var getMedalDetailSubject = AcLive__Subject.make();
+  var getMedalListSubject = AcLive__Subject.make();
+  var getMedalRankListSubject = AcLive__Subject.make();
+  var getUserMedalSubject = AcLive__Subject.make();
+  var wearMedalSubject = AcLive__Subject.make();
+  var cancelWearMedalSubject = AcLive__Subject.make();
+  var checkLiveAuthSubject = AcLive__Subject.make();
+  var getLiveTypeListSubject = AcLive__Subject.make();
+  var getPushConfigSubject = AcLive__Subject.make();
+  var getLiveStatusSubject = AcLive__Subject.make();
+  var getTranscodeInfoSubject = AcLive__Subject.make();
+  var startLiveSubject = AcLive__Subject.make();
+  var stopLiveSubject = AcLive__Subject.make();
+  var changeTitleAndCoverSubject = AcLive__Subject.make();
+  var getLiveCutStatusSubject = AcLive__Subject.make();
+  var setLiveCutStatusSubject = AcLive__Subject.make();
+  var commentSubject = AcLive__Subject.make();
+  var likeSubject = AcLive__Subject.make();
+  var enterRoomSubject = AcLive__Subject.make();
+  var followAuthorSubject = AcLive__Subject.make();
+  var throwBananaSubject = AcLive__Subject.make();
+  var giftSubject = AcLive__Subject.make();
+  var richTextSubject = AcLive__Subject.make();
+  var joinClubSubject = AcLive__Subject.make();
+  var shareLiveSubject = AcLive__Subject.make();
+  var danmakuStopSubject = AcLive__Subject.make();
+  var bananaCountSubject = AcLive__Subject.make();
+  var displayInfoSubject = AcLive__Subject.make();
+  var topUsersSubject = AcLive__Subject.make();
+  var recentCommentsSubject = AcLive__Subject.make();
+  var redpackListSubject = AcLive__Subject.make();
+  var chatCallSubject = AcLive__Subject.make();
+  var chatAcceptSubject = AcLive__Subject.make();
+  var chatReadySubject = AcLive__Subject.make();
+  var chatEndSubject = AcLive__Subject.make();
+  var danmakuStopErrorStopSubject = AcLive__Subject.make();
+  var kickedOutSubject = AcLive__Subject.make();
+  var violationAlertSubject = AcLive__Subject.make();
+  var managerStateSubject = AcLive__Subject.make();
   var uuidDict = {};
   var isConnecting = function () {
     var w = ws.contents;
@@ -148,7 +148,7 @@ function make($$WebSocket, $staropt$star) {
     
   };
   var connect = function () {
-    if (isConnecting(undefined)) {
+    if (isConnecting()) {
       return ;
     }
     var w = $$WebSocket.make(config.websocketUrl);
@@ -167,14 +167,14 @@ function make($$WebSocket, $staropt$star) {
       }
       var fn = cleanupFn.contents;
       if (fn !== undefined) {
-        fn(undefined);
+        fn();
         cleanupFn.contents = undefined;
       }
       if (Core__Option.isSome(ws.contents)) {
-        disConnect(undefined);
+        disConnect();
         if (config.autoReconnect) {
           setTimeout((function () {
-                  connect(undefined);
+                  connect();
                 }), 5000);
           return ;
         } else {
@@ -191,14 +191,14 @@ function make($$WebSocket, $staropt$star) {
     };
     var closeListener = function (param) {
       unitSubject.set(undefined, "websocketClose");
-      cleanup(undefined);
+      cleanup();
     };
     var errorListener = function (e) {
       websocketErrorSubject.set({
             error: e.error,
             message: e.message
           }, "websocketError");
-      cleanup(undefined);
+      cleanup();
     };
     $$WebSocket.addOpenListener(w, openListener);
     $$WebSocket.addCloseListener(w, closeListener);
@@ -228,10 +228,9 @@ function make($$WebSocket, $staropt$star) {
         case 6 :
             return setEmptyResponse(setTokenSubject, response$1._0);
         case 100 :
-            var v = response$1._0;
-            return getDanmakuSubject.set(v, AcLive__Message.getOptionalResponseRequestId(v));
+            return setResponse(getDanmakuSubject, response$1._0);
         case 101 :
-            return setEmptyResponse(stopDanmakuSubject, response$1._0);
+            return setResponse(stopDanmakuSubject, response$1._0);
         case 102 :
             return setResponse(getWatchingListSubject, response$1._0);
         case 103 :
@@ -321,8 +320,8 @@ function make($$WebSocket, $staropt$star) {
         case 1008 :
             return setDanmaku(shareLiveSubject, response$1._0);
         case 2000 :
-            var v$1 = response$1._0;
-            return danmakuStopSubject.set(v$1, v$1.liverUID.toString());
+            var v = response$1._0;
+            return danmakuStopSubject.set(v, v.liverUID.toString());
         case 2001 :
             return setDanmaku(bananaCountSubject, response$1._0);
         case 2002 :
@@ -758,7 +757,7 @@ function make($$WebSocket, $staropt$star) {
     }
     var w$1 = Caml_option.valFromOption(w);
     return new Promise((function (resolve, reject) {
-                  var match = generateUuid(undefined);
+                  var match = generateUuid();
                   var deleteUuid = match[1];
                   var requestID = Core__Option.getWithDefault(requestIDPrefix, "") + "#" + match[0];
                   var unsubscribe = {
@@ -767,10 +766,10 @@ function make($$WebSocket, $staropt$star) {
                   var timeout$1 = setTimeout((function () {
                           var f = unsubscribe.contents;
                           if (f !== undefined) {
-                            f(undefined);
+                            f();
                             unsubscribe.contents = undefined;
                           }
-                          deleteUuid(undefined);
+                          deleteUuid();
                           reject({
                                 RE_EXN_ID: AsyncRequestTimeout
                               });
@@ -779,7 +778,7 @@ function make($$WebSocket, $staropt$star) {
                     sendRequest(constructor(AcLive__Message.makeEmptyMessage(requestID)), w$1);
                     unsubscribe.contents = subject.oneshot((function (value, param) {
                             clearTimeout(timeout$1);
-                            deleteUuid(undefined);
+                            deleteUuid();
                             if (value.TAG === "Ok") {
                               return resolve(value._0);
                             } else {
@@ -794,7 +793,7 @@ function make($$WebSocket, $staropt$star) {
                     sendRequest(constructor(AcLive__Message.makeMessage(data, requestID)), w$1);
                     unsubscribe.contents = subject.oneshot((function (value, param) {
                             clearTimeout(timeout$1);
-                            deleteUuid(undefined);
+                            deleteUuid();
                             if (value.TAG === "Ok") {
                               return resolve(value._0);
                             } else {

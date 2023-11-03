@@ -45,7 +45,7 @@ function addSubcriberInDict(dict, subcriber, key) {
   }
   var unsubscribe = addSubcriber(d$1, subcriber);
   return function () {
-    unsubscribe(undefined);
+    unsubscribe();
     if (isEmpty(d$1.dict)) {
       return Core__Dict.$$delete(dict, key);
     }

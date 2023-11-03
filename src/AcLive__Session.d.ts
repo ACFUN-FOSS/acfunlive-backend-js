@@ -1,5 +1,5 @@
 import type { websocketError, jsonError } from './AcLive__Session.gen.ts'
-import type { addManagerRequest, authorKickRequest, bananaCount, changeTitleAndCoverRequest, chatAccept, chatCall, chatEnd, chatReady, checkLiveAuthResponse, comment, danmaku, danmakuStopError, deleteManagerRequest, displayInfo, emptyDanmaku, emptyMessage, enterRoom, error, followAuthor, getAllGiftListResponse, getAllKickHistoryRequest, getAllKickHistoryResponse, getAllLiveListResponse, getBillboardRequest, getBillboardResponse, getDanmakuRequest, getDanmakuResponse, getGiftListRequest, getGiftListResponse, getLiveCutInfoRequest, getLiveCutInfoResponse, getLiveCutStatusResponse, getLiveDataRequest, getLiveDataResponse, getLiveStatusResponse, getLiveTypeListResponse, getLuckListRequest, getLuckListResponse, getManagerListResponse, getMedalDetailRequest, getMedalDetailResponse, getMedalListResponse, getMedalRankListRequest, getMedalRankListResponse, getPlaybackRequest, getPlaybackResponse, getPushConfigResponse, getSummaryRequest, getSummaryResponse, getTranscodeInfoRequest, getTranscodeInfoResponse, getUserInfoRequest, getUserInfoResponse, getUserLiveInfoRequest, getUserLiveInfoResponse, getUserMedalRequest, getUserMedalResponse, getWalletBalanceResponse, getWatchingListRequest, getWatchingListResponse, gift, joinClub, kickedOut, like, loginRequest, loginResponse, managerKickRequest, managerState, message, optionalMessage, receiveForwardResponse, recentComments, redpackList, requestForwardRequest, richText, setClientIDRequest, setLiveCutStatusRequest, setTokenRequest, shareLive, startLiveRequest, startLiveResponse, stopDanmakuRequest, stopLiveRequest, stopLiveResponse, throwBanana, topUsers, violationAlert, wearMedalRequest } from './data/AcLive__Message.gen.ts'
+import type { addManagerRequest, authorKickRequest, bananaCount, changeTitleAndCoverRequest, chatAccept, chatCall, chatEnd, chatReady, checkLiveAuthResponse, comment, danmaku, danmakuStopError, deleteManagerRequest, displayInfo, emptyDanmaku, emptyMessage, enterRoom, error, followAuthor, getAllGiftListResponse, getAllKickHistoryRequest, getAllKickHistoryResponse, getAllLiveListResponse, getBillboardRequest, getBillboardResponse, getDanmakuRequest, getDanmakuResponse, getGiftListRequest, getGiftListResponse, getLiveCutInfoRequest, getLiveCutInfoResponse, getLiveCutStatusResponse, getLiveDataRequest, getLiveDataResponse, getLiveStatusResponse, getLiveTypeListResponse, getLuckListRequest, getLuckListResponse, getManagerListResponse, getMedalDetailRequest, getMedalDetailResponse, getMedalListResponse, getMedalRankListRequest, getMedalRankListResponse, getPlaybackRequest, getPlaybackResponse, getPushConfigResponse, getSummaryRequest, getSummaryResponse, getTranscodeInfoRequest, getTranscodeInfoResponse, getUserInfoRequest, getUserInfoResponse, getUserLiveInfoRequest, getUserLiveInfoResponse, getUserMedalRequest, getUserMedalResponse, getWalletBalanceResponse, getWatchingListRequest, getWatchingListResponse, gift, joinClub, kickedOut, like, loginRequest, loginResponse, managerKickRequest, managerState, message, receiveForwardResponse, recentComments, redpackList, requestForwardRequest, richText, setClientIDRequest, setLiveCutStatusRequest, setTokenRequest, shareLive, startLiveRequest, startLiveResponse, stopDanmakuRequest, stopDanmakuResponse, stopLiveRequest, stopLiveResponse, throwBanana, topUsers, violationAlert, wearMedalRequest } from './data/AcLive__Message.gen.ts'
 
 export type event = {
     'websocketOpen': [undefined, undefined];
@@ -12,8 +12,8 @@ export type event = {
     'requestForward': [emptyMessage, string];
     'receiveForward': [message<receiveForwardResponse>, string];
     'setToken': [emptyMessage, string];
-    'getDanmaku': [optionalMessage<getDanmakuResponse>, string];
-    'stopDanmaku': [emptyMessage, string];
+    'getDanmaku': [message<getDanmakuResponse>, string];
+    'stopDanmaku': [message<stopDanmakuResponse>, string];
     'getWatchingList': [message<getWatchingListResponse>, string];
     'getBillboard': [message<getBillboardResponse>, string];
     'getSummary': [message<getSummaryResponse>, string];
@@ -79,8 +79,8 @@ export type request = {
     'setClientID': [setClientIDRequest, emptyMessage];
     'requestForward': [requestForwardRequest, emptyMessage];
     'setToken': [setTokenRequest, emptyMessage];
-    'getDanmaku': [getDanmakuRequest, optionalMessage<getDanmakuResponse>];
-    'stopDanmaku': [stopDanmakuRequest, emptyMessage];
+    'getDanmaku': [getDanmakuRequest, message<getDanmakuResponse>];
+    'stopDanmaku': [stopDanmakuRequest, message<stopDanmakuResponse>];
     'getWatchingList': [getWatchingListRequest, message<getWatchingListResponse>];
     'getBillboard': [getBillboardRequest, message<getBillboardResponse>];
     'getSummary': [getSummaryRequest, message<getSummaryResponse>];

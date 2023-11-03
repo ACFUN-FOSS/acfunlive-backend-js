@@ -226,7 +226,12 @@ let streamInfoStruct = S.object(s => {
   streamName: s.field("streamName", S.string),
 })
 
-let getDanmakuResponse = S.object(s => s.field("StreamInfo", streamInfoStruct))
+let getDanmakuResponseStruct = S.object(s => {
+  liverUID: s.field("liverUID", S.int),
+  streamInfo: ?s.field("StreamInfo", S.option(streamInfoStruct)),
+})
+
+let stopDanmakuResponseStruct = liverUIDStruct
 
 let medalInfoStruct = S.object(s => {
   uperID: s.field("uperID", S.int),
@@ -720,25 +725,6 @@ let makeResponseData = (
   | UnknownResult(n) => s.fail(`unknown result type: ${n->Int.toString}`)
   }
 
-let makeOptionalResponseData = (
-  s: S.effectCtx<responseData>,
-  data,
-  {requestID, result, error},
-  struct,
-  constructor,
-) =>
-  switch result {
-  | Success =>
-    switch data->S.parseAnyWith(S.object(s => s.field("data", S.option(struct)))) {
-    | Ok(Some(d)) => constructor(Ok({requestID, data: d}))
-    | Ok(None) => constructor(Ok({requestID: requestID}))
-    | Error(e) => s.failWithError(e)
-    }
-  | JsonParseError | InvalidRequestType | InvalidRequestData | HandleRequestError | NeedLogin =>
-    constructor(Error({requestID, result, error}))
-  | UnknownResult(n) => s.fail(`unknown result type: ${n->Int.toString}`)
-  }
-
 let makeEmptyDanmakuData = (s: S.effectCtx<responseData>, {liverUID}, constructor) =>
   if liverUID > 0 {
     let danmaku: emptyDanmaku = {liverUID: liverUID}
@@ -769,9 +755,9 @@ let responseDataStruct = S.custom("responseData", s => {
       | ReceiveForward =>
         makeResponseData(s, data, model, forwardDataStruct, v => ReceiveForward(v))
       | SetToken => makeEmptyResponseData(s, model, v => SetToken(v))
-      | GetDanmaku =>
-        makeOptionalResponseData(s, data, model, getDanmakuResponse, v => GetDanmaku(v))
-      | StopDanmaku => makeEmptyResponseData(s, model, v => StopDanmaku(v))
+      | GetDanmaku => makeResponseData(s, data, model, getDanmakuResponseStruct, v => GetDanmaku(v))
+      | StopDanmaku =>
+        makeResponseData(s, data, model, stopDanmakuResponseStruct, v => StopDanmaku(v))
       | GetWatchingList =>
         makeResponseData(s, data, model, getWatchingListResponseStruct, v => GetWatchingList(v))
       | GetBillboard =>

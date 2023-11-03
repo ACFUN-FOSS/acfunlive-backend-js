@@ -1,8 +1,8 @@
 /* TypeScript file generated from AcLive__Message.res by genType. */
-/* eslint-disable import/first */
 
+/* eslint-disable */
+/* tslint:disable */
 
-// tslint:disable-next-line:interface-over-type-literal
 export type responseResult = 
     "Success"
   | "JsonParseError"
@@ -12,32 +12,22 @@ export type responseResult =
   | "NeedLogin"
   | { TAG: "UnknownResult"; _0: number };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type message<a> = { readonly requestID: string; readonly data: a };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type emptyMessage = { readonly requestID: string };
 
-// tslint:disable-next-line:interface-over-type-literal
-export type optionalMessage<a> = { readonly requestID: string; readonly data?: a };
-
-// tslint:disable-next-line:interface-over-type-literal
 export type error = {
   readonly requestID: string; 
   readonly result: responseResult; 
   readonly error: string
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type danmaku<a> = { readonly liverUID: number; readonly data: a };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type emptyDanmaku = { readonly liverUID: number };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type loginRequest = { readonly account: string; readonly password: string };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type tokenInfo = {
   readonly userID: number; 
   readonly securityKey: string; 
@@ -46,31 +36,22 @@ export type tokenInfo = {
   readonly cookies: string[]
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type loginResponse = tokenInfo;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type setClientIDRequest = { readonly clientID: string };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type forwardData = { readonly clientID: string; readonly message: string };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type requestForwardRequest = forwardData;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type receiveForwardResponse = forwardData;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type setTokenRequest = tokenInfo;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type liverUID = { readonly liverUID: number };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getDanmakuRequest = liverUID;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type streamURL = {
   readonly url: string; 
   readonly bitrate: number; 
@@ -78,7 +59,6 @@ export type streamURL = {
   readonly qualityName: string
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type streamInfo = {
   readonly liveID: string; 
   readonly title: string; 
@@ -88,19 +68,16 @@ export type streamInfo = {
   readonly streamName: string
 };
 
-// tslint:disable-next-line:interface-over-type-literal
-export type getDanmakuResponse = streamInfo;
+export type getDanmakuResponse = { readonly liverUID: number; readonly streamInfo?: streamInfo };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type stopDanmakuRequest = liverUID;
 
-// tslint:disable-next-line:interface-over-type-literal
+export type stopDanmakuResponse = liverUID;
+
 export type liveID = { readonly liveID: string };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getWatchingListRequest = liveID;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type medalInfo = {
   readonly uperID: number; 
   readonly userID: number; 
@@ -108,13 +85,11 @@ export type medalInfo = {
   readonly level: number
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type managerType = 
     "NotManager"
   | "NormalManager"
   | { TAG: "UnknownManagerType"; _0: number };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type userInfo = {
   readonly userID: number; 
   readonly nickname: string; 
@@ -123,7 +98,6 @@ export type userInfo = {
   readonly managerType: managerType
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type watchingUser = {
   readonly userInfo: userInfo; 
   readonly anonymousUser: boolean; 
@@ -131,19 +105,14 @@ export type watchingUser = {
   readonly customData: string
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getWatchingListResponse = watchingUser[];
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getBillboardRequest = liverUID;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getBillboardResponse = watchingUser[];
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getSummaryRequest = liveID;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getSummaryResponse = {
   readonly duration: number; 
   readonly likeCount: string; 
@@ -153,23 +122,18 @@ export type getSummaryResponse = {
   readonly bananaCount: number
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getLuckListRequest = {
   readonly liveID: string; 
   readonly redpackID: string; 
   readonly redpackBizUnit: string
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type luckyUser = { readonly userInfo: userInfo; readonly grabAmount: number };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getLuckListResponse = luckyUser[];
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getPlaybackRequest = liveID;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getPlaybackResponse = {
   readonly duration: number; 
   readonly url: string; 
@@ -179,13 +143,11 @@ export type getPlaybackResponse = {
   readonly height: number
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type giftPayType = 
     "FreeGift"
   | "NonFreeGift"
   | { TAG: "UnknownGiftPayType"; _0: number };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type giftDetail = {
   readonly giftID: number; 
   readonly giftName: string; 
@@ -205,19 +167,14 @@ export type giftDetail = {
   readonly cornerMarkerText: string
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getAllGiftListResponse = giftDetail[];
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getWalletBalanceResponse = { readonly acCoin: number; readonly banana: number };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type userID = { readonly userID: number };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getUserLiveInfoRequest = userID;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type userProfile = {
   readonly userID: number; 
   readonly nickname: string; 
@@ -233,7 +190,6 @@ export type userProfile = {
   readonly isFollowed: boolean
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type liveType = {
   readonly categoryID: number; 
   readonly categoryName: string; 
@@ -241,7 +197,6 @@ export type liveType = {
   readonly subCategoryName: string
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type userLiveInfo = {
   readonly profile: userProfile; 
   readonly liveType: liveType; 
@@ -259,16 +214,12 @@ export type userLiveInfo = {
   readonly paidShowUserBuyStatus: boolean
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getUserLiveInfoResponse = userLiveInfo;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getAllLiveListResponse = userLiveInfo[];
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getLiveDataRequest = { readonly days: number };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type liveStat = {
   readonly duration: number; 
   readonly maxPopularityValue: number; 
@@ -278,21 +229,18 @@ export type liveStat = {
   readonly bananaCount: number
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type liveDetail = {
   readonly liveStartTime: number; 
   readonly liveEndTime: number; 
   readonly liveStat: liveStat
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type dailyData = {
   readonly date: string; 
   readonly liveTimes: number; 
   readonly liveStat: liveStat
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getLiveDataResponse = {
   readonly beginDate: string; 
   readonly endDate: string; 
@@ -301,16 +249,12 @@ export type getLiveDataResponse = {
   readonly dailyData?: dailyData[]
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getGiftListRequest = liveID;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getGiftListResponse = giftDetail[];
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getUserInfoRequest = userID;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getUserInfoResponse = {
   readonly userID: number; 
   readonly nickname: string; 
@@ -328,61 +272,46 @@ export type getUserInfoResponse = {
   readonly likeCount: number
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getLiveCutInfoRequest = { readonly liverUID: number; readonly liveID: string };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getLiveCutInfoResponse = {
   readonly status: boolean; 
   readonly url: string; 
   readonly redirectURL: string
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type manager = {
   readonly userInfo: userInfo; 
   readonly customData: string; 
   readonly online: boolean
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getManagerListResponse = manager[];
 
-// tslint:disable-next-line:interface-over-type-literal
 export type managerUID = { readonly managerUID: number };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type addManagerRequest = managerUID;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type deleteManagerRequest = managerUID;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getAllKickHistoryRequest = liveID;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type kickHistory = {
   readonly userID: number; 
   readonly nickname: string; 
   readonly kickTime: number
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getAllKickHistoryResponse = kickHistory[];
 
-// tslint:disable-next-line:interface-over-type-literal
 export type kickUser = { readonly liveID: string; readonly kickedUID: number };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type managerKickRequest = kickUser;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type authorKickRequest = kickUser;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getMedalDetailRequest = liverUID;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type medal = {
   readonly medalInfo: medalInfo; 
   readonly uperName: string; 
@@ -394,7 +323,6 @@ export type medal = {
   readonly medalCount: number
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type medalDegree = {
   readonly uperID: number; 
   readonly giftDegree: number; 
@@ -407,27 +335,22 @@ export type medalDegree = {
   readonly bananaDegreeLimit: number
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getMedalDetailResponse = {
   readonly medal: medal; 
   readonly medalDegree: medalDegree; 
   readonly userRank: string
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getMedalListResponse = (undefined | medal[]);
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getMedalRankListRequest = liverUID;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type userMedalInfo = {
   readonly profile: userProfile; 
   readonly friendshipDegree: number; 
   readonly level: number
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getMedalRankListResponse = {
   readonly hasFansClub: boolean; 
   readonly rankList?: userMedalInfo[]; 
@@ -438,22 +361,16 @@ export type getMedalRankListResponse = {
   readonly userRank: string
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getUserMedalRequest = userID;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getUserMedalResponse = medal;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type wearMedalRequest = liverUID;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type checkLiveAuthResponse = { readonly liveAuth: boolean };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getLiveTypeListResponse = liveType;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getPushConfigResponse = {
   readonly streamName: string; 
   readonly streamPullAddress: string; 
@@ -464,7 +381,6 @@ export type getPushConfigResponse = {
   readonly streamKey: string
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getLiveStatusResponse = {
   readonly liveID: string; 
   readonly streamName: string; 
@@ -476,10 +392,8 @@ export type getLiveStatusResponse = {
   readonly bizCustomData: string
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getTranscodeInfoRequest = { readonly streamName: string };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type transcodeInfo = {
   readonly streamURL: streamURL; 
   readonly resolution: string; 
@@ -487,10 +401,8 @@ export type transcodeInfo = {
   readonly template: string
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getTranscodeInfoResponse = transcodeInfo[];
 
-// tslint:disable-next-line:interface-over-type-literal
 export type startLiveRequest = {
   readonly title: string; 
   readonly coverFile: string; 
@@ -501,50 +413,36 @@ export type startLiveRequest = {
   readonly subCategoryID: number
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type startLiveResponse = liveID;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type stopLiveRequest = liveID;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type stopLiveResponse = { readonly duration: number; readonly endReason: string };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type changeTitleAndCoverRequest = {
   readonly title: string; 
   readonly coverFile: string; 
   readonly liveID: string
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type canCutLive = { readonly canCut: boolean };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type getLiveCutStatusResponse = canCutLive;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type setLiveCutStatusRequest = canCutLive;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type danmuInfo = { readonly sendTime: number; readonly userInfo: userInfo };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type comment = { readonly danmuInfo: danmuInfo; readonly content: string };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type like = danmuInfo;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type enterRoom = danmuInfo;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type followAuthor = danmuInfo;
 
-// tslint:disable-next-line:interface-over-type-literal
 export type throwBanana = { readonly danmuInfo: danmuInfo; readonly bananaCount: number };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type drawPoint = {
   readonly marginLeft: number; 
   readonly marginTop: number; 
@@ -554,14 +452,12 @@ export type drawPoint = {
   readonly pointHeight: number
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type drawGiftInfo = {
   readonly screenWidth: number; 
   readonly screenHeight: number; 
   readonly drawPoint?: drawPoint[]
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type gift = {
   readonly danmuInfo: danmuInfo; 
   readonly giftDetail: giftDetail; 
@@ -574,36 +470,29 @@ export type gift = {
   readonly drawGiftInfo: drawGiftInfo
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type richTextUserInfo = { readonly userInfo: userInfo; readonly color: string };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type richTextPlain = { readonly text: string; readonly color: string };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type richTextImage = {
   readonly pictures: string[]; 
   readonly alternativeText: string; 
   readonly alternativeColor: string
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type richTextSegment = 
-    { TAG: "UserInfo"; readonly segment: richTextUserInfo }
-  | { TAG: "Plain"; readonly segment: richTextPlain }
-  | { TAG: "Image"; readonly segment: richTextImage };
+    { type: "UserInfo"; readonly segment: richTextUserInfo }
+  | { type: "Plain"; readonly segment: richTextPlain }
+  | { type: "Image"; readonly segment: richTextImage };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type richText = { readonly sendTime: number; readonly segments: richTextSegment[] };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type joinClub = {
   readonly joinTime: number; 
   readonly fansInfo: userInfo; 
   readonly uperInfo: userInfo
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type sharePlatformType = 
     "QQ"
   | "Qzone"
@@ -613,37 +502,30 @@ export type sharePlatformType =
   | "AcFunMoment"
   | { TAG: "UnknownPlatform"; _0: number };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type shareLive = {
   readonly danmuInfo: danmuInfo; 
   readonly sharePlatform: sharePlatformType; 
   readonly sharePlatformIcon: string
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type bananaCount = { readonly bananaCount: string };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type displayInfo = {
   readonly watchingCount: string; 
   readonly likeCount: string; 
   readonly likeDelta: number
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type topUsers = watchingUser[];
 
-// tslint:disable-next-line:interface-over-type-literal
 export type recentComments = comment[];
 
-// tslint:disable-next-line:interface-over-type-literal
 export type redpackDisplayStatus = 
     "RedpackShow"
   | "RedpackGetToken"
   | "RedpackGrab"
   | { TAG: "UnknownRedpackDisplayStatus"; _0: number };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type redpack = {
   readonly userInfo: userInfo; 
   readonly displayStatus: redpackDisplayStatus; 
@@ -655,37 +537,31 @@ export type redpack = {
   readonly settleBeginTime: number
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type redpackList = redpack[];
 
-// tslint:disable-next-line:interface-over-type-literal
 export type chatCall = {
   readonly chatID: string; 
   readonly liveID: string; 
   readonly callTime: number
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type chatMediaType = 
     "Audio"
   | "Video"
   | { TAG: "UnknownChatMediaType"; _0: number };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type chatAccept = {
   readonly chatID: string; 
   readonly mediaType: chatMediaType; 
   readonly signalInfo: string
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type chatReady = {
   readonly chatID: string; 
   readonly guest: userInfo; 
   readonly mediaType: chatMediaType
 };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type chatEndType = 
     "CancelByAuthor"
   | "EndByAuthor"
@@ -697,19 +573,14 @@ export type chatEndType =
   | "PeerLiveStopped"
   | { TAG: "UnknownChatEndType"; _0: number };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type chatEnd = { readonly chatID: string; readonly endType: chatEndType };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type danmakuStopError = { readonly error: string };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type kickedOut = { readonly kickedOutReason: string };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type violationAlert = { readonly violationContent: string };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type managerStateType = 
     "NotManager"
   | "ManagerAdded"
@@ -717,5 +588,4 @@ export type managerStateType =
   | "IsManager"
   | { TAG: "UnknownManagerStateType"; _0: number };
 
-// tslint:disable-next-line:interface-over-type-literal
 export type managerState = { readonly managerState: managerStateType };

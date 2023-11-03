@@ -6,7 +6,7 @@ import * as Caml_js_exceptions from "rescript/lib/es6/caml_js_exceptions.js";
 
 var session = AcFunLiveBackend.makeNodeSession(undefined);
 
-session.connect(undefined);
+session.connect();
 
 session.on("heartbeat", (function () {
         console.log("heartbeat");
@@ -31,10 +31,24 @@ async function action() {
     console.log("login call: ", info);
     var liveList = await session.asyncRequest("getAllLiveList", undefined, undefined, undefined);
     console.log("live list: ", liveList);
+    var liverUID = Core__Option.getExn(liveList.data[0]).profile.userID;
     var stream = await session.asyncRequest("getDanmaku", {
-          liverUID: Core__Option.getExn(liveList.data[0]).profile.userID
+          liverUID: liverUID
         }, undefined, undefined);
     console.log("get danmaku stream: ", stream);
+    setTimeout((function () {
+            try {
+              session.asyncRequest("stopDanmaku", {
+                    liverUID: liverUID
+                  }, undefined, undefined);
+              return ;
+            }
+            catch (raw_e){
+              var e = Caml_js_exceptions.internalToOCamlException(raw_e);
+              console.log("stop danmaku error: ", e);
+              return ;
+            }
+          }), 10000);
     return ;
   }
   catch (raw_e){
@@ -46,7 +60,7 @@ async function action() {
 
 session.on("websocketOpen", (function () {
         console.log("websocket open");
-        action(undefined);
+        action();
       }), undefined, undefined);
 
 session.on("jsonError", (function (v) {
@@ -63,12 +77,12 @@ session.on("websocketClose", (function () {
 
 session.on("danmakuStop", (function (param) {
         console.log("danmaku stop");
-        session.disConnect(undefined);
+        session.disConnect();
       }), undefined, undefined);
 
 session.on("danmakuStopError", (function (e) {
         console.log("danmaku stop error: ", e);
-        session.disConnect(undefined);
+        session.disConnect();
       }), undefined, undefined);
 
 export {

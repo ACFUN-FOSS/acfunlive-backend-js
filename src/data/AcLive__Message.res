@@ -183,12 +183,6 @@ type emptyMessage = {requestID: string}
 let makeEmptyMessage = (~requestID="") => {requestID: requestID}
 
 @genType
-type optionalMessage<'a> = {
-  requestID: string,
-  data?: 'a,
-}
-
-@genType
 type error = {
   requestID: string,
   result: responseResult,
@@ -206,14 +200,6 @@ let getResponseRequestId = (response: response<'a>) =>
 type emptyResponse = Result.t<emptyMessage, error>
 
 let getEmptyResponseRequestId = (response: emptyResponse) =>
-  switch response {
-  | Ok(v) => v.requestID
-  | Error(e) => e.requestID
-  }
-
-type optionalResponse<'a> = Result.t<optionalMessage<'a>, error>
-
-let getOptionalResponseRequestId = (response: optionalResponse<'a>) =>
   switch response {
   | Ok(v) => v.requestID
   | Error(e) => e.requestID
@@ -289,10 +275,16 @@ type streamInfo = {
 }
 
 @genType
-type getDanmakuResponse = streamInfo
+type getDanmakuResponse = {
+  liverUID: int,
+  streamInfo?: streamInfo,
+}
 
 @genType
 type stopDanmakuRequest = liverUID
+
+@genType
+type stopDanmakuResponse = liverUID
 
 @genType
 type liveID = {liveID: string}
@@ -1046,8 +1038,8 @@ type responseData =
   | @as(4) RequestForward(emptyResponse)
   | @as(5) ReceiveForward(response<receiveForwardResponse>)
   | @as(6) SetToken(emptyResponse)
-  | @as(100) GetDanmaku(optionalResponse<getDanmakuResponse>)
-  | @as(101) StopDanmaku(emptyResponse)
+  | @as(100) GetDanmaku(response<getDanmakuResponse>)
+  | @as(101) StopDanmaku(response<stopDanmakuResponse>)
   | @as(102) GetWatchingList(response<getWatchingListResponse>)
   | @as(103) GetBillboard(response<getBillboardResponse>)
   | @as(104) GetSummary(response<getSummaryResponse>)

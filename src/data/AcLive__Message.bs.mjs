@@ -132,10 +132,6 @@ function getEmptyResponseRequestId(response) {
   return response._0.requestID;
 }
 
-function getOptionalResponseRequestId(response) {
-  return response._0.requestID;
-}
-
 function intToManagerType(i) {
   if (i !== 0) {
     if (i !== 1) {
@@ -273,7 +269,6 @@ export {
   makeEmptyMessage ,
   getResponseRequestId ,
   getEmptyResponseRequestId ,
-  getOptionalResponseRequestId ,
   intToManagerType ,
   intToGiftPayType ,
   intToSharePlatformType ,
