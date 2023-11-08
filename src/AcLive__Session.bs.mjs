@@ -59,8 +59,14 @@ function make($$WebSocket, $staropt$star) {
         autoReconnect: true,
         asyncRequestTimeout: 10000
       });
+  var id = {
+    contents: 0
+  };
   var ws = {
     contents: undefined
+  };
+  var isReConnecting = {
+    contents: false
   };
   var unitSubject = AcLive__Subject.make();
   var websocketErrorSubject = AcLive__Subject.make();
@@ -139,18 +145,22 @@ function make($$WebSocket, $staropt$star) {
       return false;
     }
   };
-  var disConnect = function () {
+  var disconnect = function () {
     var w = ws.contents;
     if (w !== undefined) {
       ws.contents = undefined;
-      return $$WebSocket.close(Caml_option.valFromOption(w));
+      $$WebSocket.close(Caml_option.valFromOption(w));
+      isReConnecting.contents = false;
+      return ;
     }
     
   };
   var connect = function () {
-    if (isConnecting()) {
+    if (!(!isConnecting() && !isReConnecting.contents)) {
       return ;
     }
+    id.contents = id.contents + 1 | 0;
+    var wid = id.contents;
     var w = $$WebSocket.make(config.websocketUrl);
     ws.contents = Caml_option.some(w);
     var heartbeatInterval = {
@@ -160,9 +170,9 @@ function make($$WebSocket, $staropt$star) {
       contents: undefined
     };
     var cleanup = function () {
-      var id = heartbeatInterval.contents;
-      if (id !== undefined) {
-        clearInterval(Caml_option.valFromOption(id));
+      var id$1 = heartbeatInterval.contents;
+      if (id$1 !== undefined) {
+        clearInterval(Caml_option.valFromOption(id$1));
         heartbeatInterval.contents = undefined;
       }
       var fn = cleanupFn.contents;
@@ -170,10 +180,12 @@ function make($$WebSocket, $staropt$star) {
         fn();
         cleanupFn.contents = undefined;
       }
-      if (Core__Option.isSome(ws.contents)) {
-        disConnect();
+      if (wid === id.contents && Core__Option.isSome(ws.contents)) {
+        disconnect();
         if (config.autoReconnect) {
+          isReConnecting.contents = true;
           setTimeout((function () {
+                  isReConnecting.contents = false;
                   connect();
                 }), 5000);
           return ;
@@ -1098,7 +1110,7 @@ function make($$WebSocket, $staropt$star) {
   };
   return {
           connect: connect,
-          disConnect: disConnect,
+          disconnect: disconnect,
           isConnecting: isConnecting,
           on: on,
           request: request,

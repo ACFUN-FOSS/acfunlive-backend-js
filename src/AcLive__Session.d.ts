@@ -123,7 +123,7 @@ export type unsubscribe = () => void;
 export interface Session {
     connect(): void;
 
-    disConnect(): void;
+    disconnect(): void;
 
     isConnecting(): boolean;
 

@@ -143,7 +143,7 @@ type unsubscribe = AcLive__Subject.unsubscribe
 
 type t = {
   connect: unit => unit,
-  disConnect: unit => unit,
+  disconnect: unit => unit,
   isConnecting: unit => bool,
   on: 'a 'b. (
     event<'a, 'b>,

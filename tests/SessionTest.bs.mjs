@@ -77,12 +77,12 @@ session.on("websocketClose", (function () {
 
 session.on("danmakuStop", (function (param) {
         console.log("danmaku stop");
-        session.disConnect();
+        session.disconnect();
       }), undefined, undefined);
 
 session.on("danmakuStopError", (function (e) {
         console.log("danmaku stop error: ", e);
-        session.disConnect();
+        session.disconnect();
       }), undefined, undefined);
 
 export {

@@ -3529,8 +3529,14 @@ function make$1($$WebSocket, $staropt$star) {
         autoReconnect: true,
         asyncRequestTimeout: 10000
       });
+  var id = {
+    contents: 0
+  };
   var ws = {
     contents: undefined
+  };
+  var isReConnecting = {
+    contents: false
   };
   var unitSubject = make$2();
   var websocketErrorSubject = make$2();
@@ -3609,18 +3615,22 @@ function make$1($$WebSocket, $staropt$star) {
       return false;
     }
   };
-  var disConnect = function () {
+  var disconnect = function () {
     var w = ws.contents;
     if (w !== undefined) {
       ws.contents = undefined;
-      return $$WebSocket.close(valFromOption(w));
+      $$WebSocket.close(valFromOption(w));
+      isReConnecting.contents = false;
+      return ;
     }
     
   };
   var connect = function () {
-    if (isConnecting()) {
+    if (!(!isConnecting() && !isReConnecting.contents)) {
       return ;
     }
+    id.contents = id.contents + 1 | 0;
+    var wid = id.contents;
     var w = $$WebSocket.make(config.websocketUrl);
     ws.contents = some(w);
     var heartbeatInterval = {
@@ -3630,9 +3640,9 @@ function make$1($$WebSocket, $staropt$star) {
       contents: undefined
     };
     var cleanup = function () {
-      var id = heartbeatInterval.contents;
-      if (id !== undefined) {
-        clearInterval(valFromOption(id));
+      var id$1 = heartbeatInterval.contents;
+      if (id$1 !== undefined) {
+        clearInterval(valFromOption(id$1));
         heartbeatInterval.contents = undefined;
       }
       var fn = cleanupFn.contents;
@@ -3640,10 +3650,12 @@ function make$1($$WebSocket, $staropt$star) {
         fn();
         cleanupFn.contents = undefined;
       }
-      if (isSome(ws.contents)) {
-        disConnect();
+      if (wid === id.contents && isSome(ws.contents)) {
+        disconnect();
         if (config.autoReconnect) {
+          isReConnecting.contents = true;
           setTimeout((function () {
+                  isReConnecting.contents = false;
                   connect();
                 }), 5000);
           return ;
@@ -4567,7 +4579,7 @@ function make$1($$WebSocket, $staropt$star) {
   };
   return {
           connect: connect,
-          disConnect: disConnect,
+          disconnect: disconnect,
           isConnecting: isConnecting,
           on: on,
           request: request,

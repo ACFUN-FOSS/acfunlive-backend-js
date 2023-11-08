@@ -142,7 +142,7 @@ type unsubscribe = AcLive__Subject.unsubscribe
 
 type t = {
   connect: unit => unit,
-  disConnect: unit => unit,
+  disconnect: unit => unit,
   isConnecting: unit => bool,
   on: 'a 'b. (
     event<'a, 'b>,
@@ -208,7 +208,9 @@ let danmakuCallback = (type a, subject: subject<a>, ~key=?, ~onData: a => unit) 
   subject.subcribe((v, ~key as _) => onData(v), ~key=?key->Option.map(Int.toString))
 
 let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfig) => {
+  let id = ref(0)
   let ws = ref(None)
+  let isReConnecting = ref(false)
 
   let unitSubject = makeSubject()
   let websocketErrorSubject = makeSubject()
@@ -287,17 +289,20 @@ let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfi
     | None => false
     }
 
-  let disConnect = () =>
+  let disconnect = () =>
     switch ws.contents {
     | Some(w) => {
         ws := None
         w->WebSocket.close
+        isReConnecting := false
       }
     | None => ()
     }
 
   let rec connect = () => {
-    if !isConnecting() {
+    if !isConnecting() && !isReConnecting.contents {
+      id := id.contents + 1
+      let wid = id.contents
       let w = WebSocket.make(config.websocketUrl)
       ws := Some(w)
 
@@ -321,13 +326,17 @@ let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfi
         | None => ()
         }
 
-        if ws.contents->Option.isSome {
+        if wid === id.contents && ws.contents->Option.isSome {
           // 并非主动关闭
-          disConnect()
+          disconnect()
 
           if config.autoReconnect {
+            isReConnecting := true
             // 延迟5秒后重新连接
-            setTimeout(() => connect(), 5000)->ignore
+            setTimeout(() => {
+              isReConnecting := false
+              connect()
+            }, 5000)->ignore
           }
         }
       }
@@ -682,7 +691,7 @@ let make = (module(WebSocket: AcLive__WebSocket.WebSocket), ~config=defaultConfi
 
   {
     connect,
-    disConnect,
+    disconnect,
     isConnecting,
     on,
     request,

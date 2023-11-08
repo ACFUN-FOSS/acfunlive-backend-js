@@ -43,9 +43,9 @@ session.on(WebsocketError, ~onData=e => Console.log2("websocket error: ", e))->i
 session.on(WebsocketClose, ~onData=() => Console.log("websocket close"))->ignore
 session.on(DanmakuStop, ~onData=_ => {
   Console.log("danmaku stop")
-  session.disConnect()
+  session.disconnect()
 })->ignore
 session.on(DanmakuStopError, ~onData=e => {
   Console.log2("danmaku stop error: ", e)
-  session.disConnect()
+  session.disconnect()
 })->ignore
